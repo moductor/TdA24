@@ -1,6 +1,8 @@
-<header>
-  <img src="./public/Logo.svg" class="logo" alt="logo" />
+---
 
+---
+
+<header>
   <svg
     class="top-vector"
     xmlns="http://www.w3.org/2000/svg"
@@ -8,12 +10,35 @@
     preserveAspectRatio="none"
     fill="none"
   >
-  
     <path d="M0 152V0H1921V377L1456 530L0 152Z" fill="#74C7D3"></path>
   </svg>
+
+  <div class="container">
+    <img src="./public/Logo.svg" class="logo" alt="logo" />
+    <nav>
+      <ul>
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+  <div class="header-img-text">
+    <div class="header-text">
+      <h1 class="name">Mgr Petra Swil Plachá MBA</h1>
+      <h2 class="claim">
+        Aktivní studentka / Předsedkyně spolku / Projektová manažerka
+      </h2>
+    </div>
+    <img
+      class="portrait"
+      src="https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp"
+      alt="portrait of lector"
+    />
+  </div>
 </header>
 
 <style lang="scss">
+  @import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
+
   $jet: #333333;
   $prussian_blue: #00384d;
   $white: #ffffff;
@@ -26,19 +51,13 @@
   }
 
   header {
-    padding: 0 1rem 0 calc(100vw / 12);
-    display: flex;
+    padding: 0 calc(100vw / 14) 0 calc(100vw / 14);
   }
 
   .logo {
-    top: 0;
-    left: calc(100vw / 12);
     display: flex;
     width: 150px;
     height: auto;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
     color: $jet;
   }
 
@@ -52,5 +71,61 @@
     path {
       fill: $sky_blue;
     }
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-text {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    align-content: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .name {
+    color: $jet;
+    font-size: clamp(1.5rem, 4rem, 4vw);
+    font-family: "Lalezar", "Open Sans", sans-serif;
+    border-radius: 25px;
+    padding: 0.5rem;
+    background: $sunglow;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+  }
+  .claim {
+    color: $jet;
+    font-size: clamp(1rem, 3rem, 1.8vw);
+    border-radius: 25px;
+    padding: 0.5rem;
+    background: $sky_blue;
+    padding: 0.5rem 1rem;
+  }
+
+  nav ul {
+    padding: 0;
+  }
+  nav ul li {
+    display: inline-block;
+    list-style: none;
+  }
+  nav ul li a {
+    color: $white;
+    text-decoration: none;
+    font-size: 20px;
+  }
+
+  .portrait {
+    border-radius: 25%;
+    rotate: 8.46deg;
+    width: calc(3.6 * 100vw / 14);
+  }
+  .header-img-text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 </style>

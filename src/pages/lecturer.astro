@@ -6,7 +6,7 @@ import Header from "../layout/Header.astro";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TdA24</title>
+    <title>TdA24 - lectures</title>
   </head>
   <body>
     <Header />
@@ -14,6 +14,8 @@ import Header from "../layout/Header.astro";
 </html>
 
 <style lang="scss">
+  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
   $jet: #333333;
   $prussian_blue: #00384d;
   $white: #ffffff;
@@ -23,24 +25,6 @@ import Header from "../layout/Header.astro";
   * {
     margin: 0;
     padding: 0;
-  }
-
-  .logo {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    width: 255.587px;
-    height: 198.747px;
-    padding: 43px 43.097px 44.087px 44px;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-  }
-
-  .top-vector {
-    position: absolute;
-    top: 0;
-    left: 0;
+    font-family: "Open Sans", sans-serif;
   }
 </style>
