@@ -2,7 +2,7 @@
 
 ---
 
-<header>
+<header id="home">
   <svg
     class="top-vector"
     xmlns="http://www.w3.org/2000/svg"
@@ -14,10 +14,14 @@
   </svg>
 
   <div class="container">
-    <img src="./public/Logo.svg" class="logo" alt="logo" />
+    <a href="/lecturer"
+      ><img src="./public/Logo.svg" class="logo" alt="logo" /></a
+    >
     <nav>
       <ul>
-        <li><a href="/">Home</a></li>
+        <li><a href="#home">Domů</a></li>
+        <li><a href="#aboutme">O mně</a></li>
+        <li><a href="#contact">Kontakt</a></li>
       </ul>
     </nav>
   </div>
@@ -31,14 +35,12 @@
     <img
       class="portrait"
       src="https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp"
-      alt="portrait of lector"
+      alt="portrét lektora"
     />
   </div>
 </header>
 
 <style lang="scss">
-  @import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
-
   $jet: #333333;
   $prussian_blue: #00384d;
   $white: #ffffff;
@@ -58,7 +60,7 @@
     display: flex;
     width: 150px;
     height: auto;
-    color: $jet;
+    color: yellow;
   }
 
   .top-vector {
@@ -66,8 +68,9 @@
     top: 0;
     left: 0;
     z-index: -99;
-    width: 100vw;
+    width: 100%;
     height: 16rem;
+
     path {
       fill: $sky_blue;
     }
@@ -107,15 +110,42 @@
 
   nav ul {
     padding: 0;
-  }
-  nav ul li {
-    display: inline-block;
-    list-style: none;
-  }
-  nav ul li a {
-    color: $white;
-    text-decoration: none;
-    font-size: 20px;
+
+    li {
+      display: inline-block;
+      list-style: none;
+      margin: 0 1rem;
+
+      a {
+        color: $white;
+        text-decoration: none;
+        font-size: 18px;
+        position: relative;
+        transition: transform 0.4s ease-in-out;
+        transform: scale(0);
+        transform-origin: center center 0;
+      }
+      a::after {
+        content: "";
+        width: 100%;
+        height: 2px;
+        background-color: $white;
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        transition: transform 0.4s ease-in-out;
+        transform: scale(0);
+        transform-origin: center center 0;
+      }
+
+      a:hover {
+        transform: scale(2);
+      }
+
+      a:hover::after {
+        transform: scale(1);
+      }
+    }
   }
 
   .portrait {

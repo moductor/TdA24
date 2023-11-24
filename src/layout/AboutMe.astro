@@ -1,0 +1,77 @@
+---
+
+---
+
+<section id="aboutme">
+  <div class="aboutme-container">
+    <div class="icon-teacher-container">
+      <img
+        src="./aboutme-picture.svg"
+        alt="ikonka učitele"
+        class="icon-teacher"
+      />
+    </div>
+    <div class="aboutme-text">
+      <div class="aboutme-title-container">
+        <h3 class="aboutme-title">O MNĚ</h3>
+        <img src="./cursor.svg" alt="ikonka kurzoru" class="cursor" />
+      </div>
+
+      <div class="bio">
+        <p>
+          Baví mě organizovat věci. Ať už to bylo vyvíjení mobilních aplikací ve
+          Futured, pořádání konferencí, spolupráce na soutěžích Prezentiáda,
+          pIšQworky,
+          <b>Tour de App</b> a Středoškolák roku, nebo třeba dobrovolnictví,
+          vždycky jsem skončila u projektového managementu, rozvíjení
+          soft-skills a vzdělávání. U studentských projektů a akcí jsem si
+          vyzkoušela snad všechno od marketingu po logistiku a moc ráda to
+          předám dál. Momentálně studuji Pdf MUNI a FF MUNI v Brně.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  @import url("https://fonts.googleapis.com/css2?family=Lalezar&display=swap");
+
+  $jet: #333333;
+  $prussian_blue: #00384d;
+  $white: #ffffff;
+  $sky_blue: #74c7d3;
+  $sunglow: #fecb2e;
+
+  .aboutme-container {
+    display: flex;
+    flex-direction: row;
+    gap: clamp(1rem, 2rem, 3rem);
+    padding: 0 calc(100vw / 14) 0 calc(100vw / 14);
+    margin: 4rem 0;
+  }
+  .aboutme-title-container {
+    display: flex;
+    justify-content: left;
+    gap: 1rem;
+  }
+  .icon-teacher-container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .cursor {
+    fill: yellow;
+    width: 23px;
+    height: 23px;
+  }
+  .icon-teacher {
+    color: yellow;
+    width: clamp(10rem, 25vw, 14rem);
+  }
+  .aboutme-title {
+    color: $jet;
+    font-size: clamp(1.5rem, 3rem, 1.8vw);
+    font-family: "Lalezar", "Open Sans", sans-serif;
+    margin: 0;
+  }
+</style>
