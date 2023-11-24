@@ -1,0 +1,30 @@
+FROM node:current-alpine
+
+ENV MONGODB_PORT=27017
+ENV MONGODB_PATH=/data/db
+ENV MONGODB_LOG=/var/log/mongod.log
+ENV HOST=0.0.0.0
+ENV PORT=80
+
+# Install MongoDB.
+
+RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositories; \
+    echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/community" >> /etc/apk/repositories; \
+    apk update; \
+    apk add mongodb mongodb-tools; \
+    mkdir -p $MONGODB_PATH;
+
+# Build the app.
+
+WORKDIR /app
+COPY . .
+
+RUN npm install; \
+    npm run build;
+
+# Run the app.
+
+CMD mongod --port $MONGODB_PORT --dbpath $MONGODB_PATH --fork --logpath $MONGODB_LOG; \
+    node ./dist/server/entry.mjs;
+
+EXPOSE 80
