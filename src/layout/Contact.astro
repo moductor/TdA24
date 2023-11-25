@@ -61,6 +61,7 @@ const tags = [
       </div>
     </div>
   </div>
+  <footer>© 2023 Teacher digital Agency</footer>
 </section>
 
 <style lang="scss">
@@ -71,6 +72,20 @@ const tags = [
   $white: #ffffff;
   $sky_blue: #74c7d3;
   $sunglow: #fecb2e;
+
+  #contact {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0;
+    align-content: center;
+    background-color: $prussian_blue;
+    background-image: url("footer-bg.svg");
+    width: 100%;
+    transform: translateY(5rem);
+    flex-wrap: wrap;
+  }
+
   .contact-container {
     display: flex;
     flex-direction: column;
@@ -80,6 +95,8 @@ const tags = [
     border-radius: 3rem;
     padding: 1rem;
     gap: 2rem;
+    max-width: clamp(40rem, 60rem, 80rem);
+    transform: translateY(-5rem);
   }
 
   .tags-container {
@@ -123,6 +140,7 @@ const tags = [
       padding: 0.5rem 1rem;
       color: $white;
       font-size: 18px;
+      font-weight: 500;
     }
   }
   .contact-info {
@@ -133,6 +151,7 @@ const tags = [
     gap: 1rem;
     justify-content: center;
     align-items: center;
+    margin-top: 1rem;
 
     div {
       display: flex;
@@ -143,8 +162,25 @@ const tags = [
   .contact-info-container {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     justify-content: center;
     align-items: center;
+  }
+
+  .contact-background {
+    background-color: $prussian_blue;
+    width: 100%;
+    height: 10rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: -99;
+  }
+
+  footer {
+    color: $white;
+    display: flex;
+    justify-content: center;
+    margin: 1rem;
   }
 </style>
