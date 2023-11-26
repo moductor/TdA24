@@ -1,4 +1,5 @@
 ---
+import Logo from "./Logo.astro";
 type Props = {
   [prop: string]: any;
 };
@@ -6,7 +7,7 @@ type Props = {
 
 <nav {...Astro.props} data-navbar>
   <a href="/" title="Přejít na domovskou stránku">
-    <img src="/images/logo/logo.svg" class="logo" alt="" aria-hidden="true" />
+    <Logo class="logo" aria-hidden="true" variant="light" />
   </a>
 </nav>
 

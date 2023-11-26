@@ -1,4 +1,5 @@
 ---
+import Icon from "../components/Icon.astro";
 type Props = {
   tags: string[];
   location: string;
@@ -33,7 +34,7 @@ const { tags, location, price, telephones, emails, ...props } = Astro.props;
       </div>
       <div class="contact">
         <ul class="telephones" aria-label="Telefonní čísla">
-          <img src="/phone-icon.svg" alt="" />
+          <Icon aria-hidden="true" icon="phone" />
           {
             telephones.map((telephone) => (
               <a class="unstyled-link" href={`tel:${telephone}`}>
@@ -43,7 +44,7 @@ const { tags, location, price, telephones, emails, ...props } = Astro.props;
           }
         </ul>
         <ul class="emails" aria-label="Emailové adresy">
-          <img src="/email-icon.svg" alt="" />
+          <Icon aria-hidden="true" icon="email" />
           {
             emails.map((email) => (
               <li>
@@ -134,12 +135,6 @@ const { tags, location, price, telephones, emails, ...props } = Astro.props;
       align-items: center;
       justify-content: center;
       gap: 1rem;
-    }
-
-    img {
-      display: block;
-      width: 1em;
-      aspect-ratio: 1;
     }
   }
 </style>
