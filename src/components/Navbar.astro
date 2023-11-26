@@ -1,0 +1,22 @@
+---
+type Props = {
+  [prop: string]: any;
+};
+---
+
+<nav {...Astro.props} data-navbar>
+  <a href="/" title="Přejít na domovskou stránku">
+    <img src="/images/logo/logo.svg" class="logo" alt="" aria-hidden="true" />
+  </a>
+</nav>
+
+<style lang="scss">
+  [data-navbar] {
+    display: flex;
+  }
+
+  .logo {
+    display: block;
+    height: 7.25rem;
+  }
+</style>

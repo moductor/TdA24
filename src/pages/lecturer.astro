@@ -1,35 +1,69 @@
 ---
-import AboutMe from "../layout/AboutMe.astro";
-import Contact from "../layout/Contact.astro";
-import Header from "../layout/Header.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import Layout from "../layout/Layout.astro";
+import LecturerAbout from "../partials/LecturerAbout.astro";
+import LecturerContact from "../partials/LecturerContact.astro";
+import LecturerHeader from "../partials/LecturerHeader.astro";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TdA24 - lectures</title>
-    <link rel="icon" type="image/x-icon" href="./cursor.svg" />
-  </head>
-  <body>
-    <Header />
-    <AboutMe />
-    <Contact />
-  </body>
-</html>
+<Layout title="Mgr. Petra Swil Plachá MBA">
+  <Header>
+    <LecturerHeader
+      name="Mgr. Petra Swil Plachá MBA"
+      claim="Aktivní studentka / Předsedkyně spolku / Projektová manažerka"
+      portrait="https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp"
+    />
+  </Header>
+  <main class="main-content content-grid">
+    <LecturerAbout
+      class="breakout"
+      content="<p>Baví mě organizovat věci. Ať už to bylo vyvíjení mobilních aplikací ve Futured, pořádání konferencí, spolupráce na soutěžích Prezentiáda, pIšQworky,<b>Tour de App</b> a Středoškolák roku, nebo třeba dobrovolnictví, vždycky jsem skončila u projektového managementu, rozvíjení soft-skills a vzdělávání.U studentských projektů a akcí jsem si vyzkoušela snad všechno od marketingu po logistiku a moc ráda to předám dál. Momentálně studuji Pdf MUNI a FF MUNI v Brně.</p>"
+    />
+    <div
+      class:list={[
+        "bottom-sheet",
+        "full-width",
+        "content-grid",
+        "background-prussian-blue",
+        "text-white",
+      ]}
+    >
+      <LecturerContact
+        class="contact-sheet"
+        location="Brno"
+        price={1200}
+        tags={[
+          "Dobrovolnictví",
+          "Studentské spolky",
+          "Efektivní učení",
+          "Prezentační dovednosti",
+          "Marketing pro neziskové studentské projekty",
+          "Mimoškolní aktivity",
+          "Projektový management, event management",
+          "Fundraising pro neziskové studentské projekty",
+        ]}
+        telephones={["+420 722 482 974"]}
+        emails={["predseda@scg.cz", "placha@scg.cz"]}
+      />
+      <Footer />
+    </div>
+  </main>
+</Layout>
 
 <style lang="scss">
-  @import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+  .main-content {
+    row-gap: 6rem;
+  }
 
-  $jet: #333333;
-  $prussian_blue: #00384d;
-  $white: #ffffff;
-  $sky_blue: #74c7d3;
-  $sunglow: #fecb2e;
+  .bottom-sheet {
+    --_escape-size: 4rem;
 
-  * {
-    margin: 0;
-    padding: 0;
-    font-family: "Open Sans", sans-serif;
+    row-gap: var(--_escape-size);
+    margin-block-start: var(--_escape-size);
+
+    .contact-sheet {
+      margin-block-start: calc(var(--_escape-size) * -1);
+    }
   }
 </style>
