@@ -26,7 +26,7 @@ export const POST: APIRoute = async ({ params, request }) => {
     if (!isInputValid(data)) {
       const error: Error = {
         code: 400,
-        message: "This is not a valid input.",
+        message: "This is not a valid input",
       };
 
       return new Response(JSON.stringify(error), {
@@ -49,7 +49,7 @@ export const POST: APIRoute = async ({ params, request }) => {
   } catch {
     const error: Error = {
       code: 400,
-      message: "An error occured while parsing the input data.",
+      message: "An error occured while parsing the input data",
     };
 
     return new Response(JSON.stringify(error), {
