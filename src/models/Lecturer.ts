@@ -47,11 +47,17 @@ export type Lecturer = LecturerBase & {
 };
 
 export function isInputValid(lecturer: LecturerInput): boolean {
-  if (!Object.hasOwn(lecturer, "first_name") || !lecturer.first_name) {
+  if (
+    !Object.hasOwn(lecturer, "first_name") ||
+    (!lecturer.first_name && lecturer.first_name !== "")
+  ) {
     return false;
   }
 
-  if (!Object.hasOwn(lecturer, "last_name") || !lecturer.last_name) {
+  if (
+    !Object.hasOwn(lecturer, "last_name") ||
+    (!lecturer.last_name && lecturer.first_name !== "")
+  ) {
     return false;
   }
 
