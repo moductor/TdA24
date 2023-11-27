@@ -18,12 +18,7 @@ jobs:
       - name: Build the image
         run: container/build.sh
 
-      - name: Save the image
-        run: podman image save -o /tmp/tda24.tar tda24:latest
-
       - name: Upload to TdA
-        uses: Tour-de-App/upload-app@tda-24
-        with:
-          team_secret: ${{ secrets.TEAM_SECRET }}
-          image_name: tda24
-          image_path: /tmp/tda24.tar
+        run: container/publish.sh
+        env:
+          SECRET: ${{ secrets.TEAM_SECRET }}
