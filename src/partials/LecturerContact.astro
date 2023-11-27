@@ -45,15 +45,17 @@ const { tags, location, price, telephones, emails, ...props } = Astro.props;
         </ul>
         <ul class="emails" aria-label="Emailové adresy">
           <Icon aria-hidden="true" icon="email" />
-          {
-            emails.map((email) => (
-              <li>
-                <a class="unstyled-link" href={`mailto:${email}`}>
-                  {email}
-                </a>
-              </li>
-            ))
-          }
+          <div class="emails-container">
+            {
+              emails.map((email) => (
+                <li>
+                  <a class="unstyled-link" href={`mailto:${email}`}>
+                    {email}
+                  </a>
+                </li>
+              ))
+            }
+          </div>
         </ul>
       </div>
     </section>
@@ -132,9 +134,14 @@ const { tags, location, price, telephones, emails, ...props } = Astro.props;
       list-style-type: none;
       display: flex;
       flex-wrap: wrap;
-      align-items: center;
+      align-items: start;
       justify-content: center;
       gap: 1rem;
     }
+  }
+  .emails-container {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
   }
 </style>
