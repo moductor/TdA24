@@ -1,27 +1,17 @@
-import type { ObjectId } from "bson";
-import DB, { getUuid, parseUuid } from "./DB";
+import DB, { getUuid } from "./DB";
 const db = DB.collection("tag");
 
 export type TagBase = {
   name: string;
 };
 
-type TagDB = TagBase & { _id: ObjectId };
-
 export type Tag = TagBase & { uuid: string };
-
-function fromDbObject(obj: TagDB): Tag {
-  return {
-    uuid: parseUuid(obj._id),
-    ...obj,
-  };
-}
 
 export async function insertOne(tag: TagBase): Promise<undefined> {
   if ((await findOne(tag.name)) != null) return;
 
-  const item: TagDB = {
-    _id: getUuid(),
+  const item: Tag = {
+    uuid: getUuid(),
     ...tag,
   };
 
@@ -29,10 +19,10 @@ export async function insertOne(tag: TagBase): Promise<undefined> {
 }
 
 export async function insertMany(tags: TagBase[]): Promise<undefined> {
-  const items: TagDB[] = tags
+  const items: Tag[] = tags
     .filter(async (tag) => (await findOne(tag.name)) == null)
     .map((tag) => ({
-      _id: getUuid(),
+      uuid: getUuid(),
       ...tag,
     }));
 
@@ -40,13 +30,13 @@ export async function insertMany(tags: TagBase[]): Promise<undefined> {
 }
 
 export async function get(uuid: string): Promise<Tag | null> {
-  const item = (await db.findOne({ _id: getUuid(uuid) })) as TagDB | null;
+  const item = (await db.findOne({ uuid })) as Tag | null;
   if (!item) return null;
-  return fromDbObject(item);
+  return item;
 }
 
 export async function findOne(name: string): Promise<Tag | null> {
-  const item = (await db.findOne({ name })) as TagDB | null;
+  const item = (await db.findOne({ name })) as Tag | null;
   if (!item) return null;
-  return fromDbObject(item);
+  return item;
 }
