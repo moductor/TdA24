@@ -148,7 +148,7 @@ export async function updateOneById(
     tags,
   };
 
-  await db.replaceOne({ uuid }, item);
+  await db.updateOne({ uuid }, item);
 
   return await get(uuid);
 }
