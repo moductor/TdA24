@@ -7,7 +7,7 @@ export type TagBase = {
 
 export type Tag = TagBase & { uuid: string };
 
-export async function insertOne(tag: TagBase): Promise<undefined> {
+export async function insertOne(tag: TagBase): Promise<string | undefined> {
   if ((await findOne(tag.name)) != null) return;
 
   const item: Tag = {
@@ -16,6 +16,7 @@ export async function insertOne(tag: TagBase): Promise<undefined> {
   };
 
   await db.insertOne(item);
+  return item.uuid;
 }
 
 export async function insertMany(tags: TagBase[]): Promise<undefined> {
@@ -39,4 +40,13 @@ export async function findOne(name: string): Promise<Tag | null> {
   const item = (await db.findOne({ name })) as Tag | null;
   if (!item) return null;
   return item;
+}
+
+export async function getByName(name: string): Promise<Tag> {
+  let item = await findOne(name);
+  if (!item) {
+    const id = await insertOne({ name });
+    item = await get(id!);
+  }
+  return item!;
 }
