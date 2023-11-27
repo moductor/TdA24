@@ -148,7 +148,7 @@ export async function updateOneById(
     tags,
   };
 
-  await db.updateOne({ uuid }, item);
+  await db.updateOne({ uuid }, { $set: item });
 
   return await get(uuid);
 }

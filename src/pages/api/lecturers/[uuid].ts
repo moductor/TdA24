@@ -2,7 +2,6 @@ import type { APIRoute } from "astro";
 import type { Error } from "../../../models/Error";
 import {
   get,
-  isInputValid,
   remove,
   updateOneById,
   type LecturerBase,
@@ -77,21 +76,6 @@ export const PUT: APIRoute = async ({ params, request }) => {
 
   try {
     const data = (await request.json()) as LecturerBase;
-
-    if (!isInputValid(data)) {
-      const error: Error = {
-        code: 400,
-        message: "This is not a valid input",
-      };
-
-      return new Response(JSON.stringify(error), {
-        status: 400,
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-    }
-
     const lecturer = await updateOneById(uuid, data);
 
     return new Response(JSON.stringify(lecturer), {
@@ -100,7 +84,9 @@ export const PUT: APIRoute = async ({ params, request }) => {
         "Content-Type": "application/json",
       },
     });
-  } catch {
+  } catch (e) {
+    console.log(e);
+
     const error: Error = {
       code: 400,
       message: "An error occured while parsing the input data",
