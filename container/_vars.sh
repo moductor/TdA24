@@ -1,0 +1,8 @@
+PODMAN=${PODMAN:-"podman"}
+IMAGE=${IMAGE:-"tda24"}
+
+PORT=${PORT:-"8080"}
+MONGODB_PORT=${PORT:-"27017"}
+
+CONTAINER_DIR=$(dirname "$0")
+PROJECT_DIR=$(dirname $CONTAINER_DIR)
