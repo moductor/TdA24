@@ -1,0 +1,35 @@
+$colors: (
+  "sky-blue": #74c7d3,
+  "white": #ffffff,
+  "jet": #333333,
+  "prussian-blue": #00384d,
+  "sunglow": #fecb2e,
+);
+
+@function lighter($color, $percentage) {
+  @return color-mix(in srgb, $color, white $percentage);
+}
+
+@function darker($color, $percentage) {
+  @return color-mix(in srgb, $color, black $percentage);
+}
+
+@function alpha($color, $percentage) {
+  @return color-mix(in srgb, $color, transparent #{100% - $percentage});
+}
+
+:root {
+  @each $color, $value in $colors {
+    --color-#{$color}: #{$value};
+  }
+}
+
+@each $color, $value in $colors {
+  .text-#{$color} {
+    color: var(--color-#{$color});
+  }
+
+  .background-#{$color} {
+    background-color: var(--color-#{$color});
+  }
+}

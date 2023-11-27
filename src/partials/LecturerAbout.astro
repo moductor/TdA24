@@ -1,0 +1,54 @@
+---
+import Icon from "../components/Icon.astro";
+type Props = {
+  content: string;
+  [prop: string]: any;
+};
+
+const { content, ...props } = Astro.props;
+---
+
+<section {...props}>
+  <div class="columns text-jet">
+    <Icon class="icon-teacher text-sunglow" aria-hidden="true" icon="studium" />
+    <div class="content">
+      <h2 class="title font-accent">O mně</h2>
+      <Fragment set:html={content} />
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    gap: 1rem;
+
+    @media (max-width: 720px) {
+      display: block;
+      margin-block-start: 4rem;
+    }
+  }
+
+  .content {
+    grid-column: 2 / -1;
+    font-size: 1.25rem;
+    line-height: 1.5;
+  }
+
+  .title {
+    text-transform: uppercase;
+    font-size: 2.2rem;
+  }
+
+  .icon-teacher {
+    display: block;
+    width: 60%;
+    justify-self: center;
+
+    @media (max-width: 720px) {
+      display: none;
+    }
+  }
+</style>
