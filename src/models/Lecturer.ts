@@ -46,6 +46,12 @@ export type Lecturer = LecturerBase & {
   tags?: Tag[];
 };
 
+export function isInputValid(lecturer: LecturerInput): boolean {
+  if (!Object.hasOwn(lecturer, "first_name")) return false;
+  if (!Object.hasOwn(lecturer, "last_name")) return false;
+  return true;
+}
+
 export async function insertOne(lecturer: LecturerInput): Promise<string> {
   const tags = !lecturer.tags
     ? undefined
