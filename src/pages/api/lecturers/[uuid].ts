@@ -1,12 +1,12 @@
 import type { APIRoute } from "astro";
-import type { Error } from "../../models/Error";
+import type { Error } from "../../../models/Error";
 import {
   get,
   isInputValid,
   remove,
   updateOneById,
   type LecturerBase,
-} from "../../models/Lecturer";
+} from "../../../models/Lecturer";
 
 export const GET: APIRoute = async ({ params, request }) => {
   const uuid = params["uuid"] as string;
