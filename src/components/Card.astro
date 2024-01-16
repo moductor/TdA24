@@ -11,6 +11,7 @@ const { decorated = "right", ...props } = Astro.props;
 
 <div {...props}>
   <slot />
+
   <span class="background" data-decorated={decorated}>
     <BackgroundBlob />
   </span>
@@ -19,6 +20,7 @@ const { decorated = "right", ...props } = Astro.props;
 <style lang="scss">
   div {
     min-height: 300px;
+    padding: var(--card-padding);
 
     position: relative;
     isolation: isolate;
