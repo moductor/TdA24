@@ -32,7 +32,22 @@ const title = _title ? `${_title} | ${siteName}` : siteName;
 
     <title>{title}</title>
   </head>
-  <body class="backgroung-white">
+  <body>
     <slot />
   </body>
 </html>
+
+<style lang="scss">
+  html {
+    color-scheme: dark light;
+  }
+
+  body {
+    background-color: var(--color-jet);
+    font-family: var(--font-body);
+
+    @media (prefers-color-scheme: light) {
+      background-color: var(--color-white);
+    }
+  }
+</style>

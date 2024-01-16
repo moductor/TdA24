@@ -1,23 +1,25 @@
 ---
 import Logo from "./Logo.astro";
+
 type Props = {
   [prop: string]: any;
 };
 ---
 
-<nav {...Astro.props} data-navbar>
+<nav {...Astro.props}>
   <a href="/" title="Přejít na domovskou stránku">
-    <Logo class="logo" aria-hidden="true" variant="light" />
+    <Logo class="logo" aria-hidden="true" />
   </a>
 </nav>
 
 <style lang="scss">
-  [data-navbar] {
+  nav {
     display: flex;
   }
 
   .logo {
     display: block;
-    height: 7.25rem;
+    height: 7rem;
+    color: var(--color-white);
   }
 </style>

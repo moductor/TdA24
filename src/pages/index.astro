@@ -1,11 +1,23 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TdA24</title>
-  </head>
-  <body>
-    <p>Hello TdA</p>
-  </body>
-</html>
+---
+import Header from "../components/Header.astro";
+import Layout from "../layout/Layout.astro";
+---
+
+<Layout>
+  <Header class="header" />
+</Layout>
+
+<style lang="scss">
+  .header {
+    --border-lightness: 100%;
+    --border-opacity: 0.2;
+
+    border-block-end: 2px solid
+      hsl(0 0% var(--border-lightness) / var(--border-opacity));
+
+    @media (prefers-color-scheme: light) {
+      --border-lightness: 0%;
+      --border-opacity: 0.06;
+    }
+  }
+</style>

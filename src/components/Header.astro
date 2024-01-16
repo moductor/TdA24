@@ -1,11 +1,51 @@
 ---
+import BackgroundWrapper from "./BackgroundWrapper.astro";
 import Navbar from "./Navbar.astro";
+
+type Props = {
+  [prop: string]: any;
+};
 ---
 
-<header>
-  <div class="content-grid background-sky-blue text-white">
-    <Navbar class="breakout" />
-  </div>
-
-  <slot />
+<header {...Astro.props}>
+  <BackgroundWrapper>
+    <div class="content-grid">
+      <Navbar />
+      <div class="content">
+        <h1>Dynamický katalog lektorů</h1>
+        <p class="title">
+          Vaše <span>vzdělání</span> je u nás <br /> v dobrých rukou!
+        </p>
+      </div>
+    </div>
+  </BackgroundWrapper>
 </header>
+
+<style lang="scss">
+  .content {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1rem;
+    padding-block: 5rem;
+  }
+
+  .title {
+    font-family: var(--font-accent);
+    font-size: 4rem;
+    line-height: 1.2;
+
+    span {
+      background-image: url("/images/title-ellipse.svg");
+      background-size: 100%;
+      background-repeat: no-repeat;
+      background-position: center top;
+    }
+  }
+
+  h1 {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    font-size: 1.2rem;
+  }
+</style>

@@ -1,0 +1,64 @@
+---
+import BackgroundBlob from "./BackgroundBlob.astro";
+
+type Props = {
+  [prop: string]: any;
+};
+---
+
+<div {...Astro.props}>
+  <slot />
+  <span class="background">
+    <BackgroundBlob />
+    <BackgroundBlob />
+    <span class="white-glow"></span>
+  </span>
+</div>
+
+<style lang="scss">
+  div {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .white-glow {
+    display: block;
+    aspect-ratio: 1;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    filter: blur(30rem);
+    opacity: 0.1;
+  }
+
+  .background {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: clip;
+  }
+
+  .background > * {
+    position: absolute;
+  }
+
+  .background > :nth-child(1) {
+    height: 36rem;
+    rotate: -45deg;
+    top: -12rem;
+    left: -4rem;
+  }
+
+  .background > :nth-child(2) {
+    height: 40rem;
+    rotate: -45deg;
+    top: 24rem;
+    right: -8rem;
+  }
+
+  .background > :nth-child(3) {
+    height: 64rem;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+</style>
