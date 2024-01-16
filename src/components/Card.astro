@@ -32,9 +32,9 @@ const { decorated = "right", ...props } = Astro.props;
       content: "";
       position: absolute;
       left: calc(var(--card-border-size) * -1);
-      top: 4rem;
+      top: clamp(var(--card-border-radius), 4rem, 25%);
       width: var(--card-border-size);
-      height: 6rem;
+      height: min(6rem, calc(100% - 2 * var(--card-border-radius)));
       background-image: linear-gradient(
         transparent,
         var(--color-sky-blue),
