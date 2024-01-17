@@ -12,9 +12,9 @@ type Props = {
     <div class="content-grid">
       <Navbar />
       <div class="content">
-        <h1>Dynamický katalog lektorů</h1>
+        <h1 class="subtitle">Dynamický katalog lektorů</h1>
         <p class="title">
-          Vaše <span>vzdělání</span> je u nás <br /> v dobrých rukou!
+          Vaše <span>vzdělání</span> je u nás v dobrých rukou!
         </p>
       </div>
     </div>
@@ -22,17 +22,40 @@ type Props = {
 </header>
 
 <style lang="scss">
+  header {
+    --border-lightness: 100%;
+    --border-opacity: 0.2;
+
+    border-block-end: 2px solid
+      hsl(0 0% var(--border-lightness) / var(--border-opacity));
+
+    @media (prefers-color-scheme: light) {
+      --border-lightness: 0%;
+      --border-opacity: 0.06;
+    }
+  }
+
   .content {
     display: flex;
     flex-direction: column-reverse;
-    gap: 1rem;
-    padding-block: 5rem;
+    gap: 1em;
+    padding-block-start: 5em;
+    padding-block-end: 8em;
+
+    @media (max-width: 720px) {
+      font-size: 0.8rem;
+    }
+
+    @media (min-width: 1200px) {
+      font-size: 1.4rem;
+    }
   }
 
   .title {
     font-family: var(--font-accent);
-    font-size: 4rem;
+    font-size: 4em;
     line-height: 1.2;
+    max-width: 16ch;
 
     span {
       background-image: url("/images/title-ellipse.svg");
@@ -42,10 +65,10 @@ type Props = {
     }
   }
 
-  h1 {
+  .subtitle {
     text-transform: uppercase;
     font-weight: 400;
     letter-spacing: 0.1em;
-    font-size: 1.2rem;
+    font-size: 1.2em;
   }
 </style>
