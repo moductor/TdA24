@@ -1,111 +1,295 @@
 ---
+import sanitizeHtml from "sanitize-html";
+import BackgroundWrapper from "../components/BackgroundWrapper.astro";
+import Card from "../components/Card.astro";
 import Footer from "../components/Footer.astro";
-import Header from "../components/Header.astro";
 import Icon from "../components/Icon.astro";
+import Navbar from "../components/Navbar.astro";
+import Tag from "../components/Tag.astro";
 import Layout from "../layout/Layout.astro";
-import LecturerAbout from "../partials/LecturerAbout.astro";
-import LecturerContact from "../partials/LecturerContact.astro";
-import LecturerHeader from "../partials/LecturerHeader.astro";
+
+const portrait =
+  "https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp";
+
+const name = "Mgr. Petra Swil Plachá MBA";
+const claim = "Aktivní studentka / Předsedkyně spolku / Projektová manažerka";
+
+const price = 1200;
+const location = "Brno";
+
+const tags = [
+  "Dobrovolnictví",
+  "Studentské spolky",
+  "Efektivní učení",
+  "Prezentační dovednosti",
+  "Marketing pro neziskové studentské projekty",
+  "Mimoškolní aktivity",
+  "Projektový management, event management",
+  "Fundraising pro neziskové studentské projekty",
+];
+
+const content =
+  "<p>Baví mě organizovat věci. Ať už to bylo vyvíjení mobilních aplikací ve Futured, pořádání konferencí, spolupráce na soutěžích Prezentiáda, pIšQworky, <b>Tour de App</b> a Středoškolák roku, nebo třeba dobrovolnictví, vždycky jsem skončila u projektového managementu, rozvíjení soft-skills a vzdělávání.U studentských projektů a akcí jsem si vyzkoušela snad všechno od marketingu po logistiku a moc ráda to předám dál. Momentálně studuji Pdf MUNI a FF MUNI v Brně.</p>";
+
+const telephones = ["+420 722 482 974"];
+const emails = ["predseda@scg.cz", "placha@scg.cz"];
 ---
 
-<Layout title="Mgr. Petra Swil Plachá MBA">
-  <Header>
-    <LecturerHeader
-      name="Mgr. Petra Swil Plachá MBA"
-      claim="Aktivní studentka / Předsedkyně spolku / Projektová manažerka"
-      portrait="https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp"
-    />
-  </Header>
+<Layout>
+  <BackgroundWrapper class="background-wrapper">
+    <div class="content-grid">
+      <div class="bento-grid">
+        <header>
+          <Navbar class="navbar" />
 
-  <main class="main-content content-grid">
-    <LecturerAbout
-      class="breakout"
-      content="<p>Baví mě organizovat věci. Ať už to bylo vyvíjení mobilních aplikací ve Futured, pořádání konferencí, spolupráce na soutěžích Prezentiáda, pIšQworky,<b>Tour de App</b> a Středoškolák roku, nebo třeba dobrovolnictví, vždycky jsem skončila u projektového managementu, rozvíjení soft-skills a vzdělávání.U studentských projektů a akcí jsem si vyzkoušela snad všechno od marketingu po logistiku a moc ráda to předám dál. Momentálně studuji Pdf MUNI a FF MUNI v Brně.</p>"
-    />
+          <div class="hero">
+            <Card class="metadata">
+              <h1 class="title">{name}</h1>
+              <p class="claim">{claim}</p>
 
-    <div
-      class:list={[
-        "bottom-sheet",
-        "full-width",
-        "content-grid",
-        "background-prussian-blue",
-        "text-white",
-      ]}
-    >
-      <LecturerContact
-        class="contact-sheet"
-        location="Brno"
-        price={1200}
-        tags={[
-          "Dobrovolnictví",
-          "Studentské spolky",
-          "Efektivní učení",
-          "Prezentační dovednosti",
-          "Marketing pro neziskové studentské projekty",
-          "Mimoškolní aktivity",
-          "Projektový management, event management",
-          "Fundraising pro neziskové studentské projekty",
-        ]}
-        telephones={["+420 722 482 974"]}
-        emails={["predseda@scg.cz", "placha@scg.cz"]}
-      />
+              <div class="tag-list">
+                <Tag class="background-sky-blue text-jet">
+                  <p>
+                    <span class="visually-hidden">Umístění:</span>
+                    <span>{location}</span>
+                  </p>
+                </Tag>
+
+                <Tag class="background-sunglow text-jet">
+                  <p>
+                    <span class="visually-hidden">Cena za hodinu:</span>
+                    <span>{price} Kč / hod</span>
+                  </p>
+                </Tag>
+              </div>
+            </Card>
+
+            <img class="portrait" src={portrait} alt="" />
+          </div>
+        </header>
+
+        <main>
+          <Card class="tags">
+            <section>
+              <h2 class="visually-hidden">Zaměření</h2>
+              <ul class="tag-list">
+                {
+                  tags.map((tag) => (
+                    <li>
+                      <Tag class="background-sky-blue text-jet">{tag}</Tag>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+          </Card>
+
+          <Card class="bio">
+            <section>
+              <h2 class="title">O mně</h2>
+              <Fragment set:html={sanitizeHtml(content)} />
+            </section>
+          </Card>
+
+          <Card class="contact">
+            <section>
+              <h2 class="title">Kontakt</h2>
+
+              <h3 class="visually-hidden">Telefonní čísla</h3>
+              <ul class="contact-list">
+                <Icon aria-hidden="true" icon="phone" />
+                {
+                  telephones.map((telephone) => (
+                    <li>
+                      <a class="unstyled-link" href={`tel:${telephone}`}>
+                        {telephone}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+
+              <h3 class="visually-hidden">Emailové adresy</h3>
+              <ul class="contact-list">
+                <Icon aria-hidden="true" icon="email" />
+                {
+                  emails.map((email) => (
+                    <li>
+                      <a class="unstyled-link" href={`mailto:${email}`}>
+                        {email}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </section>
+          </Card>
+        </main>
+      </div>
+
       <Footer />
-
-      <Icon class="icon" aria-hidden="true" icon="napad" />
-      <Icon class="icon" aria-hidden="true" icon="konverzace" />
-      <Icon class="icon" aria-hidden="true" icon="pocitac" />
     </div>
-  </main>
+  </BackgroundWrapper>
 </Layout>
 
 <style lang="scss">
-  .main-content {
-    row-gap: 6rem;
+  // Layout
+
+  .background-wrapper {
+    min-height: 100vh;
   }
 
-  .bottom-sheet {
-    --_escape-size: 4rem;
+  .bento-grid {
+    --spacing: 1.25rem;
 
-    position: relative;
-    isolation: isolate;
-    row-gap: var(--_escape-size);
-    margin-block-start: var(--_escape-size);
+    display: grid;
+    padding-block-end: var(--spacing);
+    gap: var(--spacing);
+  }
 
-    .contact-sheet {
-      margin-block-start: calc(var(--_escape-size) * -1);
+  header,
+  main,
+  .hero {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    gap: inherit;
+  }
+
+  .navbar {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 1200px) {
+    .bento-grid {
+      grid-template-columns: repeat(12, 1fr);
     }
 
-    .icon {
-      position: absolute;
+    .metadata {
+      grid-column: 4 / -1;
+    }
+
+    .portrait {
+      grid-column: 1 / 4;
+    }
+
+    .tags {
+      grid-column: 1 / -1;
+    }
+
+    .bio {
+      grid-column: 1 / 9;
+    }
+
+    .contact {
+      grid-column: 9 / -1;
+    }
+  }
+
+  // Typography
+
+  h1 {
+    font-size: 3.5rem;
+
+    @media (max-width: 720px) {
+      font-size: 2.6rem;
+    }
+  }
+
+  h2 {
+    font-size: 2.5rem;
+
+    @media (max-width: 720px) {
+      font-size: 2.2rem;
+    }
+  }
+
+  .title {
+    font-family: var(--font-accent);
+    line-height: 1.2;
+  }
+
+  // Lists
+
+  .tag-list {
+    display: flex;
+    gap: 0.6em;
+  }
+
+  .contact-list {
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    column-gap: 0.6rem;
+    row-gap: 0.6rem;
+
+    > :not(li) {
       color: var(--color-sunglow);
-      z-index: -1;
+    }
 
-      &:nth-of-type(1) {
-        grid-column: 2 / 3;
-        justify-self: start;
-        align-self: center;
-        font-size: 4rem;
-      }
+    li {
+      grid-column: 2;
+      line-height: 1;
+    }
+  }
 
-      &:nth-of-type(2) {
-        grid-column: -3 / -2;
-        justify-self: end;
-        align-self: start;
-        font-size: 4rem;
-        margin-block-start: 1em;
-      }
+  // Sections
 
-      &:nth-of-type(3) {
-        grid-column: -3 / -2;
-        justify-self: start;
-        align-self: end;
-        font-size: 4rem;
-        margin-block-end: 1em;
-      }
+  .metadata {
+    gap: 1rem;
 
-      @media (max-width: 1150px) {
-        display: none;
+    .claim,
+    .tag-list {
+      @media (min-width: 720px) {
+        font-size: 1.2rem;
       }
     }
+
+    .tag-list {
+      margin-block-start: 0.8rem;
+    }
+  }
+
+  .portrait {
+    aspect-ratio: 5 / 4;
+    width: 100%;
+    object-fit: cover;
+    box-shadow: var(--card-shadow);
+    border-radius: var(--card-border-radius);
+    grid-row: 1;
+
+    @media (min-width: 720px) {
+      aspect-ratio: 16 / 9;
+    }
+
+    @media (min-width: 1200px) {
+      aspect-ratio: 1;
+    }
+  }
+
+  .tags ul {
+    list-style-type: none;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media (max-width: 720px) {
+      flex-direction: column;
+      justify-items: stretch;
+      text-align: center;
+    }
+  }
+
+  .bio section,
+  .contact section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .bio section {
+    line-height: 1.5;
+  }
+
+  .contact section {
+    justify-items: center;
   }
 </style>
