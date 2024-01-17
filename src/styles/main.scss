@@ -2,6 +2,7 @@
 @use "colors";
 @use "fonts";
 @use "root";
+@use "typography";
 
 .visually-hidden {
   position: fixed;
@@ -57,7 +58,6 @@
   }
 }
 
-.title {
-  font-family: var(--font-accent);
-  line-height: 1.2;
+.content-flow > * + * {
+  margin-block-start: 1em;
 }
