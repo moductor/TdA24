@@ -1,0 +1,18 @@
+---
+type Props = {
+  [prop: string]: any;
+};
+---
+
+<div {...Astro.props}>
+  <slot />
+</div>
+
+<style lang="scss">
+  div {
+    padding-inline: 0.6em;
+    padding-block: 0.2em;
+    border-radius: 100vmax;
+    font-weight: 700;
+  }
+</style>
