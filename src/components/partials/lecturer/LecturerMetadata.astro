@@ -1,0 +1,62 @@
+---
+import Card from "../../widgets/Card.astro";
+import Tag from "../../widgets/Tag.astro";
+
+type Props = {
+  name: string;
+  claim: string;
+  location: string;
+  price: number;
+  [prop: string]: any;
+};
+
+const { name, claim, location, price, ...props } = Astro.props;
+---
+
+<Card data-metadata-card {...props}>
+  <h1 class="title-1">{name}</h1>
+  <p class="claim">{claim}</p>
+
+  <div class="tag-list">
+    <Tag class="background-sky-blue text-jet">
+      <p>
+        <span class="visually-hidden">Umístění:</span>
+        <span>{location}</span>
+      </p>
+    </Tag>
+
+    <Tag class="background-sunglow text-jet">
+      <p>
+        <span class="visually-hidden">Cena za hodinu:</span>
+        <span>{price} Kč / hod</span>
+      </p>
+    </Tag>
+  </div>
+</Card>
+
+<style lang="scss">
+  [data-metadata-card] {
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+
+    @media (max-width: 720px) {
+      font-size: 2.6rem;
+    }
+  }
+
+  .claim,
+  .tag-list {
+    @media (min-width: 720px) {
+      font-size: 1.2rem;
+    }
+  }
+
+  .tag-list {
+    margin-block-start: 0.8rem;
+    display: flex;
+    gap: 0.6em;
+  }
+</style>

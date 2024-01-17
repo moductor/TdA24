@@ -1,12 +1,16 @@
 ---
-import sanitizeHtml from "sanitize-html";
+import Layout from "../layout/Layout.astro";
+
 import Footer from "../components/Footer.astro";
 import Navbar from "../components/Navbar.astro";
+
 import BackgroundWrapper from "../components/widgets/BackgroundWrapper.astro";
-import Card from "../components/widgets/Card.astro";
-import Icon from "../components/widgets/Icon.astro";
-import Tag from "../components/widgets/Tag.astro";
-import Layout from "../layout/Layout.astro";
+
+import LecturerBio from "../components/partials/lecturer/LecturerBio.astro";
+import LecturerContact from "../components/partials/lecturer/LecturerContact.astro";
+import LecturerMetadata from "../components/partials/lecturer/LecturerMetadata.astro";
+import LecturerPortrait from "../components/partials/lecturer/LecturerPortrait.astro";
+import LecturerTags from "../components/partials/lecturer/LecturerTags.astro";
 
 const portrait =
   "https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp";
@@ -43,87 +47,27 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
           <Navbar class="navbar" />
 
           <div class="hero">
-            <Card class="metadata">
-              <h1 class="title">{name}</h1>
-              <p class="claim">{claim}</p>
-
-              <div class="tag-list">
-                <Tag class="background-sky-blue text-jet">
-                  <p>
-                    <span class="visually-hidden">Umístění:</span>
-                    <span>{location}</span>
-                  </p>
-                </Tag>
-
-                <Tag class="background-sunglow text-jet">
-                  <p>
-                    <span class="visually-hidden">Cena za hodinu:</span>
-                    <span>{price} Kč / hod</span>
-                  </p>
-                </Tag>
-              </div>
-            </Card>
-
-            <img class="portrait" src={portrait} alt="" />
+            <LecturerMetadata
+              name={name}
+              claim={claim}
+              location={location}
+              price={price}
+              class="metadata"
+            />
+            <LecturerPortrait portrait={portrait} class="portrait" />
           </div>
         </header>
 
         <main>
-          <Card class="tags">
-            <section>
-              <h2 class="visually-hidden">Zaměření</h2>
-              <ul class="tag-list">
-                {
-                  tags.map((tag) => (
-                    <li>
-                      <Tag class="background-sky-blue text-jet">{tag}</Tag>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-          </Card>
-
-          <Card class="bio">
-            <section>
-              <h2 class="title">O mně</h2>
-              <Fragment set:html={sanitizeHtml(content)} />
-            </section>
-          </Card>
-
-          <Card class="contact">
-            <section>
-              <h2 class="title">Kontakt</h2>
-
-              <h3 class="visually-hidden">Telefonní čísla</h3>
-              <ul class="contact-list">
-                <Icon aria-hidden="true" icon="phone" />
-                {
-                  telephones.map((telephone) => (
-                    <li>
-                      <a class="unstyled-link" href={`tel:${telephone}`}>
-                        {telephone}
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
-
-              <h3 class="visually-hidden">Emailové adresy</h3>
-              <ul class="contact-list">
-                <Icon aria-hidden="true" icon="email" />
-                {
-                  emails.map((email) => (
-                    <li>
-                      <a class="unstyled-link" href={`mailto:${email}`}>
-                        {email}
-                      </a>
-                    </li>
-                  ))
-                }
-              </ul>
-            </section>
-          </Card>
+          <LecturerTags
+            tags={tags.map((tag) => ({ uuid: "", name: tag }))}
+            class="tags"
+          />
+          <LecturerBio content={content} class="bio" />
+          <LecturerContact
+            contact={{ telephone_numbers: telephones, emails: emails }}
+            class="contact"
+          />
         </main>
       </div>
 
@@ -133,8 +77,6 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
 </Layout>
 
 <style lang="scss">
-  // Layout
-
   .background-wrapper {
     min-height: 100vh;
   }
@@ -158,6 +100,10 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
 
   .navbar {
     grid-column: 1 / -1;
+  }
+
+  .portrait {
+    grid-row: 1;
   }
 
   @media (min-width: 1200px) {
@@ -184,112 +130,5 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
     .contact {
       grid-column: 9 / -1;
     }
-  }
-
-  // Typography
-
-  h1 {
-    font-size: 3.5rem;
-
-    @media (max-width: 720px) {
-      font-size: 2.6rem;
-    }
-  }
-
-  h2 {
-    font-size: 2.5rem;
-
-    @media (max-width: 720px) {
-      font-size: 2.2rem;
-    }
-  }
-
-  .title {
-    font-family: var(--font-accent);
-    line-height: 1.2;
-  }
-
-  // Lists
-
-  .tag-list {
-    display: flex;
-    gap: 0.6em;
-  }
-
-  .contact-list {
-    list-style-type: none;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    column-gap: 0.6rem;
-    row-gap: 0.6rem;
-
-    > :not(li) {
-      color: var(--color-sunglow);
-    }
-
-    li {
-      grid-column: 2;
-      line-height: 1;
-    }
-  }
-
-  // Sections
-
-  .metadata {
-    gap: 1rem;
-
-    .claim,
-    .tag-list {
-      @media (min-width: 720px) {
-        font-size: 1.2rem;
-      }
-    }
-
-    .tag-list {
-      margin-block-start: 0.8rem;
-    }
-  }
-
-  .portrait {
-    aspect-ratio: 5 / 4;
-    width: 100%;
-    object-fit: cover;
-    box-shadow: var(--card-shadow);
-    border-radius: var(--card-border-radius);
-    grid-row: 1;
-
-    @media (min-width: 720px) {
-      aspect-ratio: 16 / 9;
-    }
-
-    @media (min-width: 1200px) {
-      aspect-ratio: 1;
-    }
-  }
-
-  .tags ul {
-    list-style-type: none;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    @media (max-width: 720px) {
-      flex-direction: column;
-      justify-items: stretch;
-      text-align: center;
-    }
-  }
-
-  .bio section,
-  .contact section {
-    display: grid;
-    gap: 1rem;
-  }
-
-  .bio section {
-    line-height: 1.5;
-  }
-
-  .contact section {
-    justify-items: center;
   }
 </style>
