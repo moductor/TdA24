@@ -8,6 +8,11 @@
 
 body {
   font-family: var(--font-body);
+  color: var(--color-white);
+
+  @media (prefers-color-scheme: light) {
+    color: var(--color-jet);
+  }
 }
 
 img {
