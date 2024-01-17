@@ -47,6 +47,7 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
           <Navbar class="navbar" />
 
           <div class="hero">
+            <LecturerPortrait portrait={portrait} class="portrait" />
             <LecturerMetadata
               name={name}
               claim={claim}
@@ -54,7 +55,6 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
               price={price}
               class="metadata"
             />
-            <LecturerPortrait portrait={portrait} class="portrait" />
           </div>
         </header>
 
@@ -100,10 +100,6 @@ const emails = ["predseda@scg.cz", "placha@scg.cz"];
 
   .navbar {
     grid-column: 1 / -1;
-  }
-
-  .portrait {
-    grid-row: 1;
   }
 
   @media (min-width: 1200px) {
