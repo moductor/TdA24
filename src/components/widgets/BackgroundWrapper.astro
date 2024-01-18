@@ -28,6 +28,10 @@ type Props = {
     border-radius: 50%;
     filter: blur(30rem);
     opacity: 0.1;
+
+    @media (prefers-color-scheme: light) {
+      background-color: var(--color-jet);
+    }
   }
 
   .background {
