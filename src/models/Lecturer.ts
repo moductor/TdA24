@@ -156,3 +156,14 @@ export async function updateOneById(
 export async function remove(uuid: string): Promise<boolean> {
   return (await db.deleteOne({ uuid })).acknowledged;
 }
+
+export function getNameString(lecturer: Lecturer) {
+  const parts = [
+    lecturer.title_before,
+    lecturer.first_name,
+    lecturer.middle_name,
+    lecturer.last_name,
+    lecturer.title_after,
+  ].filter((part) => part != undefined);
+  return parts.join(" ");
+}
