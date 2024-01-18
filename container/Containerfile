@@ -19,7 +19,8 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositor
 WORKDIR /app
 COPY . .
 
-RUN npm install; \
+RUN mv .env.container .env; \
+    npm install; \
     npm run build;
 
 # Run the app.
