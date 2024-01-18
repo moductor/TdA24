@@ -1,10 +1,25 @@
 ---
-import Header from "../components/Header.astro";
+import { getAll } from "../models/Lecturer";
+import "../placeholderData";
+
 import Layout from "../layout/Layout.astro";
+
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+
+import HomeLecturerItem from "../components/partials/home/HomeLecturerItem.astro";
+
+const lecturers = await getAll();
 ---
 
 <Layout>
   <Header class="header" />
+  <main class="content-grid" style="margin-block: 4rem;">
+    <div class="breakout" style="display: grid; gap: 4rem;">
+      {lecturers.map((lecturer) => <HomeLecturerItem lecturer={lecturer} />)}
+    </div>
+  </main>
+  <Footer />
 </Layout>
 
 <style lang="scss"></style>
