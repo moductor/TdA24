@@ -45,8 +45,10 @@ const lecturers: LecturerInput[] = [
   },
 ];
 
-(async () => {
+export default async function createPlaceholderData() {
   const allLecturers = await getAll();
   if (allLecturers.length > 0) return;
-  lecturers.forEach(insertOne);
-})();
+  for (const lecturer of lecturers) {
+    await insertOne(lecturer);
+  }
+}

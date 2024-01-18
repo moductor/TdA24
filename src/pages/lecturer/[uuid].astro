@@ -1,5 +1,6 @@
 ---
-import "../../placeholderData";
+import { get, getNameString } from "../../models/Lecturer";
+import createPlaceholderData from "../../placeholderData";
 
 import Layout from "../../layout/Layout.astro";
 
@@ -13,7 +14,8 @@ import LecturerContact from "../../components/partials/lecturer/LecturerContact.
 import LecturerMetadata from "../../components/partials/lecturer/LecturerMetadata.astro";
 import LecturerPortrait from "../../components/partials/lecturer/LecturerPortrait.astro";
 import LecturerTags from "../../components/partials/lecturer/LecturerTags.astro";
-import { get, getNameString } from "../../models/Lecturer";
+
+await createPlaceholderData();
 
 const lecturer = await get(Astro.params["uuid"] as string);
 
