@@ -1,0 +1,115 @@
+---
+import "../../placeholderData";
+
+import Layout from "../../layout/Layout.astro";
+
+import Footer from "../../components/Footer.astro";
+import Navbar from "../../components/Navbar.astro";
+
+import BackgroundWrapper from "../../components/widgets/BackgroundWrapper.astro";
+
+import LecturerBio from "../../components/partials/lecturer/LecturerBio.astro";
+import LecturerContact from "../../components/partials/lecturer/LecturerContact.astro";
+import LecturerMetadata from "../../components/partials/lecturer/LecturerMetadata.astro";
+import LecturerPortrait from "../../components/partials/lecturer/LecturerPortrait.astro";
+import LecturerTags from "../../components/partials/lecturer/LecturerTags.astro";
+import { get, getNameString } from "../../models/Lecturer";
+
+const lecturer = await get(Astro.params["uuid"] as string);
+
+if (lecturer == null)
+  return new Response(null, {
+    status: 404,
+    statusText: "Not found",
+  });
+---
+
+<Layout>
+  <BackgroundWrapper class="background-wrapper">
+    <div class="content-grid">
+      <div class="bento-grid">
+        <header>
+          <Navbar class="navbar" />
+
+          <div class="hero">
+            <LecturerPortrait
+              portrait={lecturer.picture_url}
+              class="portrait"
+            />
+            <LecturerMetadata
+              name={getNameString(lecturer)}
+              claim={lecturer.claim}
+              location={lecturer.location}
+              price={lecturer.price_per_hour}
+              class="metadata"
+            />
+          </div>
+        </header>
+
+        <main>
+          <LecturerTags
+            tags={lecturer.tags ? lecturer.tags : []}
+            class="tags"
+          />
+          <LecturerBio content={lecturer.bio ? lecturer.bio : ""} class="bio" />
+          <LecturerContact contact={lecturer.contact} class="contact" />
+        </main>
+      </div>
+
+      <Footer />
+    </div>
+  </BackgroundWrapper>
+</Layout>
+
+<style lang="scss">
+  .background-wrapper {
+    min-height: 100vh;
+  }
+
+  .bento-grid {
+    --spacing: 1.25rem;
+
+    display: grid;
+    padding-block-end: var(--spacing);
+    gap: var(--spacing);
+  }
+
+  header,
+  main,
+  .hero {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: subgrid;
+    gap: inherit;
+  }
+
+  .navbar {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 1200px) {
+    .bento-grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+
+    .metadata {
+      grid-column: 4 / -1;
+    }
+
+    .portrait {
+      grid-column: 1 / 4;
+    }
+
+    .tags {
+      grid-column: 1 / -1;
+    }
+
+    .bio {
+      grid-column: 1 / 9;
+    }
+
+    .contact {
+      grid-column: 9 / -1;
+    }
+  }
+</style>
