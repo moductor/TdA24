@@ -1,0 +1,86 @@
+---
+import Icon from "../../../widgets/Icon.astro";
+
+type Props = {
+  title: string;
+  expanded?: boolean;
+  [prop: string]: any;
+};
+
+const { title, expanded = false, ...props } = Astro.props;
+---
+
+<div {...props} data-filter-category={expanded ? "expanded" : "collapsed"}>
+  <div class="header">
+    <h3>{title}</h3>
+    <Icon icon="expand" class="icon" aria-hidden="true" />
+  </div>
+
+  <div class="content-wrapper">
+    <div class="content">
+      <div class="content-spacing">
+        <slot />
+      </div>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .header {
+    position: relative;
+    padding-block: 0.8rem;
+    border-block-start: 2px solid hsl(0 0% 50% / 0.4);
+    cursor: pointer;
+  }
+
+  .icon {
+    position: absolute;
+    inset-inline-end: 0;
+    inset-block-start: 50%;
+    translate: 0 -50%;
+    font-size: 1.4rem;
+    transition: rotate 0.2s ease;
+
+    [data-filter-category="expanded"] & {
+      rotate: -180deg;
+    }
+  }
+
+  .content-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.2s ease;
+
+    [data-filter-category="expanded"] & {
+      grid-template-rows: 1fr;
+    }
+
+    .content {
+      overflow: clip;
+    }
+  }
+
+  .content-spacing {
+    padding-block-start: 0.4rem;
+    padding-block-end: 1.2rem;
+  }
+</style>
+
+<script>
+  const categories = document.querySelectorAll("[data-filter-category]");
+
+  for (const category of categories) {
+    (category as HTMLElement).addEventListener("click", (e) => {
+      const target = e.target as HTMLElement;
+
+      const header = target.closest(".header");
+      if (!header) return;
+
+      const curVal = category.getAttribute("data-filter-category");
+      category.setAttribute(
+        "data-filter-category",
+        curVal == "expanded" ? "collapsed" : "expanded",
+      );
+    });
+  }
+</script>

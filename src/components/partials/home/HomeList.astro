@@ -1,0 +1,23 @@
+---
+import type { Lecturer } from "../../../models/Lecturer";
+
+import HomeItem from "./HomeItem.astro";
+
+type Props = {
+  lecturers: Lecturer[];
+  [prop: string]: any;
+};
+
+const { lecturers, ...props } = Astro.props;
+---
+
+<div {...props} data-lecturer-list>
+  {lecturers.map((lecturer) => <HomeItem lecturer={lecturer} />)}
+</div>
+
+<style lang="scss">
+  [data-lecturer-list] {
+    display: grid;
+    row-gap: 3rem;
+  }
+</style>

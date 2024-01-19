@@ -1,0 +1,26 @@
+---
+import type { Lecturer } from "../../../models/Lecturer";
+import HomeFilters from "./HomeFilters.astro";
+
+import HomeList from "./HomeList.astro";
+
+type Props = {
+  lecturers: Lecturer[];
+  [prop: string]: any;
+};
+
+const { lecturers, ...props } = Astro.props;
+---
+
+<div {...props} data-home-view>
+  <HomeFilters />
+  <HomeList lecturers={lecturers} />
+</div>
+
+<style lang="scss">
+  [data-home-view] {
+    display: grid;
+    grid-template-columns: 24rem 1fr;
+    gap: 3rem;
+  }
+</style>

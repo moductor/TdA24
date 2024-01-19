@@ -1,0 +1,58 @@
+---
+import Card from "../../widgets/Card.astro";
+
+import FilterCategory from "./filters/FilterCategory.astro";
+---
+
+<div data-home-filters>
+  <Card class="card">
+    <div class="card-content">
+      <h2>Filtry</h2>
+
+      <FilterCategory title="Cena" expanded={true}>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, saepe
+          molestiae! Reiciendis deserunt sit repudiandae laudantium dolorem
+          possimus cupiditate eos! Repellat voluptas doloribus cum temporibus
+          tempore quas in ducimus dolor.
+        </p>
+      </FilterCategory>
+
+      <FilterCategory title="Lokace">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Labore, saepe
+          molestiae! Reiciendis deserunt sit repudiandae laudantium dolorem
+          possimus cupiditate eos! Repellat voluptas doloribus cum temporibus
+          tempore quas in ducimus dolor.
+        </p>
+      </FilterCategory>
+    </div>
+  </Card>
+</div>
+
+<style lang="scss">
+  [data-home-filters] {
+    --scroll-margin: 1.5rem;
+
+    position: relative;
+  }
+
+  .card {
+    position: sticky;
+    inset-block-start: var(--scroll-margin);
+    height: calc(100vh - 2 * var(--scroll-margin));
+    padding: 0;
+    align-content: stretch;
+  }
+
+  .card-content {
+    height: 100%;
+    overflow-y: auto;
+    border-radius: inherit;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    margin-block-end: 1.5rem;
+  }
+</style>
