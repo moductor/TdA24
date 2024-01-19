@@ -8,7 +8,7 @@ const lecturers: LecturerInput[] = [
     last_name: "Bartuška",
     title_after: "Ph.D. ThDr.",
     claim: "",
-    price_per_hour: 9999999,
+    price_per_hour: 1500,
     location: "České Budějovice",
     tags: [
       { name: "TdA24" },
