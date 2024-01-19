@@ -4,8 +4,7 @@ import styles from "./FilterVariantRange.module.scss";
 type Props = {
   maxValue: number;
   minValue: number;
-  onChange?: (maxRangeValue: number, minRangeValue: number) => void;
-  // onChange: (min: number, max: number) => void;
+  onChange?: (min: number, max: number) => void;
 };
 
 export default ({ maxValue, minValue }: Props) => {
@@ -24,7 +23,6 @@ export default ({ maxValue, minValue }: Props) => {
       setRightProgress(
         100 - ((value - minValue) / (maxValue - minValue)) * 100
       );
-      console.log(rightProgress);
     }
   };
 

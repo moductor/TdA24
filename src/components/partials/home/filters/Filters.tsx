@@ -4,6 +4,7 @@ import FilterCategory from "./FilterCategory.tsx";
 import FilterVariantOptions, {
   type Item as OptionsItem,
 } from "./variants/FilterVariantOptions.tsx";
+import FilterVariantRange from "./variants/FilterVariantRange.tsx";
 
 export interface WindowExtension extends Window {
   reloadLecturers?: (filteredIDs: string[]) => void;
@@ -63,7 +64,7 @@ const getTags = (lecturers: Lecturer[]): OptionsItem[] => {
 
 const lecturers = loadLecturers();
 
-const prices = getPriceRange(lecturers);
+let prices = getPriceRange(lecturers);
 let locations = getLocations(lecturers);
 let tags = getTags(lecturers);
 
@@ -73,9 +74,14 @@ export default () => {
   return (
     <>
       <FilterCategory title="Cena" expanded={true}>
-        <p>
-          {prices.min} až {prices.max}
-        </p>
+        <FilterVariantRange
+          maxValue={prices.max}
+          minValue={prices.min}
+          onChange={(min, max) => {
+            prices = { min, max };
+            filter();
+          }}
+        />
       </FilterCategory>
 
       <FilterCategory title="Lokace" expanded={true}>
@@ -132,6 +138,19 @@ const filter = () => {
       return true;
     });
   }
+
+  filtered = filtered.filter((e) => {
+    filtered.forEach((lecturer) => {
+      if (!lecturer.price_per_hour) return false;
+      if (
+        lecturer.price_per_hour >= prices.min &&
+        lecturer.price_per_hour <= prices.max
+      ) {
+        return false;
+      }
+      return true;
+    });
+  });
 
   window.reloadLecturers(filtered.map((e) => e.uuid));
 };
