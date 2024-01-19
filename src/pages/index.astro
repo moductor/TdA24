@@ -20,6 +20,12 @@ const lecturers = await getAll();
     <HomeView lecturers={lecturers} class="breakout" />
   </main>
   <Footer />
+
+  <script
+    id="lecturersData"
+    type="application/json"
+    set:html={JSON.stringify(lecturers)}
+  />
 </Layout>
 
 <style lang="scss"></style>

@@ -1,0 +1,12 @@
+---
+type Props = {
+  [prop: string]: any;
+};
+
+const { ...props } = Astro.props;
+---
+
+<div {...props}>
+  <input type="range" name="" id="" />
+  <input type="range" name="" id="" />
+</div>

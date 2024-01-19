@@ -1,0 +1,26 @@
+---
+import FilterCategory from "./FilterCategory.astro";
+import FilterVariantOptions from "./variants/FilterVariantOptions.astro";
+import FilterVariantRange from "./variants/FilterVariantRange.astro";
+---
+
+<FilterCategory title="Cena" expanded={true}>
+  <FilterVariantRange id="filterPrice" />
+</FilterCategory>
+
+<FilterCategory title="Lokace" expanded={true}>
+  <FilterVariantOptions id="filterLocation" />
+</FilterCategory>
+
+<FilterCategory title="Zaměření">
+  <FilterVariantOptions id="filterTags" />
+</FilterCategory>
+
+<script>
+  import type { Lecturer } from "../../../../models/Lecturer";
+
+  const lecturersData = document.getElementById("lecturersData")?.innerHTML;
+  const lecturers: Lecturer[] = JSON.parse(lecturersData!);
+
+  console.log(lecturers);
+</script>

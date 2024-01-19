@@ -15,7 +15,7 @@ const { name, claim, location, price, useH1 = false, ...props } = Astro.props;
 ---
 
 <Card data-metadata-card {...props}>
-  {useH1 ? <h1 class="title-1">{name}</h1> : <h2 class="title-1">{name}</h2>}
+  {useH1 ? <h1 class="title-1">{name}</h1> : <h2 class="title-2">{name}</h2>}
   {claim && <p class="claim">{claim}</p>}
 
   <div class="tag-list">
