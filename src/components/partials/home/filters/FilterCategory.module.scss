@@ -1,0 +1,46 @@
+.header {
+  position: relative;
+  padding-block: 0.8rem;
+  border-block-start: 2px solid hsl(0 0% 50% / 0.4);
+  cursor: pointer;
+}
+
+.icon {
+  width: 1em;
+  height: 1em;
+  object-fit: contain;
+
+  * {
+    fill: currentColor;
+  }
+
+  position: absolute;
+  inset-inline-end: 0;
+  inset-block-start: 50%;
+  translate: 0 -50%;
+  font-size: 1.4rem;
+  transition: rotate 0.2s ease;
+
+  [data-filter-category="expanded"] & {
+    rotate: -180deg;
+  }
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease;
+
+  [data-filter-category="expanded"] & {
+    grid-template-rows: 1fr;
+  }
+
+  .content {
+    overflow: clip;
+  }
+}
+
+.content-spacing {
+  padding-block-start: 0.4rem;
+  padding-block-end: 1.2rem;
+}

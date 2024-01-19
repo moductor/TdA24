@@ -3,7 +3,7 @@ import type { Lecturer } from "../../../models/Lecturer";
 import HomeFilters from "./HomeFilters.astro";
 
 import HomeList from "./HomeList.astro";
-import Filters from "./filters/Filters.astro";
+import Filters from "./filters/Filters.tsx";
 
 type Props = {
   lecturers: Lecturer[];
@@ -19,7 +19,7 @@ const { lecturers, ...props } = Astro.props;
   </div>
 
   <HomeFilters>
-    <Filters />
+    <Filters client:only />
   </HomeFilters>
   <HomeList lecturers={lecturers} />
 </div>
