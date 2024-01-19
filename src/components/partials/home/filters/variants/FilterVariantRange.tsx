@@ -1,24 +1,37 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import styles from "./FilterVariantRange.module.scss";
 
-type Props = {
-  maxValue: number;
-  minValue: number;
-  onChange?: (min: number, max: number) => void;
+export type PriceRange = {
+  min: number;
+  max: number;
 };
 
-export default ({ maxValue, minValue }: Props) => {
+type Props = {
+  limits: PriceRange;
+  onChange?: (current: PriceRange) => void;
+};
+
+export default ({ limits, onChange: changeCb }: Props) => {
+  const maxValue = limits.max;
+  const minValue = limits.min;
+
   const [maxRangeValue, setMaxRangeInput] = useState(maxValue);
   const [minRangeValue, setMinRangeInput] = useState(minValue);
 
   const [leftProgress, setLeftProgress] = useState(0);
   const [rightProgress, setRightProgress] = useState(0);
 
-  const onMaxValueChange = (event: any) => {
-    const value = event.target.value;
+  if (changeCb) changeCb({ min: minRangeValue, max: maxRangeValue });
+
+  const onMaxValueChange = (event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const value = parseInt(target.value);
+
     if (value < minValue) setMaxRangeInput(minValue);
+
     if (value > maxValue) setMaxRangeInput(maxValue);
-    if (parseInt(value) >= minRangeValue) {
+
+    if (value >= minRangeValue) {
       setMaxRangeInput(value);
       setRightProgress(
         100 - ((value - minValue) / (maxValue - minValue)) * 100
@@ -26,11 +39,14 @@ export default ({ maxValue, minValue }: Props) => {
     }
   };
 
-  const onMinValueChange = (event: any) => {
-    const value = event.target.value;
+  const onMinValueChange = (event: ChangeEvent) => {
+    const target = event.target as HTMLInputElement;
+    const value = parseInt(target.value);
+
     if (value < minValue) setMinRangeInput(minValue);
     if (value > maxValue) setMinRangeInput(maxValue);
-    if (parseInt(value) <= maxRangeValue) {
+
+    if (value <= maxRangeValue) {
       setMinRangeInput(value);
       setLeftProgress(((value - minValue) / (maxValue - minValue)) * 100);
     }
