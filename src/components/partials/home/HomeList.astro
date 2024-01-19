@@ -48,10 +48,9 @@ const { lecturers, ...props } = Astro.props;
   import type { WindowExtension } from "../../partials/home/filters/Filters";
   declare let window: WindowExtension;
 
-  const template = document.querySelector("[data-lecturer-list-empty-state]");
-  const emptyState = (template as HTMLTemplateElement).content.cloneNode(true);
-
-  console.log(emptyState);
+  const template = document.querySelector(
+    "[data-lecturer-list-empty-state]",
+  ) as HTMLTemplateElement;
 
   const list = document.querySelector("[data-lecturer-list]") as HTMLElement;
   const listItems = list.querySelectorAll("[data-lecturer-item]");
@@ -66,13 +65,13 @@ const { lecturers, ...props } = Astro.props;
   window.reloadLecturers = (filteredIDs) => {
     list.innerHTML = "";
 
-    if (!filteredIDs.length) {
-      list.append(emptyState);
-    }
-
     for (const uuid of filteredIDs) {
       const item = items[uuid];
       list.append(item);
+    }
+
+    if (list.childNodes.length == 0) {
+      list.append(template.content.cloneNode(true));
     }
   };
 </script>
