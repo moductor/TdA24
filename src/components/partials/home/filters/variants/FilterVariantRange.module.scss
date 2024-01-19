@@ -1,8 +1,12 @@
+.wrapper {
+  padding-block-start: 0.5rem;
+}
 .num-input-field {
   height: 2.2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-block-start: 1.5rem;
 }
 .num-input-field input {
   height: 100%;
@@ -41,10 +45,12 @@
   position: absolute;
   top: -5px;
   height: 5px;
-  width: 100%;
+  width: calc(100% - 0.2rem);
   background: none;
   -webkit-appearance: none;
   pointer-events: none;
+
+  margin: 0.1rem;
 }
 .range-input::-webkit-slider-thumb {
   -webkit-appearance: none;

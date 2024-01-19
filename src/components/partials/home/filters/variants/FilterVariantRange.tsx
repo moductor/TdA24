@@ -43,7 +43,7 @@ export default ({ maxValue, minValue }: Props) => {
   };
 
   return (
-    <div>
+    <div className={styles["wrapper"]}>
       <div className={styles["slider"]}>
         <div className={styles["progress-bar"]} style={stylesos}></div>
       </div>
