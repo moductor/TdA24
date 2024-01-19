@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_CONTAINER="docker.io/library/mongo:latest"
+
 _CURRENT_DIR=$(dirname "$0")
 source $_CURRENT_DIR/_vars.sh
 
@@ -10,7 +12,7 @@ if [[ -f "$DB_CONTAINER_ID_FILE" ]]; then
 fi
 
 if [[ -z "$DB_CONTAINER_ID" ]]; then
-  DB_CONTAINER_ID=$($PODMAN container create -p $MONGODB_PORT:27017 mongo:latest)
+  DB_CONTAINER_ID=$($PODMAN container create -p $MONGODB_PORT:27017 $_CONTAINER)
   echo "$DB_CONTAINER_ID" > $DB_CONTAINER_ID_FILE
 fi
 

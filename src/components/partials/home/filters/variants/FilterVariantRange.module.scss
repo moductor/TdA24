@@ -1,0 +1,78 @@
+.wrapper {
+  padding-block-start: 0.5rem;
+}
+.num-input-field {
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-start: 1.5rem;
+}
+.num-input-field input {
+  height: 100%;
+  width: 45%;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-white);
+  background: none;
+  outline: none;
+  text-align: center;
+  font-size: 0.9rem;
+  -moz-appearance: textfield;
+}
+.num-input-field input::-webkit-outer-spin-button,
+.num-input-field input::-webkit-inner-spin-button {
+  margin: 0;
+}
+.slider {
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 3rem;
+  width: 100%;
+  position: relative;
+}
+.progress-bar {
+  height: 5px;
+  background-color: var(--color-white);
+  border-radius: 3rem;
+  position: absolute;
+}
+.range-inputs {
+  position: relative;
+  height: 5px;
+  width: 100%;
+}
+.range-input[type="range"] {
+  position: absolute;
+  top: -5px;
+  height: 5px;
+  width: calc(100% - 0.2rem);
+  background: none;
+  -webkit-appearance: none;
+  pointer-events: none;
+
+  margin: 0.1rem;
+}
+.range-input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid var(--color-jet);
+  outline: 0.1rem solid var(--color-white);
+  border-radius: 50%;
+  background: var(--color-white);
+  cursor: pointer;
+  pointer-events: auto;
+}
+.range-input::-moz-range-thumb {
+  -moz-appearance: none;
+  appearance: none;
+  width: 1rem;
+  height: 1rem;
+  border: 0.1rem solid var(--color-jet);
+  outline: 0.1rem solid var(--color-white);
+  border-radius: 50%;
+  background: var(--color-white);
+  cursor: pointer;
+  pointer-events: auto;
+}

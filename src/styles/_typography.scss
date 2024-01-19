@@ -1,0 +1,28 @@
+@mixin titleFontStyling {
+  font-family: var(--font-accent);
+  line-height: 1.2;
+}
+
+.title {
+  @include titleFontStyling;
+}
+
+.title-1 {
+  font-size: 3.5rem;
+
+  @media (max-width: 720px) {
+    font-size: 2.6rem;
+  }
+
+  @include titleFontStyling;
+}
+
+.title-2 {
+  font-size: 2.5rem;
+
+  @media (max-width: 720px) {
+    font-size: 2.2rem;
+  }
+
+  @include titleFontStyling;
+}

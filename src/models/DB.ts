@@ -1,7 +1,7 @@
 import { MongoClient } from "mongodb";
 import { v4 as generateUuid } from "uuid";
 
-const client = new MongoClient("mongodb://localhost:27017");
+const client = new MongoClient(import.meta.env.DB_URL);
 
 await client.connect();
 const db = client.db("tda24_lecturer");

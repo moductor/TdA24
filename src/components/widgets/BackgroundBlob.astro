@@ -1,0 +1,23 @@
+---
+type Props = {
+  [prop: string]: any;
+};
+---
+
+<span {...Astro.props}></span>
+
+<style lang="scss">
+  span {
+    display: block;
+    aspect-ratio: 1 / 2;
+    min-height: 1em;
+
+    border-radius: 50%;
+    background-image: linear-gradient(
+      var(--color-sky-blue) 20%,
+      var(--color-sunglow)
+    );
+    filter: blur(6rem);
+    opacity: 0.25;
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import type { Lecturer } from "../../../models/Lecturer";
+
+import HomeItem from "./HomeItem.astro";
+
+type Props = {
+  lecturers: Lecturer[];
+  [prop: string]: any;
+};
+
+const { lecturers, ...props } = Astro.props;
+---
+
+<div {...props} data-lecturer-list>
+  {lecturers.map((lecturer) => <HomeItem lecturer={lecturer} />)}
+</div>
+
+<template data-lecturer-list-empty-state>
+  <div class="empty-state">
+    Nebyli nalezeni žádní lektoři odpovídající zadání. Prosím, upravte hodnoty
+    filtrů.
+  </div>
+</template>
+
+<style lang="scss">
+  [data-lecturer-list] {
+    --portrait-size: 16rem;
+
+    display: grid;
+    row-gap: 3rem;
+    align-content: start;
+
+    @media (min-width: 720px) {
+      grid-template-columns: var(--portrait-size) 1fr;
+    }
+
+    > * {
+      grid-column: 1 / -1;
+    }
+  }
+
+  .empty-state {
+    font-size: 1.25rem;
+  }
+</style>
+
+<script>
+  import type { WindowExtension } from "../../partials/home/filters/Filters";
+  declare let window: WindowExtension;
+
+  const template = document.querySelector(
+    "[data-lecturer-list-empty-state]",
+  ) as HTMLTemplateElement;
+
+  const list = document.querySelector("[data-lecturer-list]") as HTMLElement;
+  const listItems = list.querySelectorAll("[data-lecturer-item]");
+
+  const items: { [uuid: string]: HTMLElement } = {};
+  for (const _item of listItems) {
+    const item = _item as HTMLElement;
+    const uuid = item.getAttribute("data-lecturer-item")!;
+    items[uuid] = item;
+  }
+
+  window.reloadLecturers = (filteredIDs) => {
+    list.innerHTML = "";
+
+    for (const uuid of filteredIDs) {
+      const item = items[uuid];
+      list.append(item);
+    }
+
+    if (list.childNodes.length == 0) {
+      list.append(template.content.cloneNode(true));
+    }
+  };
+</script>

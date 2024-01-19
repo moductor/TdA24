@@ -1,23 +1,52 @@
 ---
-import Logo from "./Logo.astro";
+import Logo from "./widgets/Logo.astro";
+
 type Props = {
+  showBackButton?: boolean;
   [prop: string]: any;
 };
+
+const { showBackButton = false, ...props } = Astro.props;
 ---
 
-<nav {...Astro.props} data-navbar>
+<nav {...props}>
   <a href="/" title="Přejít na domovskou stránku">
-    <Logo class="logo" aria-hidden="true" variant="light" />
+    <Logo class="logo" aria-hidden="true" />
   </a>
+  {
+    showBackButton && (
+      <a href="/" aria-hidden="true" class="menu-button">
+        Domů
+      </a>
+    )
+  }
 </nav>
 
 <style lang="scss">
-  [data-navbar] {
+  nav {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline-end: 1.5rem;
+  }
+
+  a {
+    color: currentColor;
   }
 
   .logo {
     display: block;
-    height: 7.25rem;
+    height: 7rem;
+  }
+
+  .menu-button {
+    text-decoration: none;
+    font-family: var(--font-accent);
+    font-size: 1.3rem;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-sky-blue);
+    }
   }
 </style>
