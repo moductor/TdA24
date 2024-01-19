@@ -93,7 +93,7 @@ export default () => {
         />
       </FilterCategory>
 
-      <FilterCategory title="Zaměření">
+      <FilterCategory title="Zaměření" expanded={true}>
         <FilterVariantOptions
           items={tags}
           onChange={(items) => {
