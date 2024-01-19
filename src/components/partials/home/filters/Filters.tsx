@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import type { Lecturer } from "../../../../models/Lecturer";
 
 import FilterCategory from "./FilterCategory.tsx";
@@ -6,32 +5,10 @@ import FilterVariantOptions, {
   type Item as OptionsItem,
 } from "./variants/FilterVariantOptions.tsx";
 
-export default () => {
-  const lecturersRef = useRef(loadLecturers());
-  const lecturers = lecturersRef.current;
-
-  const prices = getPriceRange(lecturers);
-  const locations = getLocations(lecturers);
-  const tags = getTags(lecturers);
-
-  return (
-    <>
-      <FilterCategory title="Cena" expanded={true}>
-        <p>
-          {prices.min} až {prices.max}
-        </p>
-      </FilterCategory>
-
-      <FilterCategory title="Lokace" expanded={true}>
-        <FilterVariantOptions values={locations} />
-      </FilterCategory>
-
-      <FilterCategory title="Zaměření">
-        <FilterVariantOptions values={tags} />
-      </FilterCategory>
-    </>
-  );
-};
+export interface WindowExtension extends Window {
+  reloadLecturers?: (filteredIDs: string[]) => void;
+}
+declare let window: WindowExtension;
 
 const loadLecturers = () => {
   const dataElement = document.getElementById("lecturersData") as HTMLElement;
@@ -82,4 +59,54 @@ const getTags = (lecturers: Lecturer[]): OptionsItem[] => {
     });
   });
   return tags;
+};
+
+const lecturers = loadLecturers();
+
+const prices = getPriceRange(lecturers);
+let locations = getLocations(lecturers);
+let tags = getTags(lecturers);
+
+export default () => {
+  window.reloadLecturers;
+
+  return (
+    <>
+      <FilterCategory title="Cena" expanded={true}>
+        <p>
+          {prices.min} až {prices.max}
+        </p>
+      </FilterCategory>
+
+      <FilterCategory title="Lokace" expanded={true}>
+        <FilterVariantOptions
+          items={locations}
+          onChange={(items) => {
+            locations = items;
+            filter();
+          }}
+        />
+      </FilterCategory>
+
+      <FilterCategory title="Zaměření">
+        <FilterVariantOptions items={tags} />
+      </FilterCategory>
+    </>
+  );
+};
+
+const filter = () => {
+  if (!window.reloadLecturers) return;
+
+  const filteredLocations = lecturers.filter((e) => {
+    const found = locations.find((location) => {
+      return location.selected && location.value == e.location;
+    });
+
+    return found != undefined;
+  });
+
+  console.log(filteredLocations);
+
+  window.reloadLecturers(filteredLocations.map((e) => e.uuid));
 };

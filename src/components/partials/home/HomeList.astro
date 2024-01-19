@@ -21,3 +21,26 @@ const { lecturers, ...props } = Astro.props;
     row-gap: 3rem;
   }
 </style>
+
+<script>
+  import type { WindowExtension } from "../../partials/home/filters/Filters";
+  declare let window: WindowExtension;
+
+  const list = document.querySelector("[data-lecturer-list]") as HTMLElement;
+  const listItems = list.querySelectorAll("[data-lecturer-item]");
+
+  const items: { [uuid: string]: HTMLElement } = {};
+  for (const _item of listItems) {
+    const item = _item as HTMLElement;
+    const uuid = item.getAttribute("data-lecturer-item")!;
+    items[uuid] = item;
+  }
+
+  window.reloadLecturers = (filteredIDs) => {
+    list.innerHTML = "";
+    for (const uuid of filteredIDs) {
+      const item = items[uuid];
+      list.append(item);
+    }
+  };
+</script>

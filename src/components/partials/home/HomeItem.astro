@@ -16,7 +16,7 @@ type Props = {
 const { lecturer, ...props } = Astro.props;
 ---
 
-<div data-lecturer-item {...props}>
+<div data-lecturer-item={lecturer.uuid} {...props}>
   <div class="data">
     <LecturerPortrait portrait={lecturer.picture_url} class="portrait" />
     <LecturerMetadata
