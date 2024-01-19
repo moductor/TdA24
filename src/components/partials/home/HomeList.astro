@@ -15,6 +15,13 @@ const { lecturers, ...props } = Astro.props;
   {lecturers.map((lecturer) => <HomeItem lecturer={lecturer} />)}
 </div>
 
+<template data-lecturer-list-empty-state>
+  <div class="empty-state">
+    Nebyli nalezeni žádní lektoři odpovídající zadání. Prosím, upravte hodnoty
+    filtrů.
+  </div>
+</template>
+
 <style lang="scss">
   [data-lecturer-list] {
     --portrait-size: 16rem;
@@ -31,11 +38,20 @@ const { lecturers, ...props } = Astro.props;
       grid-column: 1 / -1;
     }
   }
+
+  .empty-state {
+    font-size: 1.25rem;
+  }
 </style>
 
 <script>
   import type { WindowExtension } from "../../partials/home/filters/Filters";
   declare let window: WindowExtension;
+
+  const template = document.querySelector("[data-lecturer-list-empty-state]");
+  const emptyState = (template as HTMLTemplateElement).content.cloneNode(true);
+
+  console.log(emptyState);
 
   const list = document.querySelector("[data-lecturer-list]") as HTMLElement;
   const listItems = list.querySelectorAll("[data-lecturer-item]");
@@ -49,6 +65,11 @@ const { lecturers, ...props } = Astro.props;
 
   window.reloadLecturers = (filteredIDs) => {
     list.innerHTML = "";
+
+    if (!filteredIDs.length) {
+      list.append(emptyState);
+    }
+
     for (const uuid of filteredIDs) {
       const item = items[uuid];
       list.append(item);
