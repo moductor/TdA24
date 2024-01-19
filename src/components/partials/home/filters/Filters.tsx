@@ -1,4 +1,5 @@
 import type { Lecturer } from "../../../../models/Lecturer";
+import type { PriceRange } from "./variants/FilterVariantRange.tsx";
 
 import FilterCategory from "./FilterCategory.tsx";
 import FilterVariantOptions, {
@@ -18,7 +19,7 @@ const loadLecturers = () => {
   return data;
 };
 
-const getPriceRange = (lecturers: Lecturer[]) => {
+const getPriceRange = (lecturers: Lecturer[]): PriceRange => {
   let minPrice: number | undefined;
   let maxPrice: number | undefined;
 
@@ -63,22 +64,20 @@ const getTags = (lecturers: Lecturer[]): OptionsItem[] => {
 };
 
 const lecturers = loadLecturers();
+const limitPriceRange = getPriceRange(lecturers);
 
-let prices = getPriceRange(lecturers);
+let priceRange = limitPriceRange;
 let locations = getLocations(lecturers);
 let tags = getTags(lecturers);
 
 export default () => {
-  window.reloadLecturers;
-
   return (
     <>
       <FilterCategory title="Cena" expanded={true}>
         <FilterVariantRange
-          maxValue={prices.max}
-          minValue={prices.min}
-          onChange={(min, max) => {
-            prices = { min, max };
+          limits={limitPriceRange}
+          onChange={(limits) => {
+            priceRange = limits;
             filter();
           }}
         />
@@ -112,6 +111,15 @@ const filter = () => {
 
   let filtered = lecturers;
 
+  // Filter price.
+
+  filtered = filtered.filter((e) => {
+    if (!e.price_per_hour) return true;
+    return (
+      e.price_per_hour >= priceRange.min && e.price_per_hour <= priceRange.max
+    );
+  });
+
   // Filter locations.
 
   const selectedLocations = locations
@@ -138,19 +146,6 @@ const filter = () => {
       return true;
     });
   }
-
-  filtered = filtered.filter((e) => {
-    filtered.forEach((lecturer) => {
-      if (!lecturer.price_per_hour) return false;
-      if (
-        lecturer.price_per_hour >= prices.min &&
-        lecturer.price_per_hour <= prices.max
-      ) {
-        return false;
-      }
-      return true;
-    });
-  });
 
   window.reloadLecturers(filtered.map((e) => e.uuid));
 };
