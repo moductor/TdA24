@@ -22,13 +22,12 @@
   -moz-appearance: textfield;
 
   border-color: rgba(255, 255, 255, 0.15);
-  color: var(--color-white);
+  color: currentColor;
   background: none;
   outline: none;
 
   @media (prefers-color-scheme: light) {
     border-color: rgba(0, 0, 0, 0.15);
-    color: var(--color-jet);
   }
 }
 
@@ -46,12 +45,8 @@
   position: relative;
 
   border-radius: 3rem;
-  background-color: var(--color-white);
+  background-color: currentColor;
   opacity: 0.1;
-
-  @media (prefers-color-scheme: light) {
-    background-color: var(--color-jet);
-  }
 }
 
 .progress-bar {
@@ -59,11 +54,7 @@
   height: 5px;
 
   border-radius: 3rem;
-  background-color: var(--color-white);
-
-  @media (prefers-color-scheme: light) {
-    background-color: var(--color-jet);
-  }
+  background-color: currentColor;
 }
 
 .range-inputs {
@@ -94,14 +85,12 @@
   height: 1rem;
 
   border: 0.1rem solid var(--color-jet);
-  outline: 0.1rem solid var(--color-white);
+  outline: 0.1rem solid currentColor;
   border-radius: 50%;
-  background: var(--color-white);
+  background: currentColor;
 
   @media (prefers-color-scheme: light) {
-    background: var(--color-jet);
     border: 0.1rem solid var(--color-white);
-    outline: 0.1rem solid var(--color-jet);
   }
 }
 
@@ -115,13 +104,11 @@
   height: 1rem;
 
   border: 0.1rem solid var(--color-jet);
-  outline: 0.1rem solid var(--color-white);
+  outline: 0.1rem solid currentColor;
   border-radius: 50%;
-  background: var(--color-white);
+  background: currentColor;
 
   @media (prefers-color-scheme: light) {
     border: 0.1rem solid var(--color-white);
-    outline: 0.1rem solid var(--color-jet);
-    background: var(--color-jet);
   }
 }
