@@ -1,6 +1,10 @@
 .wrapper {
   padding-block-start: 0.5rem;
 }
+
+/*--------------------
+  Number price input
+--------------------*/
 .num-input-field {
   height: 2.2rem;
   display: flex;
@@ -8,71 +12,116 @@
   justify-content: space-between;
   margin-block-start: 1.5rem;
 }
+
 .num-input-field input {
   height: 100%;
   width: 45%;
+
+  text-align: center;
+  font-size: 0.9rem;
+  -moz-appearance: textfield;
+
   border-color: rgba(255, 255, 255, 0.15);
   color: var(--color-white);
   background: none;
   outline: none;
-  text-align: center;
-  font-size: 0.9rem;
-  -moz-appearance: textfield;
+
+  @media (prefers-color-scheme: light) {
+    border-color: rgba(0, 0, 0, 0.15);
+    color: var(--color-jet);
+  }
 }
+
 .num-input-field input::-webkit-outer-spin-button,
 .num-input-field input::-webkit-inner-spin-button {
   margin: 0;
 }
+
+/*--------------------------
+  Price range slider input
+--------------------------*/
 .slider {
   height: 5px;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 3rem;
   width: 100%;
   position: relative;
-}
-.progress-bar {
-  height: 5px;
-  background-color: var(--color-white);
+
   border-radius: 3rem;
-  position: absolute;
+  background-color: var(--color-white);
+  opacity: 0.1;
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--color-jet);
+  }
 }
+
+.progress-bar {
+  position: absolute;
+  height: 5px;
+
+  border-radius: 3rem;
+  background-color: var(--color-white);
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--color-jet);
+  }
+}
+
 .range-inputs {
   position: relative;
   height: 5px;
   width: 100%;
 }
+
 .range-input[type="range"] {
   position: absolute;
+  margin: 0.1rem;
   top: -5px;
   height: 5px;
   width: calc(100% - 0.2rem);
+
   background: none;
   -webkit-appearance: none;
   pointer-events: none;
-
-  margin: 0.1rem;
 }
+
 .range-input::-webkit-slider-thumb {
+  cursor: pointer;
+  pointer-events: auto;
+
   -webkit-appearance: none;
   appearance: none;
   width: 1rem;
   height: 1rem;
+
   border: 0.1rem solid var(--color-jet);
   outline: 0.1rem solid var(--color-white);
   border-radius: 50%;
   background: var(--color-white);
+
+  @media (prefers-color-scheme: light) {
+    background: var(--color-jet);
+    border: 0.1rem solid var(--color-white);
+    outline: 0.1rem solid var(--color-jet);
+  }
+}
+
+.range-input::-moz-range-thumb {
   cursor: pointer;
   pointer-events: auto;
-}
-.range-input::-moz-range-thumb {
+
   -moz-appearance: none;
   appearance: none;
   width: 1rem;
   height: 1rem;
+
   border: 0.1rem solid var(--color-jet);
   outline: 0.1rem solid var(--color-white);
   border-radius: 50%;
   background: var(--color-white);
-  cursor: pointer;
-  pointer-events: auto;
+
+  @media (prefers-color-scheme: light) {
+    border: 0.1rem solid var(--color-white);
+    outline: 0.1rem solid var(--color-jet);
+    background: var(--color-jet);
+  }
 }
