@@ -27,11 +27,13 @@ export default ({ title, expanded: expandedInit = false, children }: Props) => {
         </svg>
       </div>
 
-      <div className={styles["content-wrapper"]}>
-        <div className={styles["content"]}>
-          <div className={styles["content-spacing"]}>{children}</div>
+      {expanded && (
+        <div className={styles["content-wrapper"]}>
+          <div className={styles["content"]}>
+            <div className={styles["content-spacing"]}>{children}</div>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
