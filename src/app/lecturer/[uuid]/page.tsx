@@ -23,50 +23,50 @@ export default async function Page({ params }: Props) {
   const lecturer = await getLecturerForUUID(params.uuid);
 
   return (
-    <BackgroundWrapper
-      className={styleClasses(styles, "wrapper", "content-grid")}
-    >
-      <div className={styleClasses(styles, "bento")}>
-        <header className={styleClasses(styles, "bento-subsection")}>
-          <Navbar
-            showBackButton={true}
-            className={styleClasses(styles, "navbar")}
-          />
-
-          <div className={styleClasses(styles, "hero", "bento-subsection")}>
-            <LecturerPortrait
-              portrait={lecturer.picture_url}
-              className={styleClasses(styles, "portrait")}
+    <BackgroundWrapper>
+      <div className={styleClasses(styles, "wrapper", "content-grid")}>
+        <div className={styleClasses(styles, "bento")}>
+          <header className={styleClasses(styles, "bento-subsection")}>
+            <Navbar
+              showBackButton={true}
+              className={styleClasses(styles, "navbar")}
             />
 
-            <LecturerMetadata
-              useH1={true}
-              name={getNameString(lecturer)}
-              claim={lecturer.claim}
-              location={lecturer.location}
-              price={lecturer.price_per_hour}
-              className={styleClasses(styles, "metadata")}
-            />
-          </div>
-        </header>
+            <div className={styleClasses(styles, "hero", "bento-subsection")}>
+              <LecturerPortrait
+                portrait={lecturer.picture_url}
+                className={styleClasses(styles, "portrait")}
+              />
 
-        <main className={styleClasses(styles, "bento-subsection")}>
-          <LecturerTags
-            tags={lecturer.tags ? lecturer.tags : []}
-            className={styleClasses(styles, "tags")}
-          />
-          <LecturerBio
-            content={lecturer.bio ? lecturer.bio : ""}
-            className={styleClasses(styles, "bio")}
-          />
-          <LecturerContact
-            contact={lecturer.contact}
-            className={styleClasses(styles, "contact")}
-          />
-        </main>
+              <LecturerMetadata
+                useH1={true}
+                name={getNameString(lecturer)}
+                claim={lecturer.claim}
+                location={lecturer.location}
+                price={lecturer.price_per_hour}
+                className={styleClasses(styles, "metadata")}
+              />
+            </div>
+          </header>
+
+          <main className={styleClasses(styles, "bento-subsection")}>
+            <LecturerTags
+              tags={lecturer.tags ? lecturer.tags : []}
+              className={styleClasses(styles, "tags")}
+            />
+            <LecturerBio
+              content={lecturer.bio ? lecturer.bio : ""}
+              className={styleClasses(styles, "bio")}
+            />
+            <LecturerContact
+              contact={lecturer.contact}
+              className={styleClasses(styles, "contact")}
+            />
+          </main>
+        </div>
+
+        <Footer />
       </div>
-
-      <Footer />
     </BackgroundWrapper>
   );
 }
