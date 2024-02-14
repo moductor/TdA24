@@ -1,0 +1,56 @@
+.view {
+  display: grid;
+  gap: 3rem;
+
+  @media (min-width: 1200px) {
+    grid-template-columns: 24rem 1fr;
+  }
+}
+
+.filters-button {
+  appearance: none;
+  background: none;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  padding: 0.4em 0.8em;
+  border-radius: 0.6em;
+  background-color: var(--color-white);
+  border: 1px solid hsl(0 0% 0% / 0.2);
+  box-shadow: 0 0.2em 0.4em hsl(0 0% 0% / 0.2);
+  color: var(--color-jet);
+
+  cursor: pointer;
+}
+
+.show-filters-section {
+  grid-column: 1 / -1;
+
+  @media (min-width: 1200px) {
+    display: none;
+  }
+
+  &.fixed {
+    position: fixed;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 999;
+
+    padding: 1rem;
+    background-color: hsl(0 0% 0% / 0.2);
+    border-block-end: 2px solid hsl(0 0% 0% / 0.1);
+    box-shadow: var(--card-shadow);
+    backdrop-filter: blur(0.5rem);
+
+    transition:
+      translate 0.2s ease,
+      opacity 0.2s ease;
+
+    &:not(.visible) {
+      translate: 0 -1.5rem;
+      opacity: 0;
+      pointer-events: none;
+    }
+  }
+}

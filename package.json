@@ -1,32 +1,35 @@
 {
   "name": "tda24",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
-    "build": "astro check && astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.1",
-    "@astrojs/node": "^6.0.3",
-    "@astrojs/react": "^3.0.9",
-    "@types/react": "^18.2.48",
-    "@types/react-dom": "^18.2.18",
-    "astro": "^3.5.0",
+    "classnames": "^2.5.1",
+    "html-react-parser": "^5.1.2",
     "mongodb": "^6.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "14.1.0",
+    "react": "^18",
+    "react-dom": "^18",
     "sanitize-html": "^2.11.0",
-    "sass": "^1.69.5",
-    "typescript": "^5.2.2",
+    "sass": "^1.70.0",
+    "styled-components": "^6.1.8",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@types/sanitize-html": "^2.9.5",
-    "@types/uuid": "^9.0.7"
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@types/sanitize-html": "^2.11.0",
+    "@types/uuid": "^9.0.8",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "prettier": "^3.2.5",
+    "typescript": "^5"
   },
   "prettier": {
     "editorconfig": true

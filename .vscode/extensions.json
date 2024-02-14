@@ -1,7 +1,6 @@
 {
   "recommendations": [
     "esbenp.prettier-vscode",
-    "astro-build.astro-vscode",
-    "unifiedjs.vscode-mdx"
+    "styled-components.vscode-styled-components"
   ]
 }

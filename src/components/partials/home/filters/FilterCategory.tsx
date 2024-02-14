@@ -8,7 +8,11 @@ type Props = {
   children: ReactNode;
 };
 
-export default ({ title, expanded: expandedInit = false, children }: Props) => {
+export default function FilterCategory({
+  title,
+  expanded: expandedInit = false,
+  children,
+}: Props) {
   const [expanded, setExpanded] = useState(expandedInit);
   const toggleExpanded = () => setExpanded((prev) => !prev);
 
@@ -34,4 +38,4 @@ export default ({ title, expanded: expandedInit = false, children }: Props) => {
       </div>
     </div>
   );
-};
+}

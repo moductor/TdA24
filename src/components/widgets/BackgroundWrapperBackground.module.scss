@@ -1,0 +1,46 @@
+.background {
+  position: absolute;
+  border-radius: inherit;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+
+  > * {
+    position: absolute;
+  }
+
+  > :nth-child(1) {
+    width: max(16%, 18rem);
+    rotate: -45deg;
+    top: -12rem;
+    left: -4rem;
+  }
+
+  > :nth-child(2) {
+    width: max(18%, 20rem);
+    rotate: -45deg;
+    top: 24rem;
+    right: -8rem;
+  }
+
+  > :nth-child(3) {
+    width: max(60%, 64rem);
+    top: 8rem;
+    left: 50%;
+    translate: -50% 0;
+    z-index: -1;
+  }
+}
+
+.white-glow {
+  display: block;
+  aspect-ratio: 1;
+  background-color: var(--color-white);
+  border-radius: 50%;
+  filter: blur(30rem);
+  opacity: 0.1;
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--color-jet);
+  }
+}

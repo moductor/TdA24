@@ -6,17 +6,20 @@ type Props = {
   onChange?: (items: Item[]) => void;
 };
 
-export default ({ items: values, onChange: changeCb }: Props) => {
+export default function FilterVariantOptions({
+  items: values,
+  onChange: changeCb,
+}: Props) {
   const [items, setItems] = useState(values);
 
-  const onChange = (index: number) => {
+  const onChange = (index: number, newVal: boolean) => {
     setItems((prev) => {
-      const newVal = [...prev];
-      newVal[index].selected = !newVal[index].selected;
+      const newArray = [...prev];
+      newArray[index].selected = newVal;
 
-      if (changeCb) changeCb(newVal);
+      if (changeCb) changeCb(newArray);
 
-      return newVal;
+      return newArray;
     });
   };
 
@@ -27,14 +30,14 @@ export default ({ items: values, onChange: changeCb }: Props) => {
           <input
             type="checkbox"
             checked={item.selected}
-            onChange={() => onChange(index)}
+            onChange={(e) => onChange(index, e.target.checked)}
           />
           {item.value}
         </label>
       ))}
     </div>
   );
-};
+}
 
 export type Item = {
   value: string;
