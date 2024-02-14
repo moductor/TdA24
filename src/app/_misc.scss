@@ -1,0 +1,27 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark light;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-jet);
+  color: var(--color-white);
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--color-white);
+    color: var(--color-jet);
+  }
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

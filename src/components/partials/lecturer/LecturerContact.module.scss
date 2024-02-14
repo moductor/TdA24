@@ -1,0 +1,21 @@
+.contact {
+  display: grid;
+  justify-items: center;
+}
+
+.contact-list {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 0.6rem;
+  row-gap: 0.6rem;
+
+  > :not(li) {
+    color: var(--color-sunglow);
+  }
+
+  li {
+    grid-column: 2;
+    line-height: 1;
+  }
+}

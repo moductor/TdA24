@@ -11,7 +11,10 @@ type Props = {
   onChange?: (current: PriceRange) => void;
 };
 
-export default ({ limits, onChange: changeCb }: Props) => {
+export default function FilterVariantRange({
+  limits,
+  onChange: changeCb,
+}: Props) {
   const maxValue = limits.max;
   const minValue = limits.min;
 
@@ -34,7 +37,7 @@ export default ({ limits, onChange: changeCb }: Props) => {
     if (value >= minRangeValue) {
       setMaxRangeInput(value);
       setRightProgress(
-        100 - ((value - minValue) / (maxValue - minValue)) * 100
+        100 - ((value - minValue) / (maxValue - minValue)) * 100,
       );
     }
   };
@@ -106,4 +109,4 @@ export default ({ limits, onChange: changeCb }: Props) => {
       </div>
     </div>
   );
-};
+}

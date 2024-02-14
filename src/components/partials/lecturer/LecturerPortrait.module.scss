@@ -1,0 +1,16 @@
+.portrait {
+  aspect-ratio: 5 / 4;
+  width: 100%;
+  object-fit: cover;
+  box-shadow: var(--card-shadow);
+  border-radius: var(--card-border-radius);
+  background-color: var(--card-background-color);
+
+  @media (min-width: 720px) {
+    aspect-ratio: 16 / 9;
+  }
+
+  @media (min-width: 1200px) {
+    aspect-ratio: 1;
+  }
+}

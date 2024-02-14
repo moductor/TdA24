@@ -1,25 +1,13 @@
-import type { Lecturer } from "../../../../models/Lecturer";
-import type { PriceRange } from "./variants/FilterVariantRange.tsx";
-
-import FilterCategory from "./FilterCategory.tsx";
+import { useEffect, useState } from "react";
+import { type Lecturer } from "../../../../database/models/Lecturer";
+import FilterCategory from "./FilterCategory";
 import FilterVariantOptions, {
   type Item as OptionsItem,
-} from "./variants/FilterVariantOptions.tsx";
-import FilterVariantRange from "./variants/FilterVariantRange.tsx";
+} from "./variants/FilterVariantOptions";
+import type { PriceRange } from "./variants/FilterVariantRange";
+import FilterVariantRange from "./variants/FilterVariantRange";
 
-export interface WindowExtension extends Window {
-  reloadLecturers?: (filteredIDs: string[]) => void;
-}
-declare let window: WindowExtension;
-
-const loadLecturers = () => {
-  const dataElement = document.getElementById("lecturersData") as HTMLElement;
-  const dataString = dataElement.innerHTML;
-  const data = JSON.parse(dataString) as Lecturer[];
-  return data;
-};
-
-const getPriceRange = (lecturers: Lecturer[]): PriceRange => {
+function getPriceRange(lecturers: Lecturer[]): PriceRange {
   let minPrice: number | undefined;
   let maxPrice: number | undefined;
 
@@ -39,18 +27,25 @@ const getPriceRange = (lecturers: Lecturer[]): PriceRange => {
   if (!maxPrice) maxPrice = 2000;
 
   return { min: minPrice, max: maxPrice };
-};
+}
 
-const getLocations = (lecturers: Lecturer[]): OptionsItem[] => {
-  return lecturers
+function getLocations(lecturers: Lecturer[]): OptionsItem[] {
+  const locations: OptionsItem[] = [];
+  lecturers
     .filter((lecturer) => lecturer.location)
-    .map((lecturer) => ({
-      value: lecturer.location as string,
-      selected: false,
-    }));
-};
+    .forEach((lecturer) => {
+      const foundItem = locations.find((e) => e.value == lecturer.location);
+      if (foundItem) return;
 
-const getTags = (lecturers: Lecturer[]): OptionsItem[] => {
+      locations.push({
+        value: lecturer.location as string,
+        selected: false,
+      });
+    });
+  return locations;
+}
+
+function getTags(lecturers: Lecturer[]): OptionsItem[] {
   const tags: OptionsItem[] = [];
   lecturers.forEach((lecturer) => {
     lecturer.tags?.forEach((tag) => {
@@ -61,24 +56,82 @@ const getTags = (lecturers: Lecturer[]): OptionsItem[] => {
     });
   });
   return tags;
-};
+}
 
-const lecturers = loadLecturers();
-const limitPriceRange = getPriceRange(lecturers);
+type Props = Readonly<{
+  lecturers: Lecturer[];
+  onFiltered?: (filtered: Lecturer[]) => void;
+}>;
 
-let priceRange = limitPriceRange;
-let locations = getLocations(lecturers);
-let tags = getTags(lecturers);
+let timeout: any;
+function delay(cb: () => void, delay = 300) {
+  clearTimeout(timeout);
+  timeout = setTimeout(cb, delay);
+}
 
-export default () => {
+export default function Filters({ lecturers, onFiltered }: Props) {
+  const limitPriceRange = getPriceRange(lecturers);
+
+  const [priceRange, setPriceRange] = useState(limitPriceRange);
+  const [locations, setLocations] = useState(getLocations(lecturers));
+  const [tags, setTags] = useState(getTags(lecturers));
+
+  useEffect(() => {
+    if (!onFiltered) return;
+    onFiltered(filter());
+  }, [priceRange, locations, tags]); // eslint-disable-line
+
+  function filter(): Lecturer[] {
+    let filtered = lecturers;
+
+    // Filter price.
+
+    filtered = filtered.filter((e) => {
+      if (!e.price_per_hour) return true;
+      return (
+        e.price_per_hour >= priceRange.min && e.price_per_hour <= priceRange.max
+      );
+    });
+
+    // Filter locations.
+
+    const selectedLocations = locations
+      .filter((e) => e.selected)
+      .map((e) => e.value);
+
+    if (selectedLocations.length > 0) {
+      filtered = filtered.filter((e) => {
+        return e.location && selectedLocations.includes(e.location);
+      });
+    }
+
+    // Filter tags.
+
+    const selectedTags = tags.filter((e) => e.selected).map((e) => e.value);
+
+    if (selectedTags.length > 0) {
+      filtered = filtered.filter((e) => {
+        const tags = e.tags?.map((e) => e.name);
+        if (!tags) return false;
+        for (const tag of selectedTags) {
+          if (!tags.includes(tag)) return false;
+        }
+        return true;
+      });
+    }
+
+    return filtered;
+  }
+
   return (
     <>
       <FilterCategory title="Cena" expanded={true}>
         <FilterVariantRange
           limits={limitPriceRange}
           onChange={(limits) => {
-            priceRange = limits;
-            filter();
+            delay(() => {
+              setPriceRange(limits);
+            });
           }}
         />
       </FilterCategory>
@@ -87,8 +140,9 @@ export default () => {
         <FilterVariantOptions
           items={locations}
           onChange={(items) => {
-            locations = items;
-            filter();
+            delay(() => {
+              setLocations(items);
+            });
           }}
         />
       </FilterCategory>
@@ -97,55 +151,12 @@ export default () => {
         <FilterVariantOptions
           items={tags}
           onChange={(items) => {
-            tags = items;
-            filter();
+            delay(() => {
+              setTags(items);
+            });
           }}
         />
       </FilterCategory>
     </>
   );
-};
-
-const filter = () => {
-  if (!window.reloadLecturers) return;
-
-  let filtered = lecturers;
-
-  // Filter price.
-
-  filtered = filtered.filter((e) => {
-    if (!e.price_per_hour) return true;
-    return (
-      e.price_per_hour >= priceRange.min && e.price_per_hour <= priceRange.max
-    );
-  });
-
-  // Filter locations.
-
-  const selectedLocations = locations
-    .filter((e) => e.selected)
-    .map((e) => e.value);
-
-  if (selectedLocations.length > 0) {
-    filtered = filtered.filter((e) => {
-      return e.location && selectedLocations.includes(e.location);
-    });
-  }
-
-  // Filter tags.
-
-  const selectedTags = tags.filter((e) => e.selected).map((e) => e.value);
-
-  if (selectedTags.length > 0) {
-    filtered = filtered.filter((e) => {
-      const tags = e.tags?.map((e) => e.name);
-      if (!tags) return false;
-      for (const tag of selectedTags) {
-        if (!tags.includes(tag)) return false;
-      }
-      return true;
-    });
-  }
-
-  window.reloadLecturers(filtered.map((e) => e.uuid));
-};
+}
