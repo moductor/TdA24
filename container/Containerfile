@@ -9,7 +9,7 @@ ENV HOST=0.0.0.0
 ENV PORT=80
 
 # https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile#L5
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat;
 
 # Install MongoDB.
 
@@ -24,9 +24,10 @@ RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositor
 WORKDIR /app
 COPY . .
 
-RUN mv .env.container .env; \
-    npm install; \
-    npm run build;
+RUN npm install; \
+    npm run build; \
+    rm .env.local; \
+    mv .env.container .env.local;
 
 # Run the app.
 
