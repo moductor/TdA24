@@ -13,7 +13,9 @@ import { getNameString } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./page.module.scss";
 
-type Params = { uuid: string };
+type Params = {
+  uuid: string;
+};
 
 type Props = {
   params: Params;
