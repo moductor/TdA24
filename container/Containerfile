@@ -1,8 +1,5 @@
 FROM node:current-alpine
 
-ENV MONGODB_PORT=27017
-ENV MONGODB_PATH=/data/db
-ENV MONGODB_LOG=/var/log/mongod.log
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
@@ -11,27 +8,16 @@ ENV PORT=80
 # https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile#L5
 RUN apk add --no-cache libc6-compat;
 
-# Install MongoDB.
-
-RUN echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/main" >> /etc/apk/repositories; \
-    echo "https://dl-cdn.alpinelinux.org/alpine/v3.9/community" >> /etc/apk/repositories; \
-    apk update; \
-    apk add mongodb mongodb-tools; \
-    mkdir -p $MONGODB_PATH;
-
 # Build the app.
 
 WORKDIR /app
 COPY . .
 
 RUN npm install; \
-    npm run build; \
-    rm .env.local; \
-    mv .env.container .env.local;
+    npm run build;
 
 # Run the app.
 
-CMD mongod --port $MONGODB_PORT --dbpath $MONGODB_PATH --fork --logpath $MONGODB_LOG; \
-    npm run start -- -H "$HOST" -p "$PORT";
+CMD npm run start -- -H "$HOST" -p "$PORT";
 
 EXPOSE 80

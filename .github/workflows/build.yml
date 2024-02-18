@@ -15,6 +15,13 @@ jobs:
       - name: Install Podman
         uses: gacts/install-podman@v1
 
+      - name: Create .env file
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+        run: |
+          cp .env.container .env.local
+          sed -i "s/@DB_URL@/$DB_URL/g" .env.local
+
       - name: Build the image
         run: container/build.sh
 
