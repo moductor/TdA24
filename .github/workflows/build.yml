@@ -20,7 +20,8 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
         run: |
           cp .env.container .env.local
-          sed -i "s/@DB_URL@/$DB_URL/g" .env.local
+          ESCAPED=$(printf '%s\n' "$DB_URL" | sed -e 's/[\/&]/\\&/g')
+          sed -i "s/@DB_URL@/$ESCAPED/g" .env.local
 
       - name: Build the image
         run: container/build.sh
