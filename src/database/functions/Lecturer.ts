@@ -2,7 +2,10 @@ import {
   ContactInfo,
   Lecturer,
   LecturerBase,
+  LecturerFilters,
   LecturerInput,
+  filter,
+  getFilters as generateFilters,
 } from "../models/Lecturer";
 import DB, { getUuid } from "./DB";
 import { get as getTag, getByName as getTagByName } from "./Tag";
@@ -76,9 +79,25 @@ export async function get(uuid: string): Promise<Lecturer | null> {
   return lecturer;
 }
 
-export async function getAll(): Promise<Lecturer[]> {
-  return await Promise.all(
-    (await db.find().toArray()).map(async (_lecturer) => {
+export type Pagination = {
+  skip: number;
+  limit: number;
+};
+
+export async function getAll(
+  pagination?: Pagination,
+  filters?: LecturerFilters,
+): Promise<Lecturer[]> {
+  const cursor = db.find();
+
+  if (pagination) {
+    cursor.skip(pagination.skip);
+    cursor.limit(pagination.limit);
+  }
+
+  const data = await cursor.toArray();
+  const lecturers = await Promise.all(
+    data.map(async (_lecturer) => {
       const item = _lecturer as LecturerDB;
 
       const tags = !item.tags
@@ -98,6 +117,17 @@ export async function getAll(): Promise<Lecturer[]> {
       return lecturer;
     }),
   );
+
+  if (filters) {
+    return filter(lecturers, filters);
+  }
+
+  return lecturers;
+}
+
+export async function getFilters(): Promise<LecturerFilters> {
+  const lecturers = await getAll();
+  return generateFilters(lecturers);
 }
 
 export async function updateOneById(
@@ -125,4 +155,12 @@ export async function updateOneById(
 
 export async function remove(uuid: string): Promise<boolean> {
   return (await db.deleteOne({ uuid })).acknowledged;
+}
+
+export async function removeAll(): Promise<boolean> {
+  return (await db.deleteMany({})).acknowledged;
+}
+
+export async function getCount(): Promise<number> {
+  return await db.countDocuments();
 }

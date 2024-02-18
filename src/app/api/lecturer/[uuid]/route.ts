@@ -5,7 +5,7 @@ import {
   updateOneById,
 } from "../../../../database/functions/Lecturer";
 import { Error } from "../../../../database/models/Error";
-import { LecturerBase } from "../../../../database/models/Lecturer";
+import { LecturerInput } from "../../../../database/models/Lecturer";
 
 type Params = {
   uuid: string;
@@ -68,7 +68,7 @@ export async function PUT(
   }
 
   try {
-    const data = (await request.json()) as LecturerBase;
+    const data = (await request.json()) as LecturerInput;
     const lecturer = await updateOneById(params.uuid, data);
     return NextResponse.json(lecturer);
   } catch (e) {

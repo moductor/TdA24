@@ -2,8 +2,11 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import HomeView from "../components/partials/home/HomeView";
 import { getAll } from "../database/functions/Lecturer";
+import createPlaceholderData from "../database/placeholderData";
 
 export default async function Page() {
+  await createPlaceholderData();
+
   const lecturers = await getAll();
 
   return (
