@@ -17,3 +17,39 @@
 .empty-state {
   font-size: 1.25rem;
 }
+
+.loading-bar {
+  $dotCount: 3;
+  $size: 0.5rem;
+  $duration: 0.8s;
+
+  display: flex;
+  justify-content: center;
+  gap: $size;
+
+  .loading-dot {
+    display: block;
+    width: $size;
+    height: $size;
+    background-color: currentColor;
+    border-radius: 25%;
+
+    animation: loadingBar $duration ease infinite alternate;
+
+    @keyframes loadingBar {
+      from {
+        opacity: 0.2;
+      }
+
+      to {
+        opacity: 0.8;
+      }
+    }
+
+    @for $i from 1 through $dotCount {
+      &:nth-child(#{$i}) {
+        animation-delay: #{($duration / $dotCount) * ($i - 1)};
+      }
+    }
+  }
+}

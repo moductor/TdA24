@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import {
-  Pagination,
   get,
   getAll,
   insertOne,
@@ -11,6 +10,7 @@ import {
   LecturerBase,
   LecturerFilters,
 } from "../../../database/models/Lecturer";
+import { Pagination } from "../../../database/models/Pagination";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const params = request.nextUrl.searchParams;

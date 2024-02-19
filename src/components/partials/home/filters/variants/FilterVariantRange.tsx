@@ -1,4 +1,4 @@
-import { useState, type ChangeEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import styles from "./FilterVariantRange.module.scss";
 
 export type PriceRange = {
@@ -24,7 +24,10 @@ export default function FilterVariantRange({
   const [leftProgress, setLeftProgress] = useState(0);
   const [rightProgress, setRightProgress] = useState(0);
 
-  if (changeCb) changeCb({ min: minRangeValue, max: maxRangeValue });
+  useEffect(() => {
+    if (!changeCb) return;
+    changeCb({ min: minRangeValue, max: maxRangeValue });
+  }, [minRangeValue, maxRangeValue]);
 
   const onMaxValueChange = (event: ChangeEvent) => {
     const target = event.target as HTMLInputElement;
