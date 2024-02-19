@@ -75,6 +75,10 @@ function getRandomNumber(min: number, max: number): number {
   return min + Math.round((max - min) * Math.random());
 }
 
+function getRandomBool(): boolean {
+  return Boolean(Math.round(Math.random()));
+}
+
 type Gender = "male" | "female";
 function getRandomGender(): Gender {
   const genders: Gender[] = ["male", "female"];
@@ -148,22 +152,41 @@ function getRandomTags(): TagBase[] {
 
 const getRandomPrice = () => getRandomNumber(500, 3000);
 
+function getRandomLecturer(): LecturerInput {
+  const gender = getRandomGender();
+
+  const firstName = getRandomFirstName(gender);
+  const lastName = getRandomLastName(gender);
+
+  let middleName: string | undefined;
+  if (getRandomBool()) {
+    do {
+      middleName = getRandomLastName(gender);
+    } while (middleName == lastName);
+  }
+
+  const location = getRandomLocation();
+  const tags = getRandomTags();
+  const price = getRandomPrice();
+
+  const seed = `${firstName} ${middleName} ${lastName} ${location} ${price}`;
+  const image = `https://picsum.photos/seed/${seed}/512/512`;
+
+  return {
+    first_name: firstName,
+    middle_name: middleName,
+    last_name: lastName,
+    location: location,
+    tags: tags,
+    price_per_hour: price,
+    picture_url: image,
+  };
+}
+
 function getRandomLecturers(count: number): LecturerInput[] {
   const lecturers: LecturerInput[] = [];
   for (let i = 0; i < count; i++) {
-    const gender = getRandomGender();
-
-    const firstName = getRandomFirstName(gender);
-    const lastName = getRandomLastName(gender);
-
-    lecturers.push({
-      first_name: firstName,
-      last_name: lastName,
-      location: getRandomLocation(),
-      tags: getRandomTags(),
-      price_per_hour: getRandomPrice(),
-      picture_url: `https://picsum.photos/seed/${firstName} ${lastName}/512/512`,
-    });
+    lecturers.push(getRandomLecturer());
   }
   return lecturers;
 }
@@ -174,7 +197,7 @@ export default async function createPlaceholderData(clear = false) {
     await removeAll();
   }
 
-  const data = [...lecturers, ...getRandomLecturers(20)];
+  const data = [...lecturers, ...getRandomLecturers(50)];
   for (const lecturer of data) {
     await insertOne(lecturer);
   }
