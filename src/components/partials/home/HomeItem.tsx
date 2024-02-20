@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import Card from "../../../components/widgets/Card";
 import {
   getNameString,
@@ -10,15 +11,51 @@ import styles from "./HomeItem.module.scss";
 
 type Props = Readonly<{
   lecturer: LecturerModel;
+  index: number;
+  itemCount: number;
   className?: string;
+  loadMoreCB?: () => void;
   [prop: string]: any;
 }>;
 
-export default function HomeItem({ lecturer, className, ...props }: Props) {
+export default function HomeItem({
+  lecturer,
+  index,
+  itemCount,
+  className,
+  loadMoreCB,
+  ...props
+}: Props) {
+  const itemRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const item = itemRef.current!;
+    const reversedIndex = itemCount - 1 - index;
+
+    if (!loadMoreCB) return;
+
+    // Just for the last element.
+    if (reversedIndex != 0) return;
+
+    const observer = new IntersectionObserver(([entry], observer) => {
+      console.log("Observing!", entry.isIntersecting);
+
+      if (!entry.isIntersecting) return;
+      observer.unobserve(entry.target);
+      loadMoreCB();
+    });
+    observer.observe(item);
+
+    return () => {
+      observer.unobserve(item);
+    };
+  }, [itemCount, loadMoreCB]);
+
   return (
     <div
       data-lecturer-item={lecturer.uuid}
       className={styleClasses(styles, "lecturer-item", className || "")}
+      ref={itemRef}
       {...props}
     >
       <LecturerPortrait

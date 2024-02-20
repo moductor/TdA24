@@ -1,27 +1,44 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { type Lecturer } from "../../../database/models/Lecturer";
+import {
+  LecturerFilters,
+  type Lecturer,
+} from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
 import HomeFilters from "./HomeFilters";
 import HomeList from "./HomeList";
 import styles from "./HomeView.module.scss";
 import Filters from "./filters/Filters";
+import { fetchLecturers } from "./lecturerFetcher";
 
 type Props = Readonly<{
   lecturersData: string;
+  lecturerFilters: string;
   className?: string;
   [prop: string]: any;
 }>;
 
 export default function HomeView({
   lecturersData,
+  lecturerFilters,
   className,
   ...props
 }: Props) {
-  const lecturers: Lecturer[] = JSON.parse(lecturersData);
+  const initialLecturers: Lecturer[] = JSON.parse(lecturersData);
+  const initialFilters: LecturerFilters = JSON.parse(lecturerFilters);
 
-  const [filteredLecturers, setFilteredLecturers] = useState(lecturers);
+  const [lecturers, setLecturers] = useState(initialLecturers);
+  const [filters, setFilters] = useState(initialFilters);
+
+  useEffect(() => {
+    (async () => {
+      console.log(filters);
+      const data = await fetchLecturers(undefined, filters);
+      console.log(data);
+      setLecturers(data);
+    })();
+  }, [filters]);
 
   const [filtersSheetVisible, setFiltersSheetVisible] = useState(false);
 
@@ -47,8 +64,7 @@ export default function HomeView({
     fixedFiltersButton.addEventListener("click", showFilters);
     fixedFiltersButton.setAttribute("tabindex", "-1");
 
-    const observer = new IntersectionObserver((entries, observer) => {
-      const entry = entries[0];
+    const observer = new IntersectionObserver(([entry]) => {
       fixedFiltersBanner.classList.toggle(
         styles["visible"],
         !entry.isIntersecting,
@@ -82,11 +98,11 @@ export default function HomeView({
         onClose={() => setFiltersSheetVisible(false)}
       >
         <Filters
-          lecturers={lecturers}
-          onFiltered={(filtered) => setFilteredLecturers(filtered)}
+          filters={filters}
+          onFiltered={(filters) => setFilters(filters)}
         />
       </HomeFilters>
-      <HomeList lecturers={filteredLecturers} />
+      <HomeList initialLecturers={lecturers} filters={filters} />
     </div>
   );
 }

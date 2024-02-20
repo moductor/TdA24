@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./FilterVariantOptions.module.scss";
 
 type Props = {
@@ -12,13 +12,15 @@ export default function FilterVariantOptions({
 }: Props) {
   const [items, setItems] = useState(values);
 
+  useEffect(() => {
+    if (!changeCb) return;
+    changeCb(items);
+  }, [items]);
+
   const onChange = (index: number, newVal: boolean) => {
     setItems((prev) => {
       const newArray = [...prev];
       newArray[index].selected = newVal;
-
-      if (changeCb) changeCb(newArray);
-
       return newArray;
     });
   };
