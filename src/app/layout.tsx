@@ -1,13 +1,12 @@
-import classNames from "classnames";
 import type { Metadata } from "next";
 import { Lalezar, Open_Sans } from "next/font/google";
+import { CSSProperties } from "react";
 import "./globals.scss";
 
 export const lalezar = Lalezar({
   display: "swap",
   subsets: ["latin"],
   weight: ["400"],
-  variable: "--font-accent",
 });
 
 export const openSans = Open_Sans({
@@ -15,8 +14,12 @@ export const openSans = Open_Sans({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
   style: ["normal", "italic"],
-  variable: "--font-body",
 });
+
+export const fontStyles = {
+  "--font-accent": lalezar.style.fontFamily,
+  "--font-body": openSans.style.fontFamily,
+} as CSSProperties;
 
 export const metadata: Metadata = {
   title: {
@@ -32,9 +35,7 @@ type Props = Readonly<{
 export default function Layout({ children }: Props) {
   return (
     <html lang="cs">
-      <body className={classNames(lalezar.variable, openSans.variable)}>
-        {children}
-      </body>
+      <body style={fontStyles}>{children}</body>
     </html>
   );
 }
