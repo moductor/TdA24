@@ -36,7 +36,7 @@ export default async function Page({ params }: Props) {
 
             <div className={styleClasses(styles, "hero", "bento-subsection")}>
               <LecturerPortrait
-                portrait={lecturer.picture_url}
+                lecturer={lecturer}
                 className={styleClasses(styles, "portrait")}
               />
 

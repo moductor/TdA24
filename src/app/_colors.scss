@@ -4,19 +4,9 @@ $colors: (
   "jet": #333333,
   "prussian-blue": #00384d,
   "sunglow": #fecb2e,
+  "error": #e61919,
+  "success": #339955,
 );
-
-@function lighter($color, $percentage) {
-  @return color-mix(in srgb, $color, white $percentage);
-}
-
-@function darker($color, $percentage) {
-  @return color-mix(in srgb, $color, black $percentage);
-}
-
-@function alpha($color, $percentage) {
-  @return color-mix(in srgb, $color, transparent #{100% - $percentage});
-}
 
 :root {
   @each $color, $value in $colors {

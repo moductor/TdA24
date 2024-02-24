@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Card from "../../../components/widgets/Card";
 import {
@@ -59,7 +60,7 @@ export default function HomeItem({
       {...props}
     >
       <LecturerPortrait
-        portrait={lecturer.picture_url}
+        lecturer={lecturer}
         className={styleClasses(styles, "portrait")}
       />
 
@@ -72,13 +73,13 @@ export default function HomeItem({
         className={styleClasses(styles, "metadata")}
       />
 
-      <a
+      <Link
         href={`/lecturer/${lecturer.uuid}`}
         className={styleClasses(styles, "link")}
         aria-label="Přejít na stránku lektora"
       >
         <Card className={styleClasses(styles, "card")}>Zobrazit více</Card>
-      </a>
+      </Link>
     </div>
   );
 }

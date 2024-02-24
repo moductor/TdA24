@@ -4,6 +4,7 @@ import {
   type Lecturer,
 } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import LoadingBar from "../../widgets/LoadingBar";
 import HomeItem from "./HomeItem";
 import styles from "./HomeList.module.scss";
 import { fetchLecturers, loadCount } from "./lecturerFetcher";
@@ -67,13 +68,7 @@ export default function HomeList({
         );
       })}
 
-      {loading && (
-        <div className={styleClasses(styles, "loading-bar", "item")}>
-          <span className={styleClasses(styles, "loading-dot")}></span>
-          <span className={styleClasses(styles, "loading-dot")}></span>
-          <span className={styleClasses(styles, "loading-dot")}></span>
-        </div>
-      )}
+      {loading && <LoadingBar className={styleClasses(styles, "item")} />}
     </>
   ) : (
     <div className={styleClasses(styles, "empty-state", "item")}>

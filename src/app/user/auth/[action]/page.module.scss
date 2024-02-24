@@ -1,0 +1,20 @@
+.wrapper {
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: var(--padding-inline);
+}
+
+.card {
+  width: min(100%, 28rem);
+}
