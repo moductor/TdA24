@@ -10,4 +10,8 @@
     justify-items: stretch;
     text-align: center;
   }
+
+  li > * {
+    display: block;
+  }
 }
