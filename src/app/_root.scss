@@ -12,9 +12,15 @@
     0 0% var(--card-border-color-lightness) / var(--card-border-color-opacity)
   );
 
+  --__colorFunctions-themize-color: white;
+  --__colorFunctions-athemize-color: black;
+
   @media (prefers-color-scheme: light) {
     --card-background-color: var(--color-white);
     --card-border-color-lightness: 0%;
+
+    --__colorFunctions-themize-color: black;
+    --__colorFunctions-athemize-color: white;
   }
 
   @media (max-width: 720px) {
