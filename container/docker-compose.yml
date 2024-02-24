@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    restart: always
+    image: mongo:latest
+    ports:
+      - 27017:27017
+  app:
+    depends_on:
+      - mongodb
+    restart: always
+    build:
+      dockerfile: base.Containerfile
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    working_dir: /app
+    volumes:
+      - ..:/app:z
+    command: npm run dev -- -p 3000
