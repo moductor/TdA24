@@ -1,0 +1,12 @@
+@use "../../app/colorFunctions.scss" as colors;
+
+.picture {
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+  background-color: #{colors.alpha(currentColor, 10%)};
+  background-image: url("/images/profile-placeholder.svg");
+  background-size: contain;
+  background-position: center;
+  border: hsl(0 0% 50% / 0.4) solid 2px;
+}
