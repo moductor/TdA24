@@ -56,6 +56,9 @@ function handleMouseMove(e: MouseEvent, background: HTMLElement) {
     const transformX = ratioX * 100;
     const transformY = ratioY * 100;
 
-    element.style.transform = `translate(${transformX}%, ${transformY}%)`;
+    element.animate(
+      { transform: `translate(${transformX}%, ${transformY}%)` },
+      { duration: 200 },
+    );
   }
 }
