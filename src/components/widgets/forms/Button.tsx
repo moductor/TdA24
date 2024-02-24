@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { MouseEventHandler, ReactNode, Ref, forwardRef } from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./Button.module.scss";
 
 type Props = {
-  link?: boolean;
+  href?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLElement>;
   children?: ReactNode;
@@ -13,18 +14,19 @@ type Props = {
 };
 
 export default forwardRef<HTMLElement, Props>(function Button(
-  { link = false, className, onClick, children, ...props }: Props,
+  { href, className, onClick, children, ...props }: Props,
   ref,
 ) {
-  return link ? (
-    <a
+  return href ? (
+    <Link
       className={styleClasses(styles, "button", className || "")}
       ref={ref as Ref<HTMLAnchorElement>}
+      href={href}
       onClick={onClick}
       {...props}
     >
       {children}
-    </a>
+    </Link>
   ) : (
     <button
       className={styleClasses(styles, "button", className || "")}
