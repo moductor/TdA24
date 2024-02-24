@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { styleClasses } from "../helpers/styleClasses";
 import styles from "./Navbar.module.scss";
 import Logo from "./widgets/Logo";
@@ -18,22 +19,22 @@ export default function Navbar({
 }: Props) {
   return (
     <nav {...props} className={styleClasses(styles, "navbar", className || "")}>
-      <a
+      <Link
         href="/"
         title="Přejít na domovskou stránku"
         className={styleClasses(styles, "logo-link")}
       >
         <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />
-      </a>
+      </Link>
       <div className={styleClasses(styles, "menu-wrapper")}>
         {showBackButton && (
-          <a
+          <Link
             href="/"
             aria-hidden="true"
             className={styleClasses(styles, "menu-button")}
           >
             Domů
-          </a>
+          </Link>
         )}
         {showUserMenu && <UserDropdownWrapper />}
       </div>
