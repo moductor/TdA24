@@ -60,7 +60,7 @@ export default function HomeItem({
       {...props}
     >
       <LecturerPortrait
-        portrait={lecturer.picture_url}
+        lecturer={lecturer}
         className={styleClasses(styles, "portrait")}
       />
 
