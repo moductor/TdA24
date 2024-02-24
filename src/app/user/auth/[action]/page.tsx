@@ -25,14 +25,14 @@ export default function Page({ params }: Props) {
   function wrap(children?: ReactNode) {
     return (
       <BackgroundWrapper>
-        <div className={styleClasses(styles, "content-grid")}>
+        <main className={styleClasses(styles, "content-grid")}>
           <div className={styleClasses(styles, "wrapper")}>
             <Navbar showBackButton={true} showUserMenu={false} />
             <div className={styleClasses(styles, "content")}>
               <Card className={styleClasses(styles, "card")}>{children}</Card>
             </div>
           </div>
-        </div>
+        </main>
       </BackgroundWrapper>
     );
   }
