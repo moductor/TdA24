@@ -7,23 +7,6 @@
   }
 }
 
-.filters-button {
-  appearance: none;
-  background: none;
-
-  font-size: 1rem;
-  font-weight: 800;
-
-  padding: 0.4em 0.8em;
-  border-radius: 0.6em;
-  background-color: var(--color-white);
-  border: 1px solid hsl(0 0% 0% / 0.2);
-  box-shadow: 0 0.2em 0.4em hsl(0 0% 0% / 0.2);
-  color: var(--color-jet);
-
-  cursor: pointer;
-}
-
 .show-filters-section {
   grid-column: 1 / -1;
 

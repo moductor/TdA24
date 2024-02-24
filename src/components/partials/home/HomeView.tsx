@@ -6,6 +6,7 @@ import {
   type Lecturer,
 } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import Button from "../../widgets/forms/Button";
 import HomeFilters from "./HomeFilters";
 import HomeList from "./HomeList";
 import styles from "./HomeView.module.scss";
@@ -85,12 +86,7 @@ export default function HomeView({
         className={styleClasses(styles, "show-filters-section")}
         ref={filtersBannerRef}
       >
-        <button
-          className={styleClasses(styles, "filters-button")}
-          ref={filtersButtonRef}
-        >
-          Filtry
-        </button>
+        <Button ref={filtersButtonRef}>Filtry</Button>
       </div>
 
       <HomeFilters
