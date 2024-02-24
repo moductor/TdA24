@@ -1,12 +1,7 @@
 import { Jwt } from "jsonwebtoken";
 import { cookies } from "next/headers";
-import serverContext from "server-only-context";
 import { User } from "../database/models/User";
 import { isTokenValid, parseUserToken } from "./tokenParser";
-
-export const [getUserContext, setUserContext] = serverContext<User | undefined>(
-  undefined,
-);
 
 export function getUserTokenWithSession(): Jwt | undefined {
   const tokenCookie = cookies().get("JWT")?.value;
@@ -22,4 +17,10 @@ export function getCurrentUserWithSession(): User | undefined {
   const token = getUserTokenWithSession();
   if (!isLoggedInWithSession(token)) return;
   return token!.payload as User;
+}
+
+let user: User | undefined | null = null;
+export function getUserContext(): User | undefined {
+  if (user === null) user = getCurrentUserWithSession();
+  return user;
 }

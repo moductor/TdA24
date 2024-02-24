@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Lalezar, Open_Sans } from "next/font/google";
 import { CSSProperties } from "react";
-import {
-  getCurrentUserWithSession,
-  setUserContext,
-} from "../helpers/userContext";
 import "./globals.scss";
 
 export const lalezar = Lalezar({
@@ -37,8 +33,6 @@ type Props = Readonly<{
 }>;
 
 export default function Layout({ children }: Props) {
-  setUserContext(getCurrentUserWithSession());
-
   return (
     <html lang="cs">
       <body style={fontStyles}>{children}</body>
