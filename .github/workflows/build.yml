@@ -17,11 +17,9 @@ jobs:
 
       - name: Create .env file
         env:
+          JWT_ACCESS_KEY: ${{ secrets.JWT_ACCESS_KEY }}
           DB_URL: ${{ secrets.DB_URL }}
-        run: |
-          cp .env.container .env.local
-          ESCAPED=$(printf '%s\n' "$DB_URL" | sed -e 's/[\/&]/\\&/g')
-          sed -i "s/@DB_URL@/$ESCAPED/g" .env.local
+        run: container/envgen.sh
 
       - name: Build the image
         run: container/build.sh
