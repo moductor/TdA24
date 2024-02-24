@@ -58,7 +58,7 @@ function handleMouseMove(e: MouseEvent, background: HTMLElement) {
 
     element.animate(
       { transform: `translate(${transformX}%, ${transformY}%)` },
-      { duration: 200 },
+      { duration: 200, fill: "forwards" },
     );
   }
 }
