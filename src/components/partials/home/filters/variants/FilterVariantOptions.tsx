@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { styleClasses } from "../../../../../helpers/styleClasses";
+import CheckBoxRow from "../../../../widgets/forms/CheckBoxRow";
 import styles from "./FilterVariantOptions.module.scss";
 
 type Props = {
@@ -26,16 +28,16 @@ export default function FilterVariantOptions({
   };
 
   return (
-    <div className={styles["list"]}>
+    <div className={styleClasses(styles, "list")}>
       {items.map((item, index) => (
-        <label key={index} className={styles["item"]}>
-          <input
-            type="checkbox"
-            checked={item.selected}
-            onChange={(e) => onChange(index, e.target.checked)}
-          />
+        <CheckBoxRow
+          key={index}
+          name={item.value}
+          checked={item.selected}
+          onChange={(e) => onChange(index, e.target.checked)}
+        >
           {item.value}
-        </label>
+        </CheckBoxRow>
       ))}
     </div>
   );
