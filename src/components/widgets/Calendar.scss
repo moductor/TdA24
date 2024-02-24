@@ -1,0 +1,106 @@
+@use "sass:color";
+
+$sunglow: #fecb2e;
+$white: white;
+$jet: #333333;
+
+.calendar {
+  max-width: 90vw;
+  margin: 40px auto;
+  background-color: none;
+  color: currentColor;
+}
+
+.fc-scrollgrid-section > td,
+.fc-scrollgrid-section > th,
+.fc-scrollgrid {
+  border: none !important;
+}
+
+.fc-scrollgrid-section-header > th > .fc-scroller-harness > .fc-scroller {
+  overflow: hidden !important;
+}
+
+.fc-daygrid-day {
+  border: 1px solid color.adjust($jet, $alpha: -0.6) !important;
+}
+
+.fc-col-header-cell,
+th {
+  border: 1px solid var(--color-jet) !important;
+}
+
+.fc-button {
+  appearance: none !important;
+  background: none !important;
+
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+
+  padding: 0.4em 0.8em !important;
+  border-radius: 0.6em !important;
+
+  border: 1px solid hsl(0 0% 0% / 0.2) !important;
+  box-shadow: 0 0.2em 0.4em hsl(0 0% 0% / 0.2) !important;
+
+  background-color: var(--color-white) !important;
+  color: var(--color-jet) !important;
+}
+
+.fc-dayGridMonth-button,
+.fc-timeGridWeek-button,
+.fc-timeGridDay-button {
+  background-color: color-mix(
+    in srgb,
+    currentColor,
+    transparent 90%
+  ) !important;
+  color: currentColor !important;
+}
+.fc-dayGridMonth-button {
+  border-radius: 0.6em 0 0 0.6em !important;
+}
+
+.fc-timeGridWeek-button {
+  border-radius: 0 0 0 0 !important;
+}
+.fc-timeGridDay-button {
+  border-radius: 0 0.6em 0.6em 0 !important;
+}
+
+.fc-button-active {
+  background-color: var(--color-white) !important;
+  color: var(--color-jet) !important;
+}
+
+.fc-prev-button {
+  border-radius: 0.6em 0 0 0.6em !important;
+}
+.fc-next-button {
+  border-radius: 0 0.6em 0.6em 0 !important;
+}
+
+.fc-daygrid-day-events {
+  margin: 0.2em;
+}
+
+.fc-day-today {
+  background-color: color.adjust($sunglow, $alpha: -0.8) !important;
+}
+
+@media only screen and (max-width: 930px) {
+  .fc-toolbar {
+    flex-direction: column !important;
+    gap: 0.6rem;
+
+    > :nth-child(1) {
+      order: 2;
+    }
+    > :nth-child(2) {
+      order: 1;
+    }
+    > :nth-child(3) {
+      order: 3;
+    }
+  }
+}
