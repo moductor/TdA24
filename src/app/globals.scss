@@ -44,6 +44,7 @@
     [breakout-end]
     minmax(var(--padding-inline), 1fr)
     [full-width-end];
+  align-content: start;
 
   > * {
     grid-column: content;
