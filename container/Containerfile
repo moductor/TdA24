@@ -1,12 +1,8 @@
-FROM node:current-alpine
+FROM localhost/base
 
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
 ENV PORT=80
-
-# https://github.com/vercel/next.js/blob/canary/examples/with-docker/Dockerfile#L5
-RUN apk add --no-cache libc6-compat;
 
 # Build the app.
 
