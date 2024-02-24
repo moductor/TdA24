@@ -22,7 +22,8 @@ export default function UserDropdown({ user }: Props) {
 
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      const dropdown = dropdownRef.current!;
+      const dropdown = dropdownRef.current;
+      if (!dropdown) return;
 
       const visible = dropdown.getAttribute("data-visible") == "true";
       if (!visible) return;
@@ -43,9 +44,7 @@ export default function UserDropdown({ user }: Props) {
   if (!user) {
     return (
       <div>
-        <Button link={true} href="/user/auth/login">
-          Přihlásit se
-        </Button>
+        <Button href="/user/auth/login">Přihlásit se</Button>
       </div>
     );
   }
