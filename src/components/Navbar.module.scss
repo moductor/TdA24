@@ -4,7 +4,8 @@
   align-items: center;
   padding-inline-end: 1.5rem;
 
-  a {
+  .logo-link,
+  .menu-button {
     color: currentColor;
   }
 }
@@ -12,6 +13,12 @@
 .logo {
   display: block;
   height: 7rem;
+}
+
+.menu-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
 }
 
 .menu-button {
