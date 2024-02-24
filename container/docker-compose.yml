@@ -1,13 +1,11 @@
 services:
   mongodb:
-    restart: always
     image: mongo:latest
     ports:
       - 27017:27017
   app:
     depends_on:
       - mongodb
-    restart: always
     build:
       dockerfile: base.Containerfile
     expose:
