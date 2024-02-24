@@ -55,7 +55,7 @@ export default function UserDropdown({ user }: Props) {
         className={styleClasses(styles, "profile-button")}
         onClick={showDropdown}
       >
-        <ProfilePicture src={`/api/user/profile-picture/${user.uuid}`} />
+        <ProfilePicture src={`/api/profile-picture/user/${user.uuid}`} />
       </span>
       <div
         className={styleClasses(styles, "dropdown-wrapper")}
