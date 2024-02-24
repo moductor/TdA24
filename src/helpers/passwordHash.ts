@@ -1,4 +1,4 @@
-import { compareSync, hashSync } from "bcrypt";
+import { compareSync, hashSync } from "bcryptjs";
 
 export const saltRounds = 10;
 
