@@ -9,8 +9,8 @@ type Props = Readonly<{
 
 export default function Tag({ children, className, ...props }: Props) {
   return (
-    <div className={styleClasses(styles, "tag", className || "")} {...props}>
+    <span className={styleClasses(styles, "tag", className || "")} {...props}>
       {children}
-    </div>
+    </span>
   );
 }
