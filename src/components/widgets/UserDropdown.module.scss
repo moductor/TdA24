@@ -1,0 +1,81 @@
+@use "../../app/colorFunctions.scss" as colors;
+
+.wrapper {
+  position: relative;
+
+  --border-size: 2px;
+  --border: var(--border-size) solid hsl(0 0% 70%);
+  --drop-size: 0.6rem;
+}
+
+.dropdown-wrapper {
+  transition: all 0.2s ease;
+
+  &:not([data-visible="true"]) {
+    translate: 0 -1rem;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &::after {
+    --_size: calc(var(--drop-size) / sin(45deg));
+
+    content: "";
+    position: absolute;
+    inset-block-start: calc(100% + (var(--_size) - var(--drop-size)));
+    inset-inline-end: 50%;
+
+    display: block;
+    background-color: var(--color-white);
+    border-top: var(--border);
+    border-left: var(--border);
+    width: var(--_size);
+    height: var(--_size);
+
+    rotate: 45deg;
+    translate: 50%;
+    transform-origin: center;
+  }
+}
+
+.dropdown {
+  position: absolute;
+  inset-block-start: calc(100% + var(--drop-size));
+  inset-inline-end: 0;
+  background-color: var(--color-white);
+  color: var(--color-jet);
+  padding: 0.4rem;
+  border: var(--border);
+  border-radius: 0.8rem;
+  width: 10rem;
+
+  display: grid;
+  gap: 0.2rem;
+}
+
+.user-item {
+  padding-block: 0.4rem;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.button-item {
+  appearance: none;
+  border: none;
+  background: none;
+  font-size: 1em;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  padding: 0.4rem;
+
+  :where(&) {
+    color: currentColor;
+  }
+
+  &:hover {
+    background-color: #{colors.alpha(currentColor, 10%)};
+    border-radius: 0.4rem;
+  }
+}
