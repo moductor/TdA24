@@ -26,7 +26,6 @@ export default function LecturerPortrait({
   ) : (
     <Image // eslint-disable-line
       className={styleClasses(styles, "portrait", className || "")}
-      // src="/images/portrait-placeholder.svg"
       src={`/api/profile-picture/lecturer/${lecturer.uuid}`}
       alt=""
       width={512}
