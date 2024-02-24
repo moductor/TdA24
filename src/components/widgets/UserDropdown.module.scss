@@ -8,7 +8,12 @@
   --drop-size: 0.6rem;
 }
 
+.profile-button {
+  cursor: pointer;
+}
+
 .dropdown-wrapper {
+  filter: drop-shadow(var(--card-shadow));
   transition: all 0.2s ease;
 
   &:not([data-visible="true"]) {
