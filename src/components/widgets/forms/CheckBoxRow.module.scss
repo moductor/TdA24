@@ -1,0 +1,56 @@
+@use "../../../app/colorFunctions.scss" as colors;
+
+.checkbox-row {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+
+  --_check-color: var(--color-jet);
+
+  .check {
+    &::before {
+      content: "";
+      display: block;
+      width: 1em;
+      height: 1em;
+      background-color: currentColor;
+      opacity: 0.4;
+
+      transition: all 0.2s ease;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 0.7em;
+      height: 0.4em;
+      border-left: 0.125em solid var(--_check-color);
+      border-bottom: 0.125em solid var(--_check-color);
+
+      inset-block-start: 0.5em;
+      inset-inline-start: 0.5em;
+
+      transform-origin: center;
+      rotate: -45deg;
+      translate: -50% -30%;
+
+      transition: opacity 0.2s ease;
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    --_check-color: var(--color-white);
+  }
+
+  :focus-visible + .check::before {
+    opacity: 0.6;
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+  }
+
+  :checked + .check::after {
+    opacity: 1;
+  }
+}
