@@ -1,29 +1,36 @@
+import Image from "next/image";
+import { Lecturer } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./LecturerPortrait.module.scss";
 
 type Props = Readonly<{
-  portrait?: string;
+  lecturer: Lecturer;
   className?: string;
   [prop: string]: any;
 }>;
 
 export default function LecturerPortrait({
-  portrait,
+  lecturer,
   className,
   ...props
 }: Props) {
-  return portrait ? (
-    <img // eslint-disable-line
+  return lecturer.picture_url ? (
+    <Image // eslint-disable-line
       className={styleClasses(styles, "portrait", className || "")}
-      src={portrait}
+      src={lecturer.picture_url!}
       alt=""
+      width={512}
+      height={512}
       {...props}
     />
   ) : (
-    <img // eslint-disable-line
+    <Image // eslint-disable-line
       className={styleClasses(styles, "portrait", className || "")}
-      src="/images/portrait-placeholder.svg"
+      // src="/images/portrait-placeholder.svg"
+      src={`/api/profile-picture/lecturer/${lecturer.uuid}`}
       alt=""
+      width={512}
+      height={512}
       {...props}
     />
   );

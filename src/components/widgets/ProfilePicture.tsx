@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { styleClasses } from "../../helpers/styleClasses";
 import styles from "./ProfilePicture.module.scss";
 
@@ -6,5 +7,13 @@ type Props = {
 };
 
 export default function ProfilePicture({ src }: Props) {
-  return <img src={src} alt="" className={styleClasses(styles, "picture")} />;
+  return (
+    <Image
+      src={src || ""}
+      alt=""
+      width={512}
+      height={512}
+      className={styleClasses(styles, "picture")}
+    />
+  );
 }
