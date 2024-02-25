@@ -3,8 +3,20 @@
   flex-direction: column;
   gap: 0.5em;
 
+  .required-label {
+    display: block;
+    color: var(--color-sky-blue);
+    border: 1px solid currentColor;
+    border-radius: 100vmax;
+    padding: 0.15em 0.5em;
+    font-size: 0.6em;
+  }
+
   > span {
     text-wrap: wrap;
+    display: flex;
+    align-items: center;
+    gap: 0.8em;
   }
 
   > input {

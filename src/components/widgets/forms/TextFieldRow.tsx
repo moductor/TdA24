@@ -10,6 +10,7 @@ type Props = {
   className?: string;
   placeholder?: string;
   required?: boolean;
+  showRequiredLabel?: boolean;
   pattern?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -23,6 +24,7 @@ export default function TextFieldRow({
   className,
   placeholder,
   required,
+  showRequiredLabel,
   pattern,
   value,
   onChange,
@@ -34,7 +36,19 @@ export default function TextFieldRow({
       className={styleClasses(styles, "textfield-row", className || "")}
       {...props}
     >
-      {children && <span>{children}</span>}
+      {children && (
+        <span>
+          {children}
+          {showRequiredLabel && required && (
+            <span
+              aria-hidden
+              className={styleClasses(styles, "required-label")}
+            >
+              vyžadováno
+            </span>
+          )}
+        </span>
+      )}
       <input
         type={type}
         name={name}
