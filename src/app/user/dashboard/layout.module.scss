@@ -1,0 +1,25 @@
+.header-wrapper {
+  overflow-x: auto;
+}
+
+.menu-wrapper {
+  width: max-content;
+  margin-inline: auto;
+}
+
+.menu {
+  padding: var(--padding-inline);
+  width: max-content;
+  display: flex;
+  gap: 1rem;
+  list-style-type: none;
+
+  li {
+    flex-shrink: 0;
+  }
+
+  a {
+    display: block;
+    height: 100%;
+  }
+}
