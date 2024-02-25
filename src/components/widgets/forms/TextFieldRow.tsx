@@ -11,6 +11,7 @@ type Props = {
   placeholder?: string;
   required?: boolean;
   showRequiredLabel?: boolean;
+  emphasizeRequiredLabel?: boolean;
   pattern?: string;
   value?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
@@ -25,6 +26,7 @@ export default function TextFieldRow({
   placeholder,
   required,
   showRequiredLabel,
+  emphasizeRequiredLabel,
   pattern,
   value,
   onChange,
@@ -42,7 +44,11 @@ export default function TextFieldRow({
           {showRequiredLabel && required && (
             <span
               aria-hidden
-              className={styleClasses(styles, "required-label")}
+              className={styleClasses(
+                styles,
+                "required-label",
+                emphasizeRequiredLabel ? "emphasize" : "",
+              )}
             >
               vyžadováno
             </span>
