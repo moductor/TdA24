@@ -5,6 +5,7 @@ import { Lecturer } from "../../../../database/models/Lecturer";
 import { styleClasses } from "../../../../helpers/styleClasses";
 import DashboardSection from "../DashboardSection";
 import TextFieldRowAutosave from "../TextFieldRowAutosave";
+import InputList from "./InputList";
 import styles from "./MetadataSection.module.scss";
 import PortraitChanger from "./PortraitChanger";
 
@@ -36,44 +37,46 @@ export default function MetadataSection({ lecturer: initialLecturer }: Props) {
     <DashboardSection title="Základní údaje">
       <div className={styleClasses(styles, "metadata")}>
         <div className={styleClasses(styles, "inputs")}>
-          <TextFieldRowAutosave
-            name="title_before"
-            label="Tituly před jménem"
-            initialValue={lecturer.title_before}
-            autosave={saveTextField}
-          />
-          <TextFieldRowAutosave
-            name="first_name"
-            label="Křestní jméno"
-            initialValue={lecturer.first_name}
-            required={true}
-            autosave={saveTextField}
-          />
-          <TextFieldRowAutosave
-            name="middle_name"
-            label="Prostřední jméno"
-            initialValue={lecturer.middle_name}
-            autosave={saveTextField}
-          />
-          <TextFieldRowAutosave
-            name="last_name"
-            label="Příjmení"
-            initialValue={lecturer.last_name}
-            required={true}
-            autosave={saveTextField}
-          />
-          <TextFieldRowAutosave
-            name="title_after"
-            label="Tituly za jménem"
-            initialValue={lecturer.title_after}
-            autosave={saveTextField}
-          />
-          <TextFieldRowAutosave
-            name="claim"
-            label="Osobní slogan"
-            initialValue={lecturer.claim}
-            autosave={saveTextField}
-          />
+          <InputList>
+            <TextFieldRowAutosave
+              name="title_before"
+              label="Tituly před jménem"
+              initialValue={lecturer.title_before}
+              autosave={saveTextField}
+            />
+            <TextFieldRowAutosave
+              name="first_name"
+              label="Křestní jméno"
+              initialValue={lecturer.first_name}
+              required={true}
+              autosave={saveTextField}
+            />
+            <TextFieldRowAutosave
+              name="middle_name"
+              label="Prostřední jméno"
+              initialValue={lecturer.middle_name}
+              autosave={saveTextField}
+            />
+            <TextFieldRowAutosave
+              name="last_name"
+              label="Příjmení"
+              initialValue={lecturer.last_name}
+              required={true}
+              autosave={saveTextField}
+            />
+            <TextFieldRowAutosave
+              name="title_after"
+              label="Tituly za jménem"
+              initialValue={lecturer.title_after}
+              autosave={saveTextField}
+            />
+            <TextFieldRowAutosave
+              name="claim"
+              label="Osobní slogan"
+              initialValue={lecturer.claim}
+              autosave={saveTextField}
+            />
+          </InputList>
         </div>
         <PortraitChanger lecturer={lecturer} />
       </div>
