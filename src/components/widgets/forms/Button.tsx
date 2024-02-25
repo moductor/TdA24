@@ -6,6 +6,7 @@ import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./Button.module.scss";
 
 type Props = {
+  variant?: "primary" | "secondary";
   href?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLElement>;
@@ -14,12 +15,13 @@ type Props = {
 };
 
 export default forwardRef<HTMLElement, Props>(function Button(
-  { href, className, onClick, children, ...props }: Props,
+  { variant = "primary", href, className, onClick, children, ...props }: Props,
   ref,
 ) {
   return href ? (
     <Link
       className={styleClasses(styles, "button", className || "")}
+      data-button-variant={variant}
       ref={ref as Ref<HTMLAnchorElement>}
       href={href}
       onClick={onClick}
@@ -30,6 +32,7 @@ export default forwardRef<HTMLElement, Props>(function Button(
   ) : (
     <button
       className={styleClasses(styles, "button", className || "")}
+      data-button-variant={variant}
       ref={ref as Ref<HTMLButtonElement>}
       onClick={onClick}
       {...props}
