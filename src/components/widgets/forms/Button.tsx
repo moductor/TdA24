@@ -6,7 +6,13 @@ import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./Button.module.scss";
 
 type Props = {
-  variant?: "primary" | "secondary";
+  variant?:
+    | "primary"
+    | "secondary"
+    | "accent"
+    | "warning"
+    | "destructive"
+    | "success";
   href?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLElement>;

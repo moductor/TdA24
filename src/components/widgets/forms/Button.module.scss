@@ -33,4 +33,28 @@
       --foreground: var(--color-white);
     }
   }
+
+  &[data-button-variant="accent"] {
+    --background: var(--color-sky-blue);
+    --foreground: var(--color-jet);
+    --border: hsl(0 0% 0% / 0.2);
+  }
+
+  &[data-button-variant="warning"] {
+    --background: var(--color-sunglow);
+    --foreground: var(--color-jet);
+    --border: hsl(0 0% 0% / 0.2);
+  }
+
+  &[data-button-variant="destructive"] {
+    --background: var(--color-error);
+    --foreground: var(--color-white);
+    --border: hsl(0 0% 100% / 0.4);
+  }
+
+  &[data-button-variant="success"] {
+    --background: var(--color-success);
+    --foreground: var(--color-white);
+    --border: hsl(0 0% 100% / 0.4);
+  }
 }
