@@ -23,6 +23,10 @@
 
   cursor: pointer;
 
+  &.button-icon {
+    padding-inline: 0.4em;
+  }
+
   &[data-button-variant="primary"] {
     --background: var(--color-white);
     --foreground: var(--color-jet);
