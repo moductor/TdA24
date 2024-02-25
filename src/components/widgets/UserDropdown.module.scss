@@ -4,7 +4,8 @@
   position: relative;
 
   --border-size: 2px;
-  --border: var(--border-size) solid hsl(0 0% 70%);
+  --border-color: hsl(0 0% 70%);
+  --border: var(--border-size) solid var(--border-color);
   --drop-size: 0.6rem;
 }
 
@@ -56,13 +57,27 @@
 
   display: grid;
   gap: 0.2rem;
+
+  hr {
+    border: none;
+    height: var(--border-size);
+    background-color: var(--border-color);
+    opacity: 0.25;
+  }
 }
 
 .user-item {
-  padding-block: 0.4rem;
-  text-align: center;
-  font-size: 1rem;
-  font-weight: 600;
+  padding: 0.4rem;
+  display: grid;
+  gap: 0.2rem;
+  // text-align: center;
+  p {
+    font-weight: 700;
+  }
+
+  small {
+    font-size: 0.75rem;
+  }
 }
 
 .button-item {
