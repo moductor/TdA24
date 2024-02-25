@@ -6,7 +6,7 @@ import RegisterForm from "../../../../components/partials/user/login/RegisterFor
 import BackgroundWrapper from "../../../../components/widgets/BackgroundWrapper";
 import Card from "../../../../components/widgets/Card";
 import { styleClasses } from "../../../../helpers/styleClasses";
-import { getUserContext } from "../../../../helpers/userContext";
+import { getCurrentUserWithSession } from "../../../../helpers/userContext";
 import styles from "./page.module.scss";
 
 type Params = {
@@ -20,7 +20,7 @@ type Props = {
 export default function Page({ params }: Props) {
   const action = params.action;
 
-  if (getUserContext()) redirect("/user/dashboard");
+  if (getCurrentUserWithSession()) redirect("/user/dashboard");
 
   function wrap(children?: ReactNode) {
     return (

@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import Header from "../../../components/Header";
 import { styleClasses } from "../../../helpers/styleClasses";
-import { getUserContext } from "../../../helpers/userContext";
+import { getCurrentUserWithSession } from "../../../helpers/userContext";
 import MenuLink, { Link } from "./MenuLink";
 import PageHeader from "./PageHeader";
 import styles from "./layout.module.scss";
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Layout({ children }: Props) {
-  const user = getUserContext();
+  const user = getCurrentUserWithSession();
   if (!user) redirect("/user/auth/login");
 
   const links: Link[] = [

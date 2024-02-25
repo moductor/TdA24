@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import { get } from "../../../../database/functions/Lecturer";
-import { getUserContext } from "../../../../helpers/userContext";
+import { getCurrentUserWithSession } from "../../../../helpers/userContext";
 import MetadataSection from "./MetadataSection";
 import TradeSection from "./TradeSection";
 
 export default async function Page() {
-  const user = getUserContext();
+  const user = getCurrentUserWithSession();
   if (!user?.lecturerId) redirect("/user/dashboard");
   const lecturer = await get(user.lecturerId);
   if (!lecturer) redirect("/user/dashboard");

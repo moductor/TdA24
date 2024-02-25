@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getUserContext } from "../../../helpers/userContext";
+import { getCurrentUserWithSession } from "../../../helpers/userContext";
 
 export default function Page() {
-  const user = getUserContext();
+  const user = getCurrentUserWithSession();
 
   if (user?.lecturerId) {
     redirect("/user/dashboard/events");

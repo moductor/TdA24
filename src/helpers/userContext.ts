@@ -18,9 +18,3 @@ export function getCurrentUserWithSession(): User | undefined {
   if (!isLoggedInWithSession(token)) return;
   return token!.payload as User;
 }
-
-let user: User | undefined | null = null;
-export function getUserContext(): User | undefined {
-  if (user === null) user = getCurrentUserWithSession();
-  return user;
-}
