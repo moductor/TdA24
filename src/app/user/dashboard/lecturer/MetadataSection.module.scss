@@ -1,0 +1,11 @@
+.metadata {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+
+  .inputs {
+    flex-grow: 1;
+    display: grid;
+    gap: 1rem;
+  }
+}
