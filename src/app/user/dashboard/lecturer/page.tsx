@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { get } from "../../../../database/functions/Lecturer";
 import { getUserContext } from "../../../../helpers/userContext";
 import MetadataSection from "./MetadataSection";
+import TradeSection from "./TradeSection";
 
 export default async function Page() {
   const user = getUserContext();
@@ -12,6 +13,7 @@ export default async function Page() {
   return (
     <>
       <MetadataSection lecturer={JSON.stringify(lecturer)} />
+      <TradeSection lecturer={JSON.stringify(lecturer)} />
     </>
   );
 }
