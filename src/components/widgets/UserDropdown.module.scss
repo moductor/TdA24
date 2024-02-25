@@ -4,9 +4,14 @@
   position: relative;
 
   --border-size: 2px;
-  --border-color: hsl(0 0% 70%);
+  --border-lightness: 60%;
+  --border-color: hsl(0 0% var(--border-lightness));
   --border: var(--border-size) solid var(--border-color);
   --drop-size: 0.6rem;
+
+  @media (prefers-color-scheme: light) {
+    --border-lightness: 80%;
+  }
 }
 
 .profile-button {
