@@ -1,10 +1,16 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  HTMLInputTypeAttribute,
+  useEffect,
+  useState,
+} from "react";
 import TextFieldRow from "../../../components/widgets/forms/TextFieldRow";
 import { delay } from "../../../helpers/delay";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./TextFieldRowAutosave.module.scss";
 
 type Props = {
+  type?: HTMLInputTypeAttribute;
   name: string;
   label?: string;
   initialValue?: string;
@@ -13,6 +19,7 @@ type Props = {
 };
 
 export default function TextFieldRowAutosave({
+  type = "text",
   name,
   label,
   initialValue,
@@ -53,7 +60,7 @@ export default function TextFieldRowAutosave({
 
   return (
     <TextFieldRow
-      type="text"
+      type={type}
       name={name}
       value={value || ""}
       onChange={onChange}
