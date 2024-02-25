@@ -22,7 +22,7 @@ export default function Header({
       <BackgroundWrapper>
         <div className="content-grid">
           <Navbar showBackButton={showBackButton} showUserMenu={showUserMenu} />
-          <div>{children}</div>
+          {children}
         </div>
       </BackgroundWrapper>
     </header>
