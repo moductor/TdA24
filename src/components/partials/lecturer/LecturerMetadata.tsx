@@ -8,7 +8,8 @@ type Props = Readonly<{
   claim?: string;
   location?: string;
   price?: number;
-  useH1?: boolean;
+  onLecturerPage?: boolean;
+  href?: string;
   className?: string;
   [prop: string]: any;
 }>;
@@ -18,7 +19,8 @@ export default function LecturerMetadata({
   claim,
   location,
   price,
-  useH1 = false,
+  onLecturerPage = false,
+  href,
   className,
   ...props
 }: Props) {
@@ -27,11 +29,14 @@ export default function LecturerMetadata({
       className={styleClasses(styles, "metadata", className || "")}
       {...props}
     >
-      {useH1 ? (
+      {onLecturerPage ? (
         <h1 className={styleClasses(styles, "title-1")}>{name}</h1>
       ) : (
-        <h2 className={styleClasses(styles, "title-2")}>{name}</h2>
+        <h2 className={styleClasses(styles, "title-2")}>
+          <a href={href}>{name}</a>
+        </h2>
       )}
+
       {claim && <p className={styleClasses(styles, "claim")}>{claim}</p>}
 
       <div className={styleClasses(styles, "tag-list")}>
