@@ -3,7 +3,6 @@
 import {
   BtnBold,
   BtnItalic,
-  BtnStrikeThrough,
   BtnUnderline,
   ContentEditableEvent,
   Editor,
@@ -29,7 +28,6 @@ export default function WysiwygEditor({ label, value, onChange }: Props) {
               <BtnBold />
               <BtnItalic />
               <BtnUnderline />
-              <BtnStrikeThrough />
             </Toolbar>
           </Editor>
         </EditorProvider>
