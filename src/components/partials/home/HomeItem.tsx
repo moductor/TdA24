@@ -59,17 +59,20 @@ export default function HomeItem({
       ref={itemRef}
       {...props}
     >
-      <LecturerPortrait
-        lecturer={lecturer}
-        className={styleClasses(styles, "portrait")}
-      />
+      <a href={`/lecturer/${lecturer.uuid}`}>
+        <LecturerPortrait
+          lecturer={lecturer}
+          className={styleClasses(styles, "portrait")}
+        />
+      </a>
 
       <LecturerMetadata
+        href={`/lecturer/${lecturer.uuid}`}
         name={getNameString(lecturer)}
         claim={lecturer.claim}
         price={lecturer.price_per_hour}
         location={lecturer.location}
-        useH1={false}
+        onLecturerPage={false}
         className={styleClasses(styles, "metadata")}
       />
 

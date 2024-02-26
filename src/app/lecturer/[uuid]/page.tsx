@@ -41,7 +41,7 @@ export default async function Page({ params }: Props) {
               />
 
               <LecturerMetadata
-                useH1={true}
+                onLecturerPage={true}
                 name={getNameString(lecturer)}
                 claim={lecturer.claim}
                 location={lecturer.location}
