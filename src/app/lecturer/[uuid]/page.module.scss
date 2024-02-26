@@ -48,14 +48,36 @@ $breakpoint: 1200px;
   }
 }
 
+.tags-no-bio-yes-contact {
+  @media (min-width: 1200px) {
+    grid-column: 1 / 9;
+  }
+}
+
 .bio {
   @media (min-width: 1200px) {
     grid-column: 1 / 9;
+  }
+}
+.bio-no-contact {
+  @media (min-width: 1200px) {
+    grid-column: inherit;
   }
 }
 
 .contact {
   @media (min-width: 1200px) {
     grid-column: 9 / -1;
+  }
+}
+
+.contact-no-bio {
+  @media (min-width: 1200px) {
+    grid-column: 9 / -1;
+  }
+}
+.contact-no-bio-no-tags {
+  @media (min-width: 1200px) {
+    grid-column: inherit;
   }
 }

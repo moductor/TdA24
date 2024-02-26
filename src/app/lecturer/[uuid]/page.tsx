@@ -24,6 +24,15 @@ type Props = {
 export default async function Page({ params }: Props) {
   const lecturer = await getLecturerForUUID(params.uuid);
 
+  const isTagsEmpty: boolean =
+    lecturer.tags == undefined || !(lecturer.tags.length > 0);
+  const isBioEmpty: boolean =
+    lecturer.bio == undefined || !(lecturer.bio!.length > 0);
+  const isTelNumbersEmpty: boolean = !(
+    lecturer.contact.telephone_numbers.length > 0
+  );
+  const isEmailsEmpty: boolean = !(lecturer.contact.emails.length > 0);
+
   return (
     <BackgroundWrapper>
       <div className={styleClasses(styles, "wrapper", "content-grid")}>
@@ -52,18 +61,44 @@ export default async function Page({ params }: Props) {
           </header>
 
           <main className={styleClasses(styles, "bento-subsection")}>
-            <LecturerTags
-              tags={lecturer.tags ? lecturer.tags : []}
-              className={styleClasses(styles, "tags")}
-            />
-            <LecturerBio
-              content={lecturer.bio ? lecturer.bio : ""}
-              className={styleClasses(styles, "bio")}
-            />
-            <LecturerContact
-              contact={lecturer.contact}
-              className={styleClasses(styles, "contact")}
-            />
+            {!isTagsEmpty && (
+              <LecturerTags
+                tags={lecturer.tags ? lecturer.tags : []}
+                className={styleClasses(
+                  styles,
+                  "tags",
+                  isBioEmpty && (!isTelNumbersEmpty || !isEmailsEmpty)
+                    ? "tags-no-bio-yes-contact"
+                    : "",
+                )}
+              />
+            )}
+            {!isBioEmpty && (
+              <LecturerBio
+                content={lecturer.bio ? lecturer.bio : ""}
+                className={styleClasses(
+                  styles,
+                  "bio",
+                  isTelNumbersEmpty && isEmailsEmpty ? "bio-no-contact" : "",
+                )}
+              />
+            )}
+            {(!isTelNumbersEmpty || !isEmailsEmpty) && (
+              <LecturerContact
+                contact={lecturer.contact}
+                isTelNumbersEmpty={isTelNumbersEmpty}
+                isEmailsEmpty={isEmailsEmpty}
+                className={styleClasses(
+                  styles,
+                  "contact",
+                  isBioEmpty && isTagsEmpty
+                    ? "contact-no-bio-no-tags"
+                    : isBioEmpty
+                      ? "contact-no-bio"
+                      : "",
+                )}
+              />
+            )}
           </main>
         </div>
 
