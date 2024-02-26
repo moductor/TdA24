@@ -9,6 +9,7 @@ type Props = Readonly<{
   location?: string;
   price?: number;
   onLecturerPage?: boolean;
+  href?: string;
   className?: string;
   [prop: string]: any;
 }>;
