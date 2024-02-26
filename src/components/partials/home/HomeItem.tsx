@@ -50,7 +50,7 @@ export default function HomeItem({
     return () => {
       observer.unobserve(item);
     };
-  }, [itemCount, loadMoreCB]);
+  }, [index, itemCount, loadMoreCB]);
 
   return (
     <div
