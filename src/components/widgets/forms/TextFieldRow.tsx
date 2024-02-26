@@ -64,7 +64,7 @@ export default function TextFieldRow({
         required={required}
         pattern={pattern}
         disabled={disabled}
-        value={value || undefined}
+        value={value === null ? undefined : value}
         onChange={onChange}
       />
     </label>

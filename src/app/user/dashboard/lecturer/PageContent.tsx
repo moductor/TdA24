@@ -4,6 +4,7 @@ import { useState } from "react";
 import FixedBanner from "../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../components/widgets/ResultIndicator";
 import Button from "../../../../components/widgets/forms/Button";
+import TextFieldList from "../../../../components/widgets/forms/TextFieldList";
 import TextFieldRow from "../../../../components/widgets/forms/TextFieldRow";
 import WysiwygEditor from "../../../../components/widgets/forms/WysiwygEditor";
 import { Lecturer } from "../../../../database/models/Lecturer";
@@ -192,6 +193,40 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             }));
           }}
         />
+      </DashboardSection>
+
+      <DashboardSection title="Kontaktní údaje">
+        <InputList>
+          <TextFieldList
+            type="text"
+            label="Telefonní čísla"
+            value={lecturer.contact.telephone_numbers}
+            onChange={(value) => {
+              setLecturer((lecturer) => ({
+                ...lecturer,
+                contact: {
+                  ...lecturer.contact,
+                  telephone_numbers: value,
+                },
+              }));
+            }}
+          />
+
+          <TextFieldList
+            type="text"
+            label="Emailové adresy"
+            value={lecturer.contact.emails}
+            onChange={(value) => {
+              setLecturer((lecturer) => ({
+                ...lecturer,
+                contact: {
+                  ...lecturer.contact,
+                  emails: value,
+                },
+              }));
+            }}
+          />
+        </InputList>
       </DashboardSection>
     </>
   );
