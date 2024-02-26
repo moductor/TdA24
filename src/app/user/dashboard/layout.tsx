@@ -4,7 +4,6 @@ import Header from "../../../components/Header";
 import { styleClasses } from "../../../helpers/styleClasses";
 import { getCurrentUserWithSession } from "../../../helpers/userContext";
 import MenuLink, { Link } from "./MenuLink";
-import PageHeader from "./PageHeader";
 import styles from "./layout.module.scss";
 
 type Props = {
@@ -49,7 +48,6 @@ export default function Layout({ children }: Props) {
       </Header>
 
       <main className={styleClasses(styles, "content-grid", "content")}>
-        <PageHeader links={links} />
         {children}
       </main>
     </>

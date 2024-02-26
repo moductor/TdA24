@@ -13,7 +13,8 @@ type Props = {
   showRequiredLabel?: boolean;
   emphasizeRequiredLabel?: boolean;
   pattern?: string;
-  value?: string;
+  disabled?: boolean;
+  value?: string | null;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   children?: ReactNode;
   [prop: string]: any;
@@ -28,6 +29,7 @@ export default function TextFieldRow({
   showRequiredLabel,
   emphasizeRequiredLabel,
   pattern,
+  disabled,
   value,
   onChange,
   children,
@@ -61,7 +63,8 @@ export default function TextFieldRow({
         placeholder={placeholder}
         required={required}
         pattern={pattern}
-        value={value}
+        disabled={disabled}
+        value={value || undefined}
         onChange={onChange}
       />
     </label>

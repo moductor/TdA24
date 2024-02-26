@@ -2,3 +2,13 @@
   display: grid;
   gap: 1rem;
 }
+
+.title-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  h1 {
+    flex-grow: 1;
+  }
+}
