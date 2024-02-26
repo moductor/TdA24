@@ -24,6 +24,17 @@ export default function RegisterForm() {
     const password = data.get("password")!.toString();
     const passwordCheck = data.get("passwordCheck")!.toString();
 
+    const regularExpression =
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,}$/;
+
+    if (!regularExpression.test(password)) {
+      setIsLoading(false);
+      setErrorMessage(
+        "Heslo musí obsahovat nejméně 8 znaků, velká a malá písmena, alespoň 1 číslo a speciální znak!",
+      );
+      return;
+    }
+
     if (password !== passwordCheck) {
       setIsLoading(false);
       setErrorMessage("Hesla se neshodují!");
