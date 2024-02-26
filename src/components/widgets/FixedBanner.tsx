@@ -36,7 +36,13 @@ export default function FixedBanner({ children, className }: Props) {
       </div>
 
       <div
-        className={styleClasses(styles, "banner", className || "", "fixed")}
+        className={styleClasses(
+          styles,
+          "banner",
+          "fixed",
+          "content-grid",
+          className || "",
+        )}
         data-visible={isVisible}
         aria-hidden="true"
       >
