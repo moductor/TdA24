@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   LecturerFilters,
   type Lecturer,
 } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import FixedBanner from "../../widgets/FixedBanner";
 import Button from "../../widgets/forms/Button";
 import HomeFilters from "./HomeFilters";
 import HomeList from "./HomeList";
@@ -43,51 +44,11 @@ export default function HomeView({
 
   const [filtersSheetVisible, setFiltersSheetVisible] = useState(false);
 
-  const filtersBannerRef = useRef<HTMLDivElement>(null);
-  const filtersButtonRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const filtersBanner = filtersBannerRef.current!;
-    const filtersButton = filtersButtonRef.current!;
-
-    const showFilters = () => setFiltersSheetVisible(true);
-    filtersButton.addEventListener("click", showFilters);
-
-    const fixedFiltersBanner = filtersBanner.cloneNode(true) as HTMLElement;
-    fixedFiltersBanner.classList.add(styles["fixed"]);
-    fixedFiltersBanner.setAttribute("aria-hidden", "true");
-    filtersBanner.parentElement?.insertBefore(
-      fixedFiltersBanner,
-      filtersBanner.nextSibling,
-    );
-
-    const fixedFiltersButton = fixedFiltersBanner.firstChild as HTMLElement;
-    fixedFiltersButton.addEventListener("click", showFilters);
-    fixedFiltersButton.setAttribute("tabindex", "-1");
-
-    const observer = new IntersectionObserver(([entry]) => {
-      fixedFiltersBanner.classList.toggle(
-        styles["visible"],
-        !entry.isIntersecting,
-      );
-    });
-    observer.observe(filtersBanner);
-
-    return () => {
-      filtersButton.removeEventListener("click", showFilters);
-      fixedFiltersButton.removeEventListener("click", showFilters);
-      observer.unobserve(filtersBanner);
-    };
-  }, []);
-
   return (
     <div className={styleClasses(styles, "view", className || "")} {...props}>
-      <div
-        className={styleClasses(styles, "show-filters-section")}
-        ref={filtersBannerRef}
-      >
-        <Button ref={filtersButtonRef}>Filtry</Button>
-      </div>
+      <FixedBanner className={styleClasses(styles, "show-filters-section")}>
+        <Button onClick={() => setFiltersSheetVisible(true)}>Filtry</Button>
+      </FixedBanner>
 
       <HomeFilters
         visible={filtersSheetVisible}

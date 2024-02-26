@@ -1,4 +1,4 @@
-import { getCurrentUserWithSession } from "../../app/user/auth/isLoggedIn";
+import { getCurrentUserWithSession } from "../../helpers/userContext";
 import UserDropdown from "./UserDropdown";
 
 export default function UserDropdownWrapper() {

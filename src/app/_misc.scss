@@ -25,3 +25,10 @@ img {
   display: block;
   max-width: 100%;
 }
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: currentColor;
+  opacity: 0.35;
+}

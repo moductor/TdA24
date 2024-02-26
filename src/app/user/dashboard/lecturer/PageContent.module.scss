@@ -1,0 +1,17 @@
+.save-section {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 1rem;
+}
+
+.metadata {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  .inputs {
+    flex-grow: 1;
+  }
+}

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { LecturerFilters } from "../../../../database/models/Lecturer";
+import { delay } from "../../../../helpers/delay";
 import FilterCategory from "./FilterCategory";
 import FilterVariantOptions from "./variants/FilterVariantOptions";
 import FilterVariantRange from "./variants/FilterVariantRange";
@@ -9,12 +10,6 @@ type Props = Readonly<{
   onFiltered?: (filters: LecturerFilters) => void;
 }>;
 
-let timeout: any;
-function delay(cb: () => void, delay = 300) {
-  clearTimeout(timeout);
-  timeout = setTimeout(cb, delay);
-}
-
 export default function Filters({ filters, onFiltered }: Props) {
   const limitPriceRange = filters.price.threshold;
 
@@ -23,7 +18,7 @@ export default function Filters({ filters, onFiltered }: Props) {
   const [tags, setTags] = useState(filters.tags);
 
   useEffect(() => {
-    delay(() => {
+    delay("update filters", () => {
       if (!onFiltered) return;
       onFiltered({
         price: {

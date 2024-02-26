@@ -1,0 +1,33 @@
+.text-field-list,
+.list {
+  display: grid;
+  gap: 0.5em;
+}
+
+.text-field-list {
+  // grid-template-columns: auto 1fr;
+}
+
+.list,
+.row {
+  display: grid;
+  grid-column: 1 / -1;
+  grid-template-columns: subgrid;
+}
+
+.prefix {
+  display: none;
+
+  align-self: center;
+  justify-self: center;
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+
+  .row:not(.new) & {
+    opacity: 0;
+  }
+
+  .row:not(.new):hover & {
+    opacity: 0.5;
+  }
+}

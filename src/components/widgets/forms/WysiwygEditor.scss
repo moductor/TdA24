@@ -1,0 +1,36 @@
+[data-wysiwyg-editor-component] {
+  .rsw-editor {
+    background-color: var(--card-background-color);
+    border: var(--card-border-size) solid var(--card-border-color);
+    border-radius: 0;
+    font-size: inherit;
+    padding: 0.6em;
+    gap: 0.6em;
+  }
+
+  .rsw-toolbar {
+    border: var(--card-border-size) solid var(--card-border-color);
+    background-color: transparent;
+
+    .rsw-btn {
+      color: currentColor;
+
+      &[data-active="true"],
+      &:hover {
+        background-color: hsl(0 0% 50% / 0.2);
+      }
+    }
+
+    .rsw-separator {
+      border-color: var(--card-border-color);
+    }
+  }
+
+  .rsw-ce {
+    line-height: 1.5;
+
+    > * + * {
+      margin-block-start: 1em;
+    }
+  }
+}

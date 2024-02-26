@@ -7,27 +7,27 @@ export type ContactInfo = {
 };
 
 export type LecturerBase = {
-  title_before?: string;
+  title_before?: string | null;
   first_name: string;
-  middle_name?: string;
+  middle_name?: string | null;
   last_name: string;
-  title_after?: string;
-  picture_url?: string;
-  location?: string;
-  claim?: string;
-  bio?: string;
-  price_per_hour?: number;
-  contact?: ContactInfo;
+  title_after?: string | null;
+  picture_url?: string | null;
+  location?: string | null;
+  claim?: string | null;
+  bio?: string | null;
+  price_per_hour?: number | null;
+  contact?: ContactInfo | null;
 };
 
 export type LecturerInput = LecturerBase & {
-  tags?: TagBase[];
+  tags?: TagBase[] | null;
 };
 
 export type Lecturer = LecturerBase & {
   uuid: string;
   contact: ContactInfo;
-  tags?: Tag[];
+  tags?: Tag[] | null;
 };
 
 export function getNameString(lecturer: Lecturer) {

@@ -1,7 +1,7 @@
 import { Jwt } from "jsonwebtoken";
 import { cookies } from "next/headers";
-import { User } from "../../../database/models/User";
-import { isTokenValid, parseUserToken } from "../../../helpers/tokenParser";
+import { User } from "../database/models/User";
+import { isTokenValid, parseUserToken } from "./tokenParser";
 
 export function getUserTokenWithSession(): Jwt | undefined {
   const tokenCookie = cookies().get("JWT")?.value;

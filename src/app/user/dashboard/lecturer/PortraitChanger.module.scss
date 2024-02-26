@@ -1,0 +1,32 @@
+.portrait {
+  position: relative;
+  width: min(100%, 16rem);
+}
+
+.portrait-image {
+  width: 100%;
+  aspect-ratio: 1 !important;
+}
+
+.edit-buttons {
+  position: absolute;
+  inset-block-end: 1rem;
+  inset-inline-end: 1rem;
+  display: flex;
+  gap: 0.4em;
+}
+
+.loading-pane {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  border-radius: var(--card-border-radius);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.2s ease;
+
+  &:not([data-visible="visible"]) {
+    opacity: 0;
+    pointer-events: none;
+  }
+}

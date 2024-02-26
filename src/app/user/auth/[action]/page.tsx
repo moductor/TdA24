@@ -6,7 +6,7 @@ import RegisterForm from "../../../../components/partials/user/login/RegisterFor
 import BackgroundWrapper from "../../../../components/widgets/BackgroundWrapper";
 import Card from "../../../../components/widgets/Card";
 import { styleClasses } from "../../../../helpers/styleClasses";
-import { isLoggedInWithSession } from "../isLoggedIn";
+import { getCurrentUserWithSession } from "../../../../helpers/userContext";
 import styles from "./page.module.scss";
 
 type Params = {
@@ -20,19 +20,19 @@ type Props = {
 export default function Page({ params }: Props) {
   const action = params.action;
 
-  if (isLoggedInWithSession()) redirect("/user/dashboard");
+  if (getCurrentUserWithSession()) redirect("/user/dashboard");
 
   function wrap(children?: ReactNode) {
     return (
       <BackgroundWrapper>
-        <div className={styleClasses(styles, "content-grid")}>
+        <main className={styleClasses(styles, "content-grid")}>
           <div className={styleClasses(styles, "wrapper")}>
             <Navbar showBackButton={true} showUserMenu={false} />
             <div className={styleClasses(styles, "content")}>
               <Card className={styleClasses(styles, "card")}>{children}</Card>
             </div>
           </div>
-        </div>
+        </main>
       </BackgroundWrapper>
     );
   }

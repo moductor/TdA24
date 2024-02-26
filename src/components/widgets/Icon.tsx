@@ -3,15 +3,16 @@ import styles from "./Icon.module.scss";
 
 type Props = Readonly<{
   icon: string;
+  className?: string;
   [prop: string]: any;
 }>;
 
-export default function Icon({ icon, ...props }: Props) {
+export default function Icon({ icon, className, ...props }: Props) {
   switch (icon) {
     case "konverzace":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-0.00604717 -0.00286198 58 49.41"
           {...props}
@@ -23,7 +24,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "napad":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-0.00858688 -0.00976563 53.39 52.15"
           {...props}
@@ -35,7 +36,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "nastaveni":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="-0.00916827 -0.00208414 54.36 55.19"
           {...props}
@@ -47,7 +48,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "pocitac":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 60.64 45.74"
           {...props}
@@ -59,7 +60,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "studium":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0.000459797 -0.000536737 52.39 56.9"
           {...props}
@@ -71,7 +72,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "phone":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0.604141 0.000854477 25 24"
           {...props}
@@ -83,7 +84,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "email":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0.395386 0 24.47 18"
           {...props}
@@ -95,7 +96,7 @@ export default function Icon({ icon, ...props }: Props) {
     case "expand":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
           {...props}
@@ -107,12 +108,60 @@ export default function Icon({ icon, ...props }: Props) {
     case "close":
       return (
         <svg
-          className={styleClasses(styles, "icon")}
+          className={styleClasses(styles, "icon", className || "")}
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 16 16"
           {...props}
         >
           <path d="m 1.980469 2 h 1 h 0.03125 c 0.253906 0.011719 0.511719 0.128906 0.6875 0.3125 l 4.28125 4.28125 l 4.3125 -4.28125 c 0.265625 -0.230469 0.445312 -0.304688 0.6875 -0.3125 h 1 v 1 c 0 0.285156 -0.035157 0.550781 -0.25 0.75 l -4.28125 4.28125 l 4.25 4.25 c 0.1875 0.1875 0.28125 0.453125 0.28125 0.71875 v 1 h -1 c -0.265625 0 -0.53125 -0.09375 -0.71875 -0.28125 l -4.28125 -4.28125 l -4.28125 4.28125 c -0.1875 0.1875 -0.453125 0.28125 -0.71875 0.28125 h -1 v -1 c 0 -0.265625 0.09375 -0.53125 0.28125 -0.71875 l 4.28125 -4.25 l -4.28125 -4.28125 c -0.210938 -0.195312 -0.304688 -0.46875 -0.28125 -0.75 z m 0 0" />
+        </svg>
+      );
+    case "edit":
+      return (
+        <svg
+          className={styleClasses(styles, "icon", className || "")}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path d="m 11.574219 0.402344 l -2.574219 2.597656 l 3.984375 4.074219 l 2.648437 -2.671875 c 0.484376 -0.484375 0.425782 -1.515625 0 -1.941406 l -2.058593 -2.058594 c -0.4375 -0.4375002 -1.441407 -0.554688 -2 0 z m -3.574219 3.597656 l -8 8 v 4 h 4.058594 l 7.925781 -7.925781 z m 0 0" />
+        </svg>
+      );
+    case "trash":
+      return (
+        <svg
+          className={styleClasses(styles, "icon", className || "")}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path d="m 1,3 h 14 c 0.550781,0 1,0.449219 1,1 0,0.550781 -0.449219,1 -1,1 H 1 C 0.449219,5 0,4.550781 0,4 0,3.449219 0.449219,3 1,3 Z m 0,0" />
+          <path d="M 4,4 V 2.5 C 4,1.113281 5.113281,0 6.5,0 h 2.980469 c 1.382812,0 2.5,1.113281 2.5,2.5 V 4 h -2 V 2.5 C 9.980469,2.230469 9.75,2 9.480469,2 H 6.5 C 6.230469,2 6,2.230469 6,2.5 V 4 Z m 0,0" />
+          <path d="m 4,4 v 9 c 0,0.546875 0.453125,1 1,1 h 6 c 0.546875,0 1,-0.453125 1,-1 V 4 h 2 v 9 c 0,1.660156 -1.339844,3 -3,3 H 5 C 3.339844,16 2,14.660156 2,13 V 4 Z m 0,0" />
+          <path d="m 7,7 v 5 C 7,12.277344 6.777344,12.5 6.5,12.5 6.222656,12.5 6,12.277344 6,12 V 7 C 6,6.722656 6.222656,6.5 6.5,6.5 6.777344,6.5 7,6.722656 7,7 Z m 0,0" />
+          <path d="m 10,7 v 5 C 10,12.277344 9.777344,12.5 9.5,12.5 9.222656,12.5 9,12.277344 9,12 V 7 C 9,6.722656 9.222656,6.5 9.5,6.5 9.777344,6.5 10,6.722656 10,7 Z m 0,0" />
+        </svg>
+      );
+    case "plus":
+      return (
+        <svg
+          className={styleClasses(styles, "icon", className || "")}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path d="m 7 3 v 4 h -4 v 2 h 4 v 4 h 2 v -4 h 4 v -2 h -4 v -4 z m 0 0" />
+        </svg>
+      );
+    case "drag":
+      return (
+        <svg
+          className={styleClasses(styles, "icon", className || "")}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path d="m 4.496094 0 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m 6 0 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m -6 6 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m 6 0 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m -6 6 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m 6 0 c -0.832032 0 -1.5 0.671875 -1.5 1.5 s 0.667968 1.5 1.5 1.5 c 0.828125 0 1.5 -0.671875 1.5 -1.5 s -0.671875 -1.5 -1.5 -1.5 z m 0 0" />
         </svg>
       );
     default:

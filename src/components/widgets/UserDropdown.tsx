@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../database/models/User";
 import { styleClasses } from "../../helpers/styleClasses";
@@ -64,14 +65,24 @@ export default function UserDropdown({ user }: Props) {
       >
         <div className={styleClasses(styles, "dropdown")}>
           <div className={styleClasses(styles, "user-item")}>
-            {user.username}
+            <p>{user.name || user.username}</p>
+            {user.name && <small>{user.username}</small>}
           </div>
-          <a
+          <hr />
+          <Link
             className={styleClasses(styles, "button-item")}
             href="/user/dashboard"
           >
             Nástěnka
-          </a>
+          </Link>
+          {user.lecturerId && (
+            <Link
+              className={styleClasses(styles, "button-item")}
+              href={`/lecturer/${user.lecturerId}`}
+            >
+              Profil
+            </Link>
+          )}
           <button
             className={styleClasses(styles, "button-item", "text-error")}
             onClick={() => {
