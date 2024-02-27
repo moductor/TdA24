@@ -72,7 +72,7 @@ export async function PUT(
 
     const error: ErrorRes = {
       code: 400,
-      message: `Error: ${(e as any).message || "unknown"}`,
+      message: `Error: ${(e as any)["message"] || "unknown"}`,
     };
 
     return NextResponse.json(error, { status: 400 });
