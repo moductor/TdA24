@@ -42,7 +42,27 @@ export function isInputValid(lecturer: LecturerInput): boolean {
   return true;
 }
 
+async function findForContactInfo(
+  contactInfo: ContactInfo,
+): Promise<LecturerDB[]> {
+  return await db
+    .find({
+      $or: [
+        { "contact.emails": { $in: contactInfo.emails } },
+        { "contact.telephone_numbers": { $in: contactInfo.telephone_numbers } },
+      ],
+    })
+    .toArray();
+}
+
 export async function insertOne(lecturer: LecturerInput): Promise<string> {
+  if (lecturer.contact) {
+    const found = await findForContactInfo(lecturer.contact);
+    if (found.length) {
+      throw Error("contact is not unique");
+    }
+  }
+
   const tags = !lecturer.tags
     ? undefined
     : await Promise.all(
@@ -159,6 +179,13 @@ export async function updateOneById(
   uuid: string,
   lecturer: LecturerInput,
 ): Promise<Lecturer | null> {
+  if (lecturer.contact) {
+    const found = await findForContactInfo(lecturer.contact);
+    if (found.length) {
+      throw Error("contact is not unique");
+    }
+  }
+
   const tags = !lecturer.tags
     ? undefined
     : await Promise.all(

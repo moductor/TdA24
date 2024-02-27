@@ -60,7 +60,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const error: Error = {
       code: 400,
-      message: "An error occured while parsing the input data",
+      message:
+        (e as any)["message"] ||
+        "An error occured while parsing the input data",
     };
 
     return NextResponse.json(error, { status: 400 });
