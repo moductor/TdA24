@@ -33,9 +33,15 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
     clearTimeout(clearResultTimeout);
     setResult(null);
 
+    const data = { ...lecturer, _id: undefined, uuid: undefined };
+
+    Object.keys(data)
+      .filter((key) => (data as any)[key] === undefined)
+      .forEach((key) => ((data as any)[key] = null));
+
     const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
       method: "PUT",
-      body: JSON.stringify({ ...lecturer, _id: undefined, uuid: undefined }),
+      body: JSON.stringify(data),
     });
 
     setResult(res.status == 200);
@@ -64,7 +70,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    title_before: e.target.value || null,
+                    title_before: e.target.value || undefined,
                   }))
                 }
               >
@@ -93,7 +99,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    middle_name: e.target.value || null,
+                    middle_name: e.target.value || undefined,
                   }))
                 }
               >
@@ -122,7 +128,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    title_after: e.target.value || null,
+                    title_after: e.target.value || undefined,
                   }))
                 }
               >
@@ -136,7 +142,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    claim: e.target.value || null,
+                    claim: e.target.value || undefined,
                   }))
                 }
               >
@@ -157,7 +163,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             onChange={(e) =>
               setLecturer((lecturer) => ({
                 ...lecturer,
-                location: e.target.value || null,
+                location: e.target.value || undefined,
               }))
             }
           >
@@ -169,7 +175,9 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             disabled={sending}
             value={lecturer.price_per_hour?.toString()}
             onChange={(e) => {
-              const value = e.target.value ? parseInt(e.target.value) : null;
+              const value = e.target.value
+                ? parseInt(e.target.value)
+                : undefined;
               if (Number.isNaN(value)) return;
 
               setLecturer((lecturer) => ({
@@ -189,7 +197,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
           onChange={(e) => {
             setLecturer((lecturer) => ({
               ...lecturer,
-              bio: e.target.value || null,
+              bio: e.target.value || undefined,
             }));
           }}
         />
