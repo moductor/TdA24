@@ -8,18 +8,16 @@ import "./Calendar.scss";
 
 type Props = {
   isLecturer?: boolean;
+  events?: { title: string; date: string }[];
 };
 
-export default function Calendar({ isLecturer = false }: Props) {
+export default function Calendar({ isLecturer = false, events = [] }: Props) {
   return (
     <div className={"calendar"}>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin]}
         initialView={"dayGridMonth"}
-        events={[
-          { title: "event 1", date: "2024-02-01" },
-          { title: "event 2", date: "2024-02-22" },
-        ]}
+        events={events}
         locale={"cs"}
         headerToolbar={{
           start: isLecturer ? "today" : "addEventButton today",
