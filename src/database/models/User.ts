@@ -1,10 +1,10 @@
 export type UserBase = {
   username: string;
   passwordHash: string;
-  lecturerId?: string | null;
-  name?: string | null;
-  email?: string | null;
-  telephone?: string | null;
+  lecturerId?: string;
+  name?: string;
+  email?: string;
+  telephone?: string;
 };
 
 export type User = UserBase & { uuid: string };

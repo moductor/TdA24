@@ -69,6 +69,11 @@ export async function PUT(
 
   try {
     const data = (await request.json()) as LecturerInput;
+
+    Object.keys(data)
+      .filter((key) => (data as any)[key] === null)
+      .forEach((key) => ((data as any)[key] = undefined));
+
     const lecturer = await updateOneById(params.uuid, data);
     return NextResponse.json(lecturer);
   } catch (e) {
