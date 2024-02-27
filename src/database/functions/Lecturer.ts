@@ -1,5 +1,5 @@
 import { Filter } from "mongodb";
-import { getUuid, removeId } from "../models/DB";
+import { WithUuid, getUuid, removeId } from "../models/DB";
 import {
   ContactInfo,
   Lecturer,
@@ -18,10 +18,11 @@ const emptyContactInfo: ContactInfo = {
   emails: [],
 };
 
-type LecturerDB = LecturerBase & {
-  uuid: string;
-  tags?: string[];
-};
+type LecturerDB = WithUuid<
+  LecturerBase & {
+    tags?: string[];
+  }
+>;
 
 export function isInputValid(lecturer: LecturerInput): boolean {
   if (
@@ -167,8 +168,8 @@ export async function updateOneById(
       );
 
   const item: LecturerDB = {
-    uuid,
     ...lecturer,
+    uuid,
     tags,
   };
 

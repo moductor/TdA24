@@ -66,8 +66,8 @@ export async function update(
   event: EventBase,
 ): Promise<Event | null> {
   const item: Event = {
-    uuid,
     ...event,
+    uuid,
   };
 
   await db.updateOne({ uuid }, { $set: item });

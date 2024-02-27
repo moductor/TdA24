@@ -63,8 +63,8 @@ export async function update(
   user: UserBase,
 ): Promise<User | null> {
   const item: User = {
-    uuid,
     ...user,
+    uuid,
   };
 
   await db.updateOne({ uuid }, { $set: item });
