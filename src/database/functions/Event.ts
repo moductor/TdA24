@@ -32,6 +32,12 @@ export async function insertOne(event: EventBase): Promise<string | undefined> {
   return item.uuid;
 }
 
+export async function get(uuid: string): Promise<Event | null> {
+  const item = await db.findOne({ uuid: uuid });
+  if (!item) return null;
+  return item;
+}
+
 type EventQuery = {
   lecturerId?: string;
   userId?: string;
@@ -39,20 +45,16 @@ type EventQuery = {
   dateTimeBefore?: Date;
 };
 
-export async function get(
-  uuid?: string,
-  q?: EventQuery,
-): Promise<Event | null> {
-  if (!uuid && !q?.lecturerId && !q?.userId) return null;
+export async function getAll(q: EventQuery): Promise<Event[] | null> {
+  if (!q.lecturerId && !q.userId) return null;
 
   const filter: Filter<Event> = {};
-  if (uuid) filter.uuid = uuid;
-  if (q?.lecturerId) filter.lecturerId = q?.lecturerId;
-  if (q?.userId) filter.userId = q?.userId;
-  if (q?.dateTimeAfter) filter.dateTimeStart = { $gte: q?.dateTimeAfter };
-  if (q?.dateTimeBefore) filter.dateTimeEnd = { $lte: q?.dateTimeBefore };
+  if (q.lecturerId) filter.lecturerId = q.lecturerId;
+  if (q.userId) filter.userId = q.userId;
+  if (q.dateTimeAfter) filter.dateTimeStart = { $gte: q.dateTimeAfter };
+  if (q.dateTimeBefore) filter.dateTimeEnd = { $lte: q.dateTimeBefore };
 
-  const item = await db.findOne(filter);
+  const item = await db.find(filter).toArray();
 
   if (!item) return null;
   return item;
