@@ -29,8 +29,8 @@ export async function insertOne(
   }
 
   const item: User = {
-    uuid: getUuid(),
     ...user,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);

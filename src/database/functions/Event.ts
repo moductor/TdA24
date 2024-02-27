@@ -29,8 +29,8 @@ export async function insertOne(event: EventBase): Promise<string> {
   }
 
   const item: Event = {
-    uuid: getUuid(),
     ...event,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);

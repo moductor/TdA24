@@ -7,8 +7,8 @@ export async function insertOne(tag: TagBase): Promise<string | undefined> {
   if ((await findOne(tag.name)) != null) return;
 
   const item: Tag = {
-    uuid: getUuid(),
     ...tag,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);

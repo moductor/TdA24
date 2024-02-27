@@ -52,9 +52,9 @@ export async function insertOne(lecturer: LecturerInput): Promise<string> {
       );
 
   const item: LecturerDB = {
-    uuid: getUuid(),
     ...lecturer,
     tags,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);
