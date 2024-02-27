@@ -1,5 +1,6 @@
+import { getUuid, removeId } from "../models/DB";
 import { Tag, TagBase } from "../models/Tag";
-import DB, { getUuid, removeId } from "./DB";
+import DB from "./DB";
 const db = DB.collection<Tag>("tag");
 
 export async function insertOne(tag: TagBase): Promise<string | undefined> {

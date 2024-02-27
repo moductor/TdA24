@@ -1,3 +1,5 @@
+import { WithUuid } from "./DB";
+
 export type EventBase = {
   lecturerId: string;
   userId?: string;
@@ -8,4 +10,4 @@ export type EventBase = {
   telephone: string;
 };
 
-export type Event = EventBase & { uuid: string };
+export type Event = WithUuid<EventBase>;

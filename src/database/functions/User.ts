@@ -1,6 +1,7 @@
 import { Filter, WithId } from "mongodb";
+import { getUuid, removeId } from "../models/DB";
 import { User, UserBase, UserInsertErrorResponse } from "../models/User";
-import DB, { getUuid, removeId } from "./DB";
+import DB from "./DB";
 const db = DB.collection<User>("user");
 
 export async function insertOne(

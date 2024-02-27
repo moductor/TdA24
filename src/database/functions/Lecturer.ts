@@ -1,4 +1,5 @@
 import { Filter } from "mongodb";
+import { getUuid, removeId } from "../models/DB";
 import {
   ContactInfo,
   Lecturer,
@@ -8,7 +9,7 @@ import {
   getFilters as generateFilters,
 } from "../models/Lecturer";
 import { Pagination } from "../models/Pagination";
-import DB, { getUuid, removeId } from "./DB";
+import DB from "./DB";
 import { get as getTag, getByName as getTagByName } from "./Tag";
 const db = DB.collection<LecturerDB>("lecturer");
 

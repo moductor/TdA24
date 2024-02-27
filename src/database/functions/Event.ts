@@ -1,6 +1,7 @@
 import { Filter } from "mongodb";
+import { getUuid, removeId, removeIds } from "../models/DB";
 import { Event, EventBase } from "../models/Event";
-import DB, { getUuid, removeId, removeIds } from "./DB";
+import DB from "./DB";
 const db = DB.collection<Event>("event");
 
 export async function insertOne(event: EventBase): Promise<string | undefined> {

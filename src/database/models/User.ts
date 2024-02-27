@@ -1,3 +1,5 @@
+import { WithUuid } from "./DB";
+
 export type UserBase = {
   username: string;
   passwordHash: string;
@@ -7,7 +9,7 @@ export type UserBase = {
   telephone?: string;
 };
 
-export type User = UserBase & { uuid: string };
+export type User = WithUuid<UserBase>;
 
 export type UserInsertErrorResponse = {
   conflict?: {
