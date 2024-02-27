@@ -23,28 +23,29 @@ export default function Layout({ children }: Props) {
       title: "Uživatelská nastavení",
       path: "/user/dashboard/account",
     },
-    {
+  ];
+
+  if (user.lecturerId) {
+    links.push({
       title: "Profil lektora",
       path: "/user/dashboard/lecturer",
-    },
-  ];
+    });
+  }
 
   return (
     <>
       <Header showBackButton={true} showUserMenu={true}>
-        {user.lecturerId && (
-          <div className={styleClasses(styles, "full-width", "header-wrapper")}>
-            <div className={styleClasses(styles, "menu-wrapper")}>
-              <ul className={styleClasses(styles, "menu")}>
-                {links.map((link, index) => (
-                  <li key={index}>
-                    <MenuLink link={link} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+        <div className={styleClasses(styles, "full-width", "header-wrapper")}>
+          <div className={styleClasses(styles, "menu-wrapper")}>
+            <ul className={styleClasses(styles, "menu")}>
+              {links.map((link, index) => (
+                <li key={index}>
+                  <MenuLink link={link} />
+                </li>
+              ))}
+            </ul>
           </div>
-        )}
+        </div>
       </Header>
 
       <main className={styleClasses(styles, "content-grid", "content")}>
