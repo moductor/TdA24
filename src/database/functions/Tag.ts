@@ -1,13 +1,14 @@
+import { getUuid, removeId } from "../models/DB";
 import { Tag, TagBase } from "../models/Tag";
-import DB, { getUuid } from "./DB";
-const db = DB.collection("tag");
+import DB from "./DB";
+const db = DB.collection<Tag>("tag");
 
 export async function insertOne(tag: TagBase): Promise<string | undefined> {
   if ((await findOne(tag.name)) != null) return;
 
   const item: Tag = {
-    uuid: getUuid(),
     ...tag,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);
@@ -26,15 +27,15 @@ export async function insertMany(tags: TagBase[]): Promise<undefined> {
 }
 
 export async function get(uuid: string): Promise<Tag | null> {
-  const item = (await db.findOne({ uuid })) as Tag | null;
+  const item = await db.findOne({ uuid });
   if (!item) return null;
-  return item;
+  return removeId(item);
 }
 
 export async function findOne(name: string): Promise<Tag | null> {
-  const item = (await db.findOne({ name })) as Tag | null;
+  const item = await db.findOne({ name });
   if (!item) return null;
-  return item;
+  return removeId(item);
 }
 
 export async function getByName(name: string): Promise<Tag> {

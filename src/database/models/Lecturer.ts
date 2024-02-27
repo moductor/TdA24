@@ -1,5 +1,6 @@
 import { FilterOptions, FilterRange } from "../filters";
 import { Tag, TagBase } from "../models/Tag";
+import { WithUuid } from "./DB";
 
 export type ContactInfo = {
   telephone_numbers: string[];
@@ -24,11 +25,12 @@ export type LecturerInput = LecturerBase & {
   tags?: TagBase[];
 };
 
-export type Lecturer = LecturerBase & {
-  uuid: string;
-  contact: ContactInfo;
-  tags?: Tag[];
-};
+export type Lecturer = WithUuid<
+  LecturerBase & {
+    contact: ContactInfo;
+    tags?: Tag[];
+  }
+>;
 
 export function getNameString(lecturer: Lecturer) {
   const parts = [

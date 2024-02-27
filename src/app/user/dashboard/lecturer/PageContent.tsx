@@ -39,9 +39,6 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
       .filter((key) => (data as any)[key] === undefined)
       .forEach((key) => ((data as any)[key] = null));
 
-    (data as any)["_id"] = undefined;
-    (data as any)["uuid"] = undefined;
-
     const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
       method: "PUT",
       body: JSON.stringify(data),

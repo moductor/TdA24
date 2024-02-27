@@ -1,4 +1,5 @@
 import { Filter } from "mongodb";
+import { WithUuid, getUuid, removeId } from "../models/DB";
 import {
   ContactInfo,
   Lecturer,
@@ -8,7 +9,7 @@ import {
   getFilters as generateFilters,
 } from "../models/Lecturer";
 import { Pagination } from "../models/Pagination";
-import DB, { getUuid } from "./DB";
+import DB from "./DB";
 import { get as getTag, getByName as getTagByName } from "./Tag";
 const db = DB.collection<LecturerDB>("lecturer");
 
@@ -17,10 +18,11 @@ const emptyContactInfo: ContactInfo = {
   emails: [],
 };
 
-type LecturerDB = LecturerBase & {
-  uuid: string;
-  tags?: string[];
-};
+type LecturerDB = WithUuid<
+  LecturerBase & {
+    tags?: string[];
+  }
+>;
 
 export function isInputValid(lecturer: LecturerInput): boolean {
   if (
@@ -50,9 +52,9 @@ export async function insertOne(lecturer: LecturerInput): Promise<string> {
       );
 
   const item: LecturerDB = {
-    uuid: getUuid(),
     ...lecturer,
     tags,
+    uuid: getUuid(),
   };
 
   await db.insertOne(item);
@@ -60,7 +62,7 @@ export async function insertOne(lecturer: LecturerInput): Promise<string> {
 }
 
 export async function get(uuid: string): Promise<Lecturer | null> {
-  const item = (await db.findOne({ uuid })) as LecturerDB | null;
+  const item = await db.findOne({ uuid });
   if (!item) return null;
 
   const tags = !item.tags
@@ -72,7 +74,7 @@ export async function get(uuid: string): Promise<Lecturer | null> {
       );
 
   const lecturer: Lecturer = {
-    ...item,
+    ...removeId(item),
     contact: item.contact || emptyContactInfo,
     tags,
   };
@@ -126,9 +128,7 @@ export async function getAll(
 
   const data = await cursor.toArray();
   const lecturers = await Promise.all(
-    data.map(async (_lecturer) => {
-      const item = _lecturer as LecturerDB;
-
+    data.map(async (item) => {
       const tags = !item.tags
         ? undefined
         : await Promise.all(
@@ -138,7 +138,7 @@ export async function getAll(
           );
 
       const lecturer: Lecturer = {
-        ...item,
+        ...removeId(item),
         contact: item.contact || emptyContactInfo,
         tags,
       };
@@ -168,8 +168,8 @@ export async function updateOneById(
       );
 
   const item: LecturerDB = {
-    uuid,
     ...lecturer,
+    uuid,
     tags,
   };
 
