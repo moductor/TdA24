@@ -12,7 +12,6 @@ export const getUuid = () => generateUuid();
 
 export function removeId<T>(obj: WithId<T>): T {
   delete (obj as any)["_id"];
-  console.log(obj);
   return obj as T;
 }
 
