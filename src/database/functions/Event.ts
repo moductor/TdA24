@@ -4,11 +4,13 @@ import { Event, EventBase } from "../models/Event";
 import DB from "./DB";
 const db = DB.collection<Event>("event");
 
-export async function insertOne(event: EventBase): Promise<string | undefined> {
+export async function insertOne(event: EventBase): Promise<string> {
   const timeDifference =
     event.dateTimeEnd.getTime() - event.dateTimeStart.getTime();
 
-  if (timeDifference < 0) return;
+  if (timeDifference < 0) {
+    throw Error("end time must not be before start time");
+  }
 
   const existing = await db.findOne({
     lecturerId: event.lecturerId,
@@ -22,7 +24,9 @@ export async function insertOne(event: EventBase): Promise<string | undefined> {
     },
   });
 
-  if (existing) return;
+  if (existing) {
+    throw Error("other event exists in this time period for this lecturer");
+  }
 
   const item: Event = {
     uuid: getUuid(),
@@ -39,7 +43,7 @@ export async function get(uuid: string): Promise<Event | null> {
   return removeId(item);
 }
 
-type EventQuery = {
+export type EventQuery = {
   lecturerId?: string;
   userId?: string;
   dateTimeAfter?: Date;
