@@ -8,7 +8,7 @@ import {
   getFilters as generateFilters,
 } from "../models/Lecturer";
 import { Pagination } from "../models/Pagination";
-import DB, { getUuid } from "./DB";
+import DB, { getUuid, removeId } from "./DB";
 import { get as getTag, getByName as getTagByName } from "./Tag";
 const db = DB.collection<LecturerDB>("lecturer");
 
@@ -60,7 +60,7 @@ export async function insertOne(lecturer: LecturerInput): Promise<string> {
 }
 
 export async function get(uuid: string): Promise<Lecturer | null> {
-  const item = (await db.findOne({ uuid })) as LecturerDB | null;
+  const item = await db.findOne({ uuid });
   if (!item) return null;
 
   const tags = !item.tags
@@ -72,7 +72,7 @@ export async function get(uuid: string): Promise<Lecturer | null> {
       );
 
   const lecturer: Lecturer = {
-    ...item,
+    ...removeId(item),
     contact: item.contact || emptyContactInfo,
     tags,
   };
@@ -126,9 +126,7 @@ export async function getAll(
 
   const data = await cursor.toArray();
   const lecturers = await Promise.all(
-    data.map(async (_lecturer) => {
-      const item = _lecturer as LecturerDB;
-
+    data.map(async (item) => {
       const tags = !item.tags
         ? undefined
         : await Promise.all(
@@ -138,7 +136,7 @@ export async function getAll(
           );
 
       const lecturer: Lecturer = {
-        ...item,
+        ...removeId(item),
         contact: item.contact || emptyContactInfo,
         tags,
       };

@@ -1,6 +1,6 @@
 import { Filter } from "mongodb";
 import { Event, EventBase } from "../models/Event";
-import DB, { getUuid } from "./DB";
+import DB, { getUuid, removeId, removeIds } from "./DB";
 const db = DB.collection<Event>("event");
 
 export async function insertOne(event: EventBase): Promise<string | undefined> {
@@ -35,7 +35,7 @@ export async function insertOne(event: EventBase): Promise<string | undefined> {
 export async function get(uuid: string): Promise<Event | null> {
   const item = await db.findOne({ uuid: uuid });
   if (!item) return null;
-  return item;
+  return removeId(item);
 }
 
 type EventQuery = {
@@ -45,8 +45,10 @@ type EventQuery = {
   dateTimeBefore?: Date;
 };
 
-export async function getAll(q: EventQuery): Promise<Event[] | null> {
-  if (!q.lecturerId && !q.userId) return null;
+export async function getAll(q: EventQuery): Promise<Event[]> {
+  if (!q.lecturerId && !q.userId) {
+    throw Error("at least one of lecturerId or userId has to be defined");
+  }
 
   const filter: Filter<Event> = {};
   if (q.lecturerId) filter.lecturerId = q.lecturerId;
@@ -54,10 +56,8 @@ export async function getAll(q: EventQuery): Promise<Event[] | null> {
   if (q.dateTimeAfter) filter.dateTimeStart = { $gte: q.dateTimeAfter };
   if (q.dateTimeBefore) filter.dateTimeEnd = { $lte: q.dateTimeBefore };
 
-  const item = await db.find(filter).toArray();
-
-  if (!item) return null;
-  return item;
+  const items = await db.find(filter).toArray();
+  return removeIds(items);
 }
 
 export async function update(

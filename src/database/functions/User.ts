@@ -1,6 +1,6 @@
 import { Filter, WithId } from "mongodb";
 import { User, UserBase, UserInsertErrorResponse } from "../models/User";
-import DB, { getUuid } from "./DB";
+import DB, { getUuid, removeId } from "./DB";
 const db = DB.collection<User>("user");
 
 export async function insertOne(
@@ -42,7 +42,9 @@ type UserQuery = {
 };
 
 export async function get(uuid?: string, q?: UserQuery): Promise<User | null> {
-  if (!uuid && !q?.username && !q?.email) return null;
+  if (!uuid && !q?.username && !q?.email) {
+    throw Error("at least one of uuid, username or email has to be defined");
+  }
 
   const filter: Filter<User> = {};
   if (uuid) filter.uuid = uuid;
@@ -52,7 +54,7 @@ export async function get(uuid?: string, q?: UserQuery): Promise<User | null> {
   const item = await db.findOne(filter);
 
   if (!item) return null;
-  return item;
+  return removeId(item);
 }
 
 export async function update(
