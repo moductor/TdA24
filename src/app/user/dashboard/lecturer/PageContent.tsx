@@ -33,11 +33,14 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
     clearTimeout(clearResultTimeout);
     setResult(null);
 
-    const data = { ...lecturer, _id: undefined, uuid: undefined };
+    const data = { ...lecturer };
 
     Object.keys(data)
       .filter((key) => (data as any)[key] === undefined)
       .forEach((key) => ((data as any)[key] = null));
+
+    (data as any)["_id"] = undefined;
+    (data as any)["uuid"] = undefined;
 
     const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
       method: "PUT",
