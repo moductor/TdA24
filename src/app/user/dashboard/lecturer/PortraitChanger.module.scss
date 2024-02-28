@@ -30,3 +30,10 @@
     pointer-events: none;
   }
 }
+
+.dialog-btns {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+}
