@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { User } from "../../database/models/User";
 import { styleClasses } from "../../helpers/styleClasses";
 import { deleteUserSession } from "../../helpers/userSession";
+import Dialog from "./Dialog";
 import ProfilePicture from "./ProfilePicture";
 import styles from "./UserDropdown.module.scss";
 import Button from "./forms/Button";
@@ -16,6 +17,8 @@ type Props = {
 export default function UserDropdown({ user }: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const [dialogModalVisible, setDialogModalVisible] = useState(false);
 
   function showDropdown() {
     setIsVisible((prev) => !prev);
@@ -49,6 +52,13 @@ export default function UserDropdown({ user }: Props) {
       </div>
     );
   }
+
+  const showDialogModal = () => {
+    document.querySelector("body")!.style.overflow = "hidden";
+    console.log("AAAAAAAAAAAAA");
+    setDialogModalVisible(true);
+    console.log("BBBBBBBBBBBBBBB");
+  };
 
   return (
     <div className={styleClasses(styles, "wrapper")}>
@@ -85,15 +95,27 @@ export default function UserDropdown({ user }: Props) {
           )}
           <button
             className={styleClasses(styles, "button-item", "text-error")}
-            onClick={() => {
-              deleteUserSession();
-              window.location.reload();
-            }}
+            onClick={showDialogModal}
           >
             Odhlásit se
           </button>
         </div>
       </div>
+      {dialogModalVisible && (
+        <Dialog
+          show={dialogModalVisible}
+          text={"Opravdu se chcete odhlásit?"}
+          acceptBtnText="Odhlásit"
+          declienBtnText="Zrušit"
+          hideDialogModal={() => {
+            setDialogModalVisible(false);
+          }}
+          onAccept={() => {
+            deleteUserSession();
+            window.location.reload();
+          }}
+        />
+      )}
     </div>
   );
 }
