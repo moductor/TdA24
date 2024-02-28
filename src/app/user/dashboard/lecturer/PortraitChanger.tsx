@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import LecturerPortrait from "../../../../components/partials/lecturer/LecturerPortrait";
+import Dialog from "../../../../components/widgets/Dialog";
 import LoadingBar from "../../../../components/widgets/LoadingBar";
 import Button from "../../../../components/widgets/forms/Button";
 import { Lecturer } from "../../../../database/models/Lecturer";
@@ -13,6 +14,11 @@ type Props = {
 export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
   const [lecturer, setLecturer] = useState(lecturerBase);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [dialogModal, setDialogModal] = useState({
+    show: false,
+    text: "Opravdu",
+  });
 
   useEffect(() => {
     setLecturer(lecturerBase);
@@ -43,13 +49,26 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
     setLecturerFromRes(res);
   });
 
+  const onDeleteDialog = () => {
+    document.querySelector("body")!.style.overflow = "hidden";
+    setDialogModal((dialogModal) => ({ ...dialogModal, show: true }));
+  };
+
   const onDelete = runUpdateAction(async () => {
     const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
       method: "PUT",
       body: JSON.stringify({ picture_url: null }),
     });
     setLecturerFromRes(res);
+    document.querySelector("body")!.style.overflow = "";
   });
+
+  const hideDialogModal = () => {
+    setDialogModal((dialogModal) => ({
+      ...dialogModal,
+      show: false,
+    }));
+  };
 
   return (
     <div className={styleClasses(styles, "portrait")}>
@@ -60,7 +79,7 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
       <div className={styleClasses(styles, "edit-buttons")}>
         <Button icon="edit" onClick={onEdit} />
         {lecturer.picture_url && (
-          <Button variant="destructive" icon="trash" onClick={onDelete} />
+          <Button variant="destructive" icon="trash" onClick={onDeleteDialog} />
         )}
       </div>
       <div
@@ -69,6 +88,18 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
       >
         <LoadingBar />
       </div>
+      {dialogModal.show && (
+        <Dialog
+          show={dialogModal.show}
+          text="Opravdu chcete vymazat profilový obrázek?"
+          acceptBtnText={"Odstranit"}
+          onAccept={() => {
+            onDelete();
+          }}
+          declienBtnText={"Zrušit"}
+          hideDialogModal={hideDialogModal}
+        />
+      )}
     </div>
   );
 }
