@@ -1,13 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FixedBanner from "../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../components/widgets/ResultIndicator";
 import Button from "../../../../components/widgets/forms/Button";
 import TextFieldList from "../../../../components/widgets/forms/TextFieldList";
 import TextFieldRow from "../../../../components/widgets/forms/TextFieldRow";
 import WysiwygEditor from "../../../../components/widgets/forms/WysiwygEditor";
-import { Lecturer } from "../../../../database/models/Lecturer";
+import { ContactInfo, Lecturer } from "../../../../database/models/Lecturer";
+import { delay } from "../../../../helpers/delay";
 import { styleClasses } from "../../../../helpers/styleClasses";
 import DashboardSection from "../DashboardSection";
 import InputList from "../InputList";
@@ -47,6 +48,35 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
     setResult(res.status == 200);
     clearResultTimeout = setTimeout(() => setResult(undefined), 2000);
   }
+
+  const [contactConflict, setContactConflict] = useState<
+    ContactInfo | undefined
+  >(undefined);
+
+  function checkUniqueContact() {
+    delay(
+      "lecturer dashboard - check unique contact",
+      async () => {
+        const res = await fetch(
+          `/api/lecturers/${lecturer.uuid}/unique-contact`,
+          {
+            method: "POST",
+            body: JSON.stringify(lecturer.contact),
+          },
+        );
+
+        if (res.status == 200) {
+          setContactConflict(undefined);
+          return;
+        }
+
+        setContactConflict((await res.json()) as ContactInfo);
+      },
+      1000,
+    );
+  }
+
+  useEffect(() => checkUniqueContact(), [lecturer]);
 
   return (
     <>
@@ -209,6 +239,8 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             type="text"
             label="Telefonní čísla"
             value={lecturer.contact.telephone_numbers}
+            erroredValues={contactConflict?.telephone_numbers}
+            errorText="Toto telefonní číslo již existuje"
             onChange={(value) => {
               setLecturer((lecturer) => ({
                 ...lecturer,
@@ -224,6 +256,8 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             type="text"
             label="Emailové adresy"
             value={lecturer.contact.emails}
+            erroredValues={contactConflict?.emails}
+            errorText="Tento email již existuje"
             onChange={(value) => {
               setLecturer((lecturer) => ({
                 ...lecturer,

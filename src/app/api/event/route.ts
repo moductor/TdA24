@@ -35,7 +35,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 
     const error: ErrorRes = {
       code: 400,
-      message: `Error: ${(e as any).message || "unknown"}`,
+      message: `Error: ${(e as any)["message"] || "unknown"}`,
     };
 
     return NextResponse.json(error, { status: 400 });
@@ -54,7 +54,7 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
 
     const error: ErrorRes = {
       code: 400,
-      message: `Error: ${(e as any).message || "unknown"}`,
+      message: `Error: ${(e as any)["message"] || "unknown"}`,
     };
 
     return NextResponse.json(error, { status: 400 });

@@ -23,5 +23,5 @@
 }
 
 @function alpha($color, $percentage) {
-  @return color-mix(in srgb, $color, transparent #{100% - $percentage});
+  @return color-mix(in srgb, $color, transparent calc(100% - #{$percentage}));
 }

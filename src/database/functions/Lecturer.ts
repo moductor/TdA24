@@ -42,7 +42,52 @@ export function isInputValid(lecturer: LecturerInput): boolean {
   return true;
 }
 
+export async function findNotUnique(
+  currentUuid: string | undefined,
+  contactInfo: ContactInfo,
+): Promise<ContactInfo | undefined> {
+  const res = await db
+    .find({
+      uuid: { $ne: currentUuid },
+      $or: [
+        { "contact.emails": { $in: contactInfo.emails } },
+        { "contact.telephone_numbers": { $in: contactInfo.telephone_numbers } },
+      ],
+    })
+    .toArray();
+
+  if (!res.length) return;
+
+  const resContact: ContactInfo = {
+    telephone_numbers: [],
+    emails: [],
+  };
+
+  res.forEach((lecturer) => {
+    if (!lecturer.contact) return;
+    lecturer.contact.emails.forEach((email) => {
+      if (resContact.emails.indexOf(email) >= 0) return;
+      if (contactInfo.emails.indexOf(email) < 0) return;
+      resContact.emails.push(email);
+    });
+    lecturer.contact.telephone_numbers.forEach((telephone) => {
+      if (resContact.telephone_numbers.indexOf(telephone) >= 0) return;
+      if (contactInfo.telephone_numbers.indexOf(telephone) < 0) return;
+      resContact.telephone_numbers.push(telephone);
+    });
+  });
+
+  return resContact;
+}
+
 export async function insertOne(lecturer: LecturerInput): Promise<string> {
+  if (lecturer.contact) {
+    const found = await findNotUnique(undefined, lecturer.contact);
+    if (found) {
+      throw Error("contact is not unique", { cause: found });
+    }
+  }
+
   const tags = !lecturer.tags
     ? undefined
     : await Promise.all(
@@ -159,6 +204,13 @@ export async function updateOneById(
   uuid: string,
   lecturer: LecturerInput,
 ): Promise<Lecturer | null> {
+  if (lecturer.contact) {
+    const found = await findNotUnique(uuid, lecturer.contact);
+    if (found) {
+      throw Error("contact is not unique", { cause: found });
+    }
+  }
+
   const tags = !lecturer.tags
     ? undefined
     : await Promise.all(

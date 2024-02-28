@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { get, remove, update } from "../../../../database/functions/Event";
 import { Error as ErrorRes } from "../../../../database/models/Error";
 import { EventBase } from "../../../../database/models/Event";
+import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
 type Params = {
   uuid: string;
@@ -30,7 +31,7 @@ export async function GET(
 }
 
 export async function DELETE(
-  _: NextRequest,
+  request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
   const event = await get(params.uuid);
@@ -42,6 +43,13 @@ export async function DELETE(
     };
 
     return NextResponse.json(error, { status: 404 });
+  }
+
+  if (
+    !isAuthorized(request, event.userId) &&
+    !isAuthorized(request, undefined, event.lecturerId)
+  ) {
+    return getUnauthorizedError();
   }
 
   await remove(params.uuid);
@@ -63,6 +71,13 @@ export async function PUT(
     return NextResponse.json(error, { status: 404 });
   }
 
+  if (
+    !isAuthorized(request, event.userId) &&
+    !isAuthorized(request, undefined, event.lecturerId)
+  ) {
+    return getUnauthorizedError();
+  }
+
   try {
     const data = (await request.json()) as EventBase;
     const event = await update(params.uuid, data);
@@ -72,7 +87,7 @@ export async function PUT(
 
     const error: ErrorRes = {
       code: 400,
-      message: `Error: ${(e as any).message || "unknown"}`,
+      message: `Error: ${(e as any)["message"] || "unknown"}`,
     };
 
     return NextResponse.json(error, { status: 400 });

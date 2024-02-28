@@ -11,6 +11,7 @@ import {
   LecturerFilters,
 } from "../../../database/models/Lecturer";
 import { Pagination } from "../../../database/models/Pagination";
+import { getUnauthorizedError, isAuthorized } from "../checkAuthenticated";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const params = request.nextUrl.searchParams;
@@ -40,6 +41,10 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  if (!isAuthorized(request)) {
+    return getUnauthorizedError();
+  }
+
   try {
     const data = (await request.json()) as LecturerBase;
 
@@ -62,6 +67,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       code: 400,
       message: "An error occured while parsing the input data",
     };
+
+    const errorObj = e as any;
+    if (errorObj.message) error.message = errorObj.message;
 
     return NextResponse.json(error, { status: 400 });
   }

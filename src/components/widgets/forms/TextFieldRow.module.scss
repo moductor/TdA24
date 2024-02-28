@@ -1,7 +1,18 @@
+@use "../../../app/colorFunctions.scss" as colors;
+
 .textfield-row {
-  display: flex;
-  flex-direction: column;
+  --border-color: currentColor;
+  --border-color-computed: #{colors.themize(var(--border-color), 10%)};
+  --border-opacity: var(--card-border-color-opacity);
+
+  --padding: 0.6em;
+
+  display: grid;
   gap: 0.5em;
+
+  * {
+    color: var(--border-color-computed);
+  }
 
   .required-label {
     display: block;
@@ -20,21 +31,51 @@
     }
   }
 
-  > span {
+  .label {
     text-wrap: wrap;
     display: flex;
     align-items: center;
     gap: 0.8em;
   }
 
-  > input {
+  .input-box {
+    display: grid;
+    gap: 0.2em;
+  }
+
+  .input-wrapper {
+    position: relative;
+  }
+
+  .input {
     appearance: none;
     background-color: var(--card-background-color);
-    border: var(--card-border-size) solid var(--card-border-color);
+    border: var(--card-border-size) solid #{colors.alpha(
+        var(--border-color-computed),
+        var(--border-opacity)
+      )};
     font-size: inherit;
-    padding: 0.6em;
+    padding: var(--padding);
 
     min-width: 0;
     width: 100%;
+  }
+
+  .suffix {
+    display: block;
+    position: absolute;
+    inset-inline-end: calc(var(--card-border-size) + var(--padding));
+    inset-block-start: 50%;
+    translate: 0 -50%;
+  }
+
+  .info-text {
+    font-size: 0.8em;
+    text-wrap: wrap;
+  }
+
+  &.state-error {
+    --border-opacity: 80%;
+    --border-color: var(--color-error);
   }
 }

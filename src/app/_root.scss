@@ -1,3 +1,5 @@
+@use "./colorFunctions.scss" as colors;
+
 :root {
   // Cards
 
@@ -6,18 +8,20 @@
   --card-shadow: 0 0.25rem 1rem hsl(0 0% 0% / 0.2);
   --card-border-radius: 2rem;
   --card-border-size: 2px;
-  --card-border-color-lightness: 100%;
-  --card-border-color-opacity: 0.15;
-  --card-border-color: hsl(
-    0 0% var(--card-border-color-lightness) / var(--card-border-color-opacity)
-  );
+  --card-border-color-base: var(--color-white);
+  --card-border-color-opacity: 15%;
+  --card-border-color: #{colors.alpha(
+      var(--card-border-color-base),
+      var(--card-border-color-opacity)
+    )};
 
   --__colorFunctions-themize-color: white;
   --__colorFunctions-athemize-color: black;
 
   @media (prefers-color-scheme: light) {
     --card-background-color: var(--color-white);
-    --card-border-color-lightness: 0%;
+    --card-border-color-base: var(--color-jet);
+    --card-border-color-opacity: 20%;
 
     --__colorFunctions-themize-color: black;
     --__colorFunctions-athemize-color: white;

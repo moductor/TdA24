@@ -6,6 +6,7 @@ import {
 } from "../../../../database/functions/Lecturer";
 import { Error } from "../../../../database/models/Error";
 import { LecturerInput } from "../../../../database/models/Lecturer";
+import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
 type Params = {
   uuid: string;
@@ -34,9 +35,13 @@ export async function GET(
 }
 
 export async function DELETE(
-  _: NextRequest,
+  request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  if (!isAuthorized(request, undefined, params.uuid)) {
+    return getUnauthorizedError();
+  }
+
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
@@ -56,6 +61,10 @@ export async function PUT(
   request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  if (!isAuthorized(request, undefined, params.uuid)) {
+    return getUnauthorizedError();
+  }
+
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
@@ -83,6 +92,11 @@ export async function PUT(
       code: 400,
       message: "An error occured while parsing the input data",
     };
+
+    const errorObj = e as any;
+    if (errorObj.message) {
+      error.message = JSON.stringify(errorObj.cause);
+    }
 
     return NextResponse.json(error, { status: 400 });
   }

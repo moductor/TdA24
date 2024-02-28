@@ -16,6 +16,9 @@ type Props = {
   disabled?: boolean;
   value?: string | null;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  errorState?: boolean;
+  suffix?: ReactNode;
+  infoText?: string;
   children?: ReactNode;
   [prop: string]: any;
 };
@@ -32,16 +35,24 @@ export default function TextFieldRow({
   disabled,
   value,
   onChange,
+  errorState = false,
+  suffix,
+  infoText,
   children,
   ...props
 }: Props) {
   return (
     <label
-      className={styleClasses(styles, "textfield-row", className || "")}
+      className={styleClasses(
+        styles,
+        "textfield-row",
+        className || "",
+        errorState ? "state-error" : "",
+      )}
       {...props}
     >
       {children && (
-        <span>
+        <span className={styleClasses(styles, "label")}>
           {children}
           {showRequiredLabel && required && (
             <span
@@ -57,16 +68,30 @@ export default function TextFieldRow({
           )}
         </span>
       )}
-      <input
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        required={required}
-        pattern={pattern}
-        disabled={disabled}
-        value={value === null ? undefined : value}
-        onChange={onChange}
-      />
+
+      <span className={styleClasses(styles, "input-box")}>
+        <span className={styleClasses(styles, "input-wrapper")}>
+          <input
+            className={styleClasses(styles, "input")}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+            required={required}
+            pattern={pattern}
+            disabled={disabled}
+            value={value === null ? undefined : value}
+            onChange={onChange}
+          />
+
+          {suffix && (
+            <span className={styleClasses(styles, "suffix")}>{suffix}</span>
+          )}
+        </span>
+
+        {infoText && (
+          <span className={styleClasses(styles, "info-text")}>{infoText}</span>
+        )}
+      </span>
     </label>
   );
 }

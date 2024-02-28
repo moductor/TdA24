@@ -46,6 +46,10 @@
     [full-width-end];
   align-content: start;
 
+  @media (min-width: 896px) {
+    --padding-inline: 3rem;
+  }
+
   > * {
     grid-column: content;
   }

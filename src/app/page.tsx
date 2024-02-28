@@ -12,8 +12,8 @@ export default async function Page() {
 
   return (
     <>
-      <Header>
-        <div className={styleClasses(styles, "hero")}>
+      <Header breakout={true}>
+        <div className={styleClasses(styles, "hero", "breakout")}>
           <h1 className={styleClasses(styles, "subtitle")}>
             Dynamický katalog lektorů
           </h1>
