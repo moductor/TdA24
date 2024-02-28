@@ -5,12 +5,18 @@ import {
   insertOne,
   isInputValid,
 } from "../../../database/functions/Lecturer";
+import {
+  get as getUser,
+  insertOne as insertOneUser,
+} from "../../../database/functions/User";
 import { Error } from "../../../database/models/Error";
 import {
   LecturerBase,
   LecturerFilters,
 } from "../../../database/models/Lecturer";
 import { Pagination } from "../../../database/models/Pagination";
+import { UserBase } from "../../../database/models/User";
+import { hash } from "../../../helpers/passwordHash";
 import { getUnauthorizedError, isAuthorized } from "../checkAuthenticated";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
@@ -40,13 +46,15 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   }
 }
 
+type CreateQuery = LecturerBase & { username?: string; password?: string };
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   if (!isAuthorized(request)) {
     return getUnauthorizedError();
   }
 
   try {
-    const data = (await request.json()) as LecturerBase;
+    const data = (await request.json()) as CreateQuery;
 
     if (!isInputValid(data)) {
       const error: Error = {
@@ -57,8 +65,32 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json(error, { status: 400 });
     }
 
-    const id = await insertOne(data);
+    const userData =
+      data.username && data.password
+        ? ({
+            username: data.username,
+            passwordHash: hash(data.password),
+          } as UserBase)
+        : undefined;
+
+    if (data.username) delete data.username;
+    if (data.password) delete data.password;
+
+    const id = await insertOne(data as LecturerBase);
     const lecturer = await get(id);
+
+    if (userData) {
+      userData.lecturerId = id;
+      const userRes = await insertOneUser(userData);
+
+      if (typeof userRes !== "string") {
+        return NextResponse.json(userRes, { status: 409 });
+      }
+
+      const user = await getUser(userRes);
+      return NextResponse.json({ ...lecturer, username: user!.username });
+    }
+
     return NextResponse.json(lecturer);
   } catch (e) {
     console.log(e);
