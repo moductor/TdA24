@@ -31,11 +31,13 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
   if (paginationParam) pagination = JSON.parse(paginationParam) as Pagination;
   if (filtersParam) filters = JSON.parse(filtersParam) as LecturerFilters;
 
+  console.log("API: GET /api/lecturers");
+
   try {
     const lecturers = await getAll(pagination, filters);
     return NextResponse.json(lecturers);
   } catch (e) {
-    console.log(e);
+    console.log("  error:", e);
 
     const error: Error = {
       code: 400,
@@ -49,14 +51,21 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 type CreateQuery = LecturerBase & { username?: string; password?: string };
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
+  console.log("API: POST /api/lecturers");
+
   if (!isAuthorized(request)) {
+    console.log("  unauthorized!");
     return getUnauthorizedError();
   }
 
   try {
     const data = (await request.json()) as CreateQuery;
 
+    console.log("  body:", JSON.stringify(data));
+
     if (!isInputValid(data)) {
+      console.log("  the input data is not valid");
+
       const error: Error = {
         code: 400,
         message: "This is not a valid input",
@@ -79,11 +88,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const id = await insertOne(data as LecturerBase);
     const lecturer = await get(id);
 
+    console.log("  inserted lecturer", id);
+
     if (userData) {
       userData.lecturerId = id;
       const userRes = await insertOneUser(userData);
 
       if (typeof userRes !== "string") {
+        console.log("  user error", JSON.stringify(userRes));
+
         return NextResponse.json(
           { lecturerId: lecturer, userError: userRes },
           { status: 409 },
@@ -91,12 +104,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       }
 
       const user = await getUser(userRes);
+
+      console.log("  inserted user", user?.uuid);
+
       return NextResponse.json({ ...lecturer, username: user!.username });
     }
 
     return NextResponse.json(lecturer);
   } catch (e) {
-    console.log(e);
+    console.log("  error:", e);
 
     const error: Error = {
       code: 400,

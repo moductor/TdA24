@@ -27,9 +27,13 @@ export async function GET(
   _: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  console.log("API: GET /api/lecturers/[uuid], uuid:", params.uuid);
+
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
+    console.log("  lecturer not found");
+
     const error: Error = {
       code: 404,
       message: "User not found",
@@ -45,13 +49,18 @@ export async function DELETE(
   request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  console.log("API: DELETE /api/lecturers/[uuid], uuid:", params.uuid);
+
   if (!isAuthorized(request, undefined, params.uuid)) {
+    console.log("  unauthorized!");
     return getUnauthorizedError();
   }
 
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
+    console.log("  lecturer not found");
+
     const error: Error = {
       code: 404,
       message: "User not found",
@@ -70,13 +79,18 @@ export async function PUT(
   request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  console.log("API: PUT /api/lecturers/[uuid], uuid:", params.uuid);
+
   if (!isAuthorized(request, undefined, params.uuid)) {
+    console.log("  unauthorized!");
     return getUnauthorizedError();
   }
 
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
+    console.log("  lecturer not found");
+
     const error: Error = {
       code: 404,
       message: "User not found",
@@ -105,19 +119,25 @@ export async function PUT(
         ? await updateUser(user.uuid, { ...user, ...userData })
         : await insertOneUser(userData);
 
-      if (user && typeof res !== "string" && !user.uuid) {
+      if (res && typeof res !== "string" && !Object.hasOwn(res, "uuid")) {
+        console.log("  user error", JSON.stringify(res));
+
         return NextResponse.json({ userError: res }, { status: 409 });
       }
+
+      console.log("  update user", user?.uuid);
     }
 
     const lecturer = await updateOneById(params.uuid, data);
+
+    console.log("  update lecturer", lecturer?.uuid);
 
     return NextResponse.json({
       ...lecturer,
       username: data.username && data.password ? data.username : undefined,
     });
   } catch (e) {
-    console.log(e);
+    console.log("  error:", e);
 
     const error: Error = {
       code: 400,
