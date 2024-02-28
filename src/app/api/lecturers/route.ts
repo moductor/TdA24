@@ -84,7 +84,10 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       const userRes = await insertOneUser(userData);
 
       if (typeof userRes !== "string") {
-        return NextResponse.json(userRes, { status: 409 });
+        return NextResponse.json(
+          { lecturerId: lecturer, userError: userRes },
+          { status: 409 },
+        );
       }
 
       const user = await getUser(userRes);

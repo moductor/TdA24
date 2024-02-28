@@ -4,8 +4,15 @@ import {
   remove,
   updateOneById,
 } from "../../../../database/functions/Lecturer";
+import {
+  get as getUser,
+  insertOne as insertOneUser,
+  update as updateUser,
+} from "../../../../database/functions/User";
 import { Error } from "../../../../database/models/Error";
 import { LecturerInput } from "../../../../database/models/Lecturer";
+import { UserBase } from "../../../../database/models/User";
+import { hash } from "../../../../helpers/passwordHash";
 import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
 type Params = {
@@ -57,6 +64,8 @@ export async function DELETE(
   return NextResponse.json(null);
 }
 
+type UpdateQuery = LecturerInput & { username?: string; password?: string };
+
 export async function PUT(
   request: NextRequest,
   { params }: Props,
@@ -77,14 +86,36 @@ export async function PUT(
   }
 
   try {
-    const data = (await request.json()) as LecturerInput;
+    const data = (await request.json()) as UpdateQuery;
 
     Object.keys(data)
       .filter((key) => (data as any)[key] === null)
       .forEach((key) => ((data as any)[key] = undefined));
 
+    if (data.username && data.password) {
+      const userData = {
+        username: data.username,
+        passwordHash: hash(data.password),
+        lecturerId: params.uuid,
+      } as UserBase;
+
+      const user = await getUser(undefined, { lecturerId: params.uuid });
+
+      const res = user
+        ? await updateUser(user.uuid, { ...user, ...userData })
+        : await insertOneUser(userData);
+
+      if (user && typeof res !== "string" && !user.uuid) {
+        return NextResponse.json({ userError: res }, { status: 409 });
+      }
+    }
+
     const lecturer = await updateOneById(params.uuid, data);
-    return NextResponse.json(lecturer);
+
+    return NextResponse.json({
+      ...lecturer,
+      username: data.username && data.password ? data.username : undefined,
+    });
   } catch (e) {
     console.log(e);
 
