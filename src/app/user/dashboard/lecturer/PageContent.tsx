@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FixedBanner from "../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../components/widgets/ResultIndicator";
 import Button from "../../../../components/widgets/forms/Button";
@@ -28,6 +28,31 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
   const [result, setResult] = useState<boolean | null | undefined>(undefined);
   const sending = result === null;
 
+  const [hasChanged, setHasChanged] = useState(false);
+
+  useEffect(() => {
+    setHasChanged(true);
+  }, [lecturer]);
+
+  useEffect(() => {
+    if (!hasChanged) return;
+
+    function handleBeforeUnload(event: BeforeUnloadEvent) {
+      event.preventDefault();
+      return (event.returnValue = "");
+    }
+
+    window.addEventListener("beforeunload", handleBeforeUnload, {
+      capture: true,
+    });
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload, {
+        capture: true,
+      });
+    };
+  }, [hasChanged]);
+
   async function save() {
     if (sending) return;
     clearTimeout(clearResultTimeout);
@@ -46,6 +71,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
 
     setResult(res.status == 200);
     clearResultTimeout = setTimeout(() => setResult(undefined), 2000);
+    setHasChanged(false);
   }
 
   return (
