@@ -27,7 +27,10 @@ export default function Dialog({ show, className, children, ...props }: Props) {
           className={styleClasses(styles, "dialog", className || "")}
           {...props}
         >
-          <Card className={styleClasses(styles, "dialog-card")}>
+          <Card
+            className={styleClasses(styles, "dialog-card")}
+            displayBackground={false}
+          >
             {children}
           </Card>
         </dialog>
