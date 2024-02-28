@@ -106,6 +106,14 @@ export default function UserDropdown({ user }: Props) {
           </div>
           <div className={styleClasses(styles, "dialog-btns")}>
             <Button
+              onClick={() => {
+                setDialogModalVisible(false);
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Zrušit
+            </Button>
+            <Button
               variant="destructive"
               onClick={async () => {
                 deleteUserSession();
@@ -115,14 +123,6 @@ export default function UserDropdown({ user }: Props) {
               }}
             >
               Odstranit
-            </Button>
-            <Button
-              onClick={() => {
-                setDialogModalVisible(false);
-                document.querySelector("body")!.style.overflow = "";
-              }}
-            >
-              Zrušit
             </Button>
           </div>
         </Dialog>
