@@ -42,7 +42,7 @@ export function isInputValid(lecturer: LecturerInput): boolean {
   return true;
 }
 
-async function findNotUnique(
+export async function findNotUnique(
   currentUuid: string | undefined,
   contactInfo: ContactInfo,
 ): Promise<ContactInfo | undefined> {
