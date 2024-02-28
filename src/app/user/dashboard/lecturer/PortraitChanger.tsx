@@ -17,7 +17,6 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
 
   const [dialogModal, setDialogModal] = useState({
     show: false,
-    text: "Opravdu",
   });
 
   useEffect(() => {
