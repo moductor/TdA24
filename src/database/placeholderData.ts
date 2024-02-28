@@ -61,7 +61,7 @@ const lecturers: LecturerInput[] = [
       { name: "Fundraising" },
     ],
     contact: {
-      emails: ["user@example.com"],
+      emails: ["placha@example.com"],
       telephone_numbers: ["+123 777 338 111"],
     },
   },
