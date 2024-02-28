@@ -6,6 +6,7 @@ import {
 } from "../../../../database/functions/Lecturer";
 import { Error } from "../../../../database/models/Error";
 import { LecturerInput } from "../../../../database/models/Lecturer";
+import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
 type Params = {
   uuid: string;
@@ -34,9 +35,13 @@ export async function GET(
 }
 
 export async function DELETE(
-  _: NextRequest,
+  request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  if (!isAuthorized(request, undefined, params.uuid)) {
+    return getUnauthorizedError();
+  }
+
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
@@ -56,6 +61,10 @@ export async function PUT(
   request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
+  if (!isAuthorized(request, undefined, params.uuid)) {
+    return getUnauthorizedError();
+  }
+
   const lecturer = await get(params.uuid);
 
   if (!lecturer) {
