@@ -7,6 +7,7 @@ import BackgroundWrapper from "./widgets/BackgroundWrapper";
 type Props = Readonly<{
   showBackButton?: boolean;
   showUserMenu?: boolean;
+  breakout?: boolean;
   children?: ReactNode;
   [prop: string]: any;
 }>;
@@ -14,6 +15,7 @@ type Props = Readonly<{
 export default function Header({
   showBackButton,
   showUserMenu,
+  breakout = false,
   children,
   ...props
 }: Props) {
@@ -21,7 +23,11 @@ export default function Header({
     <header {...props} className={styleClasses(styles, "header")}>
       <BackgroundWrapper>
         <div className="content-grid">
-          <Navbar showBackButton={showBackButton} showUserMenu={showUserMenu} />
+          <Navbar
+            showBackButton={showBackButton}
+            showUserMenu={showUserMenu}
+            className={breakout ? "breakout" : ""}
+          />
           {children}
         </div>
       </BackgroundWrapper>
