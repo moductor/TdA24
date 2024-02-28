@@ -88,16 +88,31 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
         <LoadingBar />
       </div>
       {dialogModal.show && (
-        <Dialog
-          show={dialogModal.show}
-          text="Opravdu chcete vymazat profilový obrázek?"
-          acceptBtnText={"Odstranit"}
-          onAccept={() => {
-            onDelete();
-          }}
-          declienBtnText={"Zrušit"}
-          hideDialogModal={hideDialogModal}
-        />
+        <Dialog show={dialogModal.show}>
+          <div className={styleClasses(styles, "dialog-text")}>
+            Opravdu chcete vymazat profilový obrázek?
+          </div>
+          <div className={styleClasses(styles, "dialog-btns")}>
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                onDelete();
+                hideDialogModal();
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Odstranit
+            </Button>
+            <Button
+              onClick={() => {
+                hideDialogModal();
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Zrušit
+            </Button>
+          </div>
+        </Dialog>
       )}
     </div>
   );
