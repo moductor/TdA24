@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { User } from "../../database/models/User";
 import { styleClasses } from "../../helpers/styleClasses";
 import { deleteUserSession } from "../../helpers/userSession";
+import Dialog from "./Dialog";
 import ProfilePicture from "./ProfilePicture";
 import styles from "./UserDropdown.module.scss";
 import Button from "./forms/Button";
@@ -16,6 +17,8 @@ type Props = {
 export default function UserDropdown({ user }: Props) {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+
+  const [dialogModalVisible, setDialogModalVisible] = useState(false);
 
   function showDropdown() {
     setIsVisible((prev) => !prev);
@@ -49,6 +52,11 @@ export default function UserDropdown({ user }: Props) {
       </div>
     );
   }
+
+  const showDialogModal = () => {
+    document.querySelector("body")!.style.overflow = "hidden";
+    setDialogModalVisible(true);
+  };
 
   return (
     <div className={styleClasses(styles, "wrapper")}>
@@ -85,15 +93,40 @@ export default function UserDropdown({ user }: Props) {
           )}
           <button
             className={styleClasses(styles, "button-item", "text-error")}
-            onClick={() => {
-              deleteUserSession();
-              window.location.reload();
-            }}
+            onClick={showDialogModal}
           >
             Odhlásit se
           </button>
         </div>
       </div>
+      {dialogModalVisible && (
+        <Dialog show={dialogModalVisible}>
+          <div className={styleClasses(styles, "dialog-text")}>
+            Opravdu chcete vymazat profilový obrázek?
+          </div>
+          <div className={styleClasses(styles, "dialog-btns")}>
+            <Button
+              onClick={() => {
+                setDialogModalVisible(false);
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Zrušit
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                deleteUserSession();
+                window.location.reload();
+                setDialogModalVisible(false);
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Odstranit
+            </Button>
+          </div>
+        </Dialog>
+      )}
     </div>
   );
 }
