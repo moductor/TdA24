@@ -3,6 +3,7 @@
 import { HTMLInputTypeAttribute, useEffect, useRef, useState } from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
 import Icon from "../Icon";
+import ResultIndicator from "../ResultIndicator";
 import styles from "./TextFieldList.module.scss";
 import TextFieldRow from "./TextFieldRow";
 
@@ -11,6 +12,8 @@ type Props = {
   type: HTMLInputTypeAttribute;
   className?: string;
   value?: string[];
+  erroredValues?: string[];
+  errorText?: string;
   onChange?: (value: string[]) => void;
 };
 
@@ -19,11 +22,14 @@ export default function TextFieldList({
   type,
   className,
   value: initialValue,
+  erroredValues: initialErrored,
+  errorText,
   onChange,
 }: Props) {
   const [values, setValues] = useState(initialValue);
-
+  const [erroredValues, setErroredValues] = useState(initialErrored);
   useEffect(() => setValues(initialValue), [initialValue]);
+  useEffect(() => setErroredValues(initialErrored), [initialErrored]);
 
   useEffect(() => {
     if (!onChange) return;
@@ -36,9 +42,7 @@ export default function TextFieldList({
     if (!values) return;
 
     if (!value) {
-      setValues((prevValues) => {
-        return prevValues!.filter((_, currentIndex) => currentIndex != index);
-      });
+      setValues((prevValues) => toRemovedFromArray(prevValues!, index));
       return;
     }
 
@@ -58,9 +62,7 @@ export default function TextFieldList({
   }, [wasNewItemAdded]);
 
   function addItem(value: string) {
-    setValues((prevValues) => {
-      return [...(prevValues || []), value];
-    });
+    setValues((prevValues) => [...(prevValues || []), value]);
 
     setWasNewItemAdded(true);
   }
@@ -70,20 +72,34 @@ export default function TextFieldList({
       {label && <span>{label}</span>}
 
       <div className={styleClasses(styles, "list")} ref={listRef}>
-        {values?.map((item, index) => (
-          <div key={index} className={styleClasses(styles, "row")}>
-            <span className={styleClasses(styles, "prefix")}>
-              <Icon icon="drag" />
-            </span>
+        {values?.map((item, index) => {
+          const isErrored = erroredValues?.includes(item) || false;
 
-            <TextFieldRow
-              className={styleClasses(styles, "field")}
-              type={type}
-              value={item}
-              onChange={(e) => handleChange(index, e.target.value)}
-            />
-          </div>
-        ))}
+          return (
+            <div key={index} className={styleClasses(styles, "row")}>
+              <span className={styleClasses(styles, "prefix")}>
+                <Icon icon="drag" />
+              </span>
+
+              <TextFieldRow
+                className={styleClasses(styles, "field")}
+                type={type}
+                value={item}
+                onChange={(e) => handleChange(index, e.target.value)}
+                errorState={isErrored}
+                infoText={isErrored ? errorText : undefined}
+                suffix={
+                  isErrored ? (
+                    <ResultIndicator
+                      result={false}
+                      className={styleClasses(styles, "error-indicator")}
+                    />
+                  ) : undefined
+                }
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className={styleClasses(styles, "row", "new")}>
@@ -101,4 +117,8 @@ export default function TextFieldList({
       </div>
     </div>
   );
+}
+
+function toRemovedFromArray<T>(array: T[], index: number) {
+  return array.filter((_, currentIndex) => currentIndex != index);
 }
