@@ -55,9 +55,7 @@ export default function UserDropdown({ user }: Props) {
 
   const showDialogModal = () => {
     document.querySelector("body")!.style.overflow = "hidden";
-    console.log("AAAAAAAAAAAAA");
     setDialogModalVisible(true);
-    console.log("BBBBBBBBBBBBBBB");
   };
 
   return (
@@ -102,19 +100,32 @@ export default function UserDropdown({ user }: Props) {
         </div>
       </div>
       {dialogModalVisible && (
-        <Dialog
-          show={dialogModalVisible}
-          text={"Opravdu se chcete odhlásit?"}
-          acceptBtnText="Odhlásit"
-          declienBtnText="Zrušit"
-          hideDialogModal={() => {
-            setDialogModalVisible(false);
-          }}
-          onAccept={() => {
-            deleteUserSession();
-            window.location.reload();
-          }}
-        />
+        <Dialog show={dialogModalVisible}>
+          <div className={styleClasses(styles, "dialog-text")}>
+            Opravdu chcete vymazat profilový obrázek?
+          </div>
+          <div className={styleClasses(styles, "dialog-btns")}>
+            <Button
+              variant="destructive"
+              onClick={async () => {
+                deleteUserSession();
+                window.location.reload();
+                setDialogModalVisible(false);
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Odstranit
+            </Button>
+            <Button
+              onClick={() => {
+                setDialogModalVisible(false);
+                document.querySelector("body")!.style.overflow = "";
+              }}
+            >
+              Zrušit
+            </Button>
+          </div>
+        </Dialog>
       )}
     </div>
   );
