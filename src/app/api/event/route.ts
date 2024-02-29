@@ -9,23 +9,25 @@ import { Error as ErrorRes } from "../../../database/models/Error";
 import { EventBase } from "../../../database/models/Event";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-  const data = (await request.json()) as { [prop: string]: string };
+  const params = request.nextUrl.searchParams;
+  function param(name: string): string | undefined {
+    return params.get(name) || undefined;
+  }
+
   const query: EventQuery = {
-    lecturerId: data["lecturerId"],
-    userId: data["userId"],
+    lecturerId: param("lecturerId"),
+    userId: param("userId"),
   };
 
-  if (data["dateTimeAfter"]) {
+  if (param("dateTimeAfter")) {
     query.dateTimeAfter = new Date();
-    query.dateTimeAfter.setTime(Date.parse(data["dateTimeAfter"]));
+    query.dateTimeAfter.setTime(Date.parse(param("dateTimeAfter")!));
   }
 
-  if (data["dateTimeBefore"]) {
+  if (param("dateTimeBefore")) {
     query.dateTimeBefore = new Date();
-    query.dateTimeBefore.setTime(Date.parse(data["dateTimeBefore"]));
+    query.dateTimeBefore.setTime(Date.parse(param("dateTimeBefore")!));
   }
-
-  console.log(query);
 
   try {
     const events = await getAll(query);
