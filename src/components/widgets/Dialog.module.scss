@@ -13,5 +13,6 @@
 }
 
 .dialog::backdrop {
-  background-color: hsla(0, 0%, 0%, 0.69);
+  background-color: hsl(0 0% 0% / 0.4);
+  backdrop-filter: blur(0.5rem);
 }
