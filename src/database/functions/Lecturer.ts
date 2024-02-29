@@ -81,12 +81,12 @@ export async function findNotUnique(
 }
 
 export async function insertOne(lecturer: LecturerInput): Promise<string> {
-  if (lecturer.contact) {
-    const found = await findNotUnique(undefined, lecturer.contact);
-    if (found) {
-      throw Error("contact is not unique", { cause: found });
-    }
-  }
+  // if (lecturer.contact) {
+  //   const found = await findNotUnique(undefined, lecturer.contact);
+  //   if (found) {
+  //     throw Error("contact is not unique", { cause: found });
+  //   }
+  // }
 
   const tags = !lecturer.tags
     ? undefined
@@ -204,12 +204,12 @@ export async function updateOneById(
   uuid: string,
   lecturer: LecturerInput,
 ): Promise<Lecturer | null> {
-  if (lecturer.contact) {
-    const found = await findNotUnique(uuid, lecturer.contact);
-    if (found) {
-      throw Error("contact is not unique", { cause: found });
-    }
-  }
+  // if (lecturer.contact) {
+  //   const found = await findNotUnique(uuid, lecturer.contact);
+  //   if (found) {
+  //     throw Error("contact is not unique", { cause: found });
+  //   }
+  // }
 
   const tags = !lecturer.tags
     ? undefined
