@@ -8,6 +8,7 @@ import LecturerMetadata from "../../../components/partials/lecturer/LecturerMeta
 import LecturerPortrait from "../../../components/partials/lecturer/LecturerPortrait";
 import LecturerTags from "../../../components/partials/lecturer/LecturerTags";
 import BackgroundWrapper from "../../../components/widgets/BackgroundWrapper";
+import Button from "../../../components/widgets/forms/Button";
 import { get } from "../../../database/functions/Lecturer";
 import { getNameString } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
@@ -56,6 +57,7 @@ export default async function Page({ params }: Props) {
                 location={lecturer.location}
                 price={lecturer.price_per_hour}
                 className={styleClasses(styles, "metadata")}
+                suffix={<Button>Rezervovat lekci</Button>}
               />
             </div>
           </header>

@@ -1,7 +1,7 @@
+import { ReactNode } from "react";
 import Card from "../../../components/widgets/Card";
 import Tag from "../../../components/widgets/Tag";
 import { styleClasses } from "../../../helpers/styleClasses";
-import Button from "../../widgets/forms/Button";
 import styles from "./LecturerMetadata.module.scss";
 
 type Props = Readonly<{
@@ -12,6 +12,7 @@ type Props = Readonly<{
   onLecturerPage?: boolean;
   href?: string;
   className?: string;
+  suffix?: ReactNode;
   [prop: string]: any;
 }>;
 
@@ -23,6 +24,7 @@ export default function LecturerMetadata({
   onLecturerPage = false,
   href,
   className,
+  suffix,
   ...props
 }: Props) {
   return (
@@ -61,9 +63,7 @@ export default function LecturerMetadata({
           )}
         </div>
 
-        <Button className={styleClasses(styles, "event-button")}>
-          Rezervovat lekci
-        </Button>
+        {suffix && <>{suffix}</>}
       </div>
     </Card>
   );
