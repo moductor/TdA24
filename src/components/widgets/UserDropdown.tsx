@@ -102,7 +102,7 @@ export default function UserDropdown({ user }: Props) {
       {dialogModalVisible && (
         <Dialog show={dialogModalVisible}>
           <div className={styleClasses(styles, "dialog-text")}>
-            Opravdu chcete vymazat profilový obrázek?
+            Opravdu se chcete odhlásit?
           </div>
           <div className={styleClasses(styles, "dialog-btns")}>
             <Button
@@ -122,7 +122,7 @@ export default function UserDropdown({ user }: Props) {
                 document.querySelector("body")!.style.overflow = "";
               }}
             >
-              Odstranit
+              Odhlásit se
             </Button>
           </div>
         </Dialog>
