@@ -1,6 +1,7 @@
 import Card from "../../../components/widgets/Card";
 import Tag from "../../../components/widgets/Tag";
 import { styleClasses } from "../../../helpers/styleClasses";
+import Button from "../../widgets/forms/Button";
 import styles from "./LecturerMetadata.module.scss";
 
 type Props = Readonly<{
@@ -39,24 +40,30 @@ export default function LecturerMetadata({
 
       {claim && <p className={styleClasses(styles, "claim")}>{claim}</p>}
 
-      <div className={styleClasses(styles, "tag-list")}>
-        {location && (
-          <Tag className="background-sky-blue text-jet">
-            <p>
-              <span className="visually-hidden">Umístění:</span>
-              <span>{location}</span>
-            </p>
-          </Tag>
-        )}
+      <div className={styleClasses(styles, "last-row-wrapper")}>
+        <div className={styleClasses(styles, "tag-list")}>
+          {location && (
+            <Tag className="background-sky-blue text-jet">
+              <p>
+                <span className="visually-hidden">Umístění:</span>
+                <span>{location}</span>
+              </p>
+            </Tag>
+          )}
 
-        {price && (
-          <Tag className="background-sunglow text-jet">
-            <p>
-              <span className="visually-hidden">Cena za hodinu:</span>
-              <span>{price} Kč / hod</span>
-            </p>
-          </Tag>
-        )}
+          {price && (
+            <Tag className="background-sunglow text-jet">
+              <p>
+                <span className="visually-hidden">Cena za hodinu:</span>
+                <span>{price} Kč / hod</span>
+              </p>
+            </Tag>
+          )}
+        </div>
+
+        <Button className={styleClasses(styles, "event-button")}>
+          Rezervovat lekci
+        </Button>
       </div>
     </Card>
   );
