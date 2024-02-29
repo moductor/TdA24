@@ -11,7 +11,7 @@
   border-radius: var(--card-border-radius);
   background-color: var(--card-background-color);
 
-  &::before {
+  &:not(.without-border-effect)::before {
     content: "";
     position: absolute;
     left: calc(var(--card-border-size) * -1);

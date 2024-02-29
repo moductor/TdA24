@@ -5,7 +5,7 @@ import styles from "./Card.module.scss";
 type Props = Readonly<{
   children?: React.ReactNode;
   decorated?: "right" | "left";
-  displayBackground?: boolean;
+  showEffects?: boolean;
   className?: string;
   [prop: string]: any;
 }>;
@@ -13,15 +13,23 @@ type Props = Readonly<{
 export default function Card({
   children,
   decorated = "right",
-  displayBackground = true,
+  showEffects = true,
   className,
   ...props
 }: Props) {
   return (
-    <div className={styleClasses(styles, "card", className || "")} {...props}>
+    <div
+      className={styleClasses(
+        styles,
+        "card",
+        className || "",
+        !showEffects ? "without-border-effect" : "",
+      )}
+      {...props}
+    >
       {children}
 
-      {displayBackground && (
+      {showEffects && (
         <span
           className={styleClasses(styles, "background")}
           data-decorated={decorated}
