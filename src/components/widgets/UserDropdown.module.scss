@@ -2,6 +2,7 @@
 
 .wrapper {
   position: relative;
+  z-index: 9999;
 
   --border-size: 2px;
   --border-lightness: 60%;
@@ -19,7 +20,6 @@
 }
 
 .dropdown-wrapper {
-  z-index: 9999;
   filter: drop-shadow(var(--card-shadow));
   transition: all 0.2s ease;
 
