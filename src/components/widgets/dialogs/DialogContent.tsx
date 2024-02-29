@@ -1,3 +1,5 @@
+import { styleClasses } from "../../../helpers/styleClasses";
+import styles from "./DialogContent.module.scss";
 import DialogContentCustom from "./DialogContentCustom";
 
 type Props = {
@@ -14,7 +16,10 @@ export default function DialogContent({
   ...props
 }: Props) {
   return (
-    <DialogContentCustom {...props}>
+    <DialogContentCustom
+      className={styleClasses(styles, "content-flow", "custom-margin")}
+      {...props}
+    >
       {title && (
         <p role="heading" className="title" style={{ fontSize: "1.6rem" }}>
           {title}

@@ -15,12 +15,7 @@ export default function DialogContentCustom({
 }: Props) {
   return (
     <div
-      className={styleClasses(
-        styles,
-        "content-custom",
-        "content-flow",
-        className || "",
-      )}
+      className={styleClasses(styles, "content-custom", className || "")}
       {...props}
     >
       {children}
