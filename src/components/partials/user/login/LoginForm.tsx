@@ -30,12 +30,12 @@ export default function LoginForm() {
     setMessage(undefined);
     setMessageIsError(true);
 
-    const usernameOrEmail = form.get("usernameOrEmail")!.toString();
+    const username = form.get("username")!.toString();
     const password = form.get("password")!.toString();
     const remember = Boolean(form.get("remember"));
 
     const query: AuthQuery = {
-      usernameOrEmail,
+      username,
       password,
       keepLoggedIn: remember,
     };
@@ -75,11 +75,11 @@ export default function LoginForm() {
 
       <TextFieldRow
         type="text"
-        name="usernameOrEmail"
+        name="username"
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Uživatelské jméno nebo email
+        Uživatelské jméno
       </TextFieldRow>
 
       <TextFieldRow

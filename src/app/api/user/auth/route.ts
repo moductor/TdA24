@@ -8,9 +8,7 @@ import { AuthQuery, AuthResponse } from "./AuthQuery";
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const data = (await request.json()) as AuthQuery;
 
-  const user =
-    (await get(undefined, { email: data.usernameOrEmail })) ||
-    (await get(undefined, { username: data.usernameOrEmail }));
+  const user = await get(undefined, { username: data.username });
 
   if (!user) {
     return new NextResponse(null, { status: 404 });

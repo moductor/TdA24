@@ -1,5 +1,5 @@
 export type AuthQuery = {
-  usernameOrEmail: string;
+  username: string;
   password: string;
   keepLoggedIn?: boolean;
 };
