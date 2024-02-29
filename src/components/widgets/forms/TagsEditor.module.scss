@@ -1,0 +1,47 @@
+@use "../../../app/colorFunctions.scss" as colors;
+
+.textfield-row {
+  --border-color: currentColor;
+  --border-color-computed: #{colors.themize(var(--border-color), 10%)};
+  --border-opacity: var(--card-border-color-opacity);
+
+  --padding: 0.6em;
+
+  display: grid;
+  gap: 0.5em;
+
+  * {
+    color: var(--border-color-computed);
+  }
+
+  .input-box {
+    display: grid;
+    gap: 0.2em;
+  }
+
+  .input-wrapper {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+
+  .input {
+    appearance: none;
+    background-color: var(--card-background-color);
+    border: var(--card-border-size) solid #{colors.alpha(
+        var(--border-color-computed),
+        var(--border-opacity)
+      )};
+    font-size: inherit;
+    padding: var(--padding);
+
+    min-width: 0;
+    width: 100%;
+  }
+
+  &.state-error {
+    --border-opacity: 80%;
+    --border-color: var(--color-error);
+  }
+}

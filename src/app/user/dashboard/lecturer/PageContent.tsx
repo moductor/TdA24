@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import FixedBanner from "../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../components/widgets/ResultIndicator";
 import Button from "../../../../components/widgets/forms/Button";
+import TagsEditor from "../../../../components/widgets/forms/TagsEditor";
 import TextFieldList from "../../../../components/widgets/forms/TextFieldList";
 import TextFieldRow from "../../../../components/widgets/forms/TextFieldRow";
 import WysiwygEditor from "../../../../components/widgets/forms/WysiwygEditor";
 import { Lecturer } from "../../../../database/models/Lecturer";
+import { Tag } from "../../../../database/models/Tag";
 import { styleClasses } from "../../../../helpers/styleClasses";
 import DashboardSection from "../DashboardSection";
 import InputList from "../InputList";
@@ -256,6 +258,20 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             }));
           }}
         />
+      </DashboardSection>
+
+      <DashboardSection title="Tagy">
+        <TagsEditor
+          type="text"
+          disabled={sending}
+          tags={lecturer.tags?.map((tag) => tag.name)}
+          onChange={(tags: string[]) => {
+            setLecturer((lecturer) => ({
+              ...lecturer,
+              tags: tags.map((tag) => ({ name: tag }) as Tag),
+            }));
+          }}
+        ></TagsEditor>
       </DashboardSection>
 
       <DashboardSection title="Kontaktní údaje">
