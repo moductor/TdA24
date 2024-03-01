@@ -1,3 +1,4 @@
+import { ResponseCookie } from "next/dist/compiled/@edge-runtime/cookies";
 import { NextRequest, NextResponse } from "next/server";
 import {
   get,
@@ -8,7 +9,8 @@ import {
   update as updateUser,
 } from "../../../../database/functions/User";
 import { Error } from "../../../../database/models/Error";
-import { UserBase } from "../../../../database/models/User";
+import { User, UserBase } from "../../../../database/models/User";
+import { generateToken } from "../../../../helpers/generateToken";
 import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
 type Params = {
@@ -128,12 +130,24 @@ export async function PUT(
 
     const user = await update(params.uuid, data);
 
+    if ((user as any).conflict) {
+      return NextResponse.json(user, { status: 409 });
+    }
     console.log("  update user", user);
 
-    return NextResponse.json({
+    const res = NextResponse.json({
       ...user,
       username: data.username && data.password ? data.username : undefined,
     });
+
+    const cookieOptions: Partial<ResponseCookie> = {
+      path: "/",
+      sameSite: "strict",
+    };
+
+    res.cookies.set("JWT", generateToken(user as User), cookieOptions);
+
+    return res;
   } catch (e) {
     console.log("  error:", e);
 
