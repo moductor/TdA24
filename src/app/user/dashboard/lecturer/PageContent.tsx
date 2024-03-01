@@ -106,11 +106,16 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
   // useEffect(() => checkUniqueContact(), [lecturer]);
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        save();
+      }}
+    >
       <PageHeader title="Profil lektora">
         <FixedBanner>
           <div className={styleClasses(styles, "save-section")}>
-            <Button onClick={save}>Uložit změny</Button>
+            <Button>Uložit změny</Button>
             <ResultIndicator result={result} />
           </div>
         </FixedBanner>
@@ -277,9 +282,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
       <DashboardSection title="Kontaktní údaje">
         <InputList>
           <TextFieldList
-            type="text"
+            type="tel"
             label="Telefonní čísla"
             value={lecturer.contact.telephone_numbers}
+            pattern="(\+420|00420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}"
             // erroredValues={contactConflict?.telephone_numbers}
             errorText="Toto telefonní číslo již existuje"
             onChange={(value) => {
@@ -294,7 +300,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
           />
 
           <TextFieldList
-            type="text"
+            type="email"
             label="Emailové adresy"
             value={lecturer.contact.emails}
             // erroredValues={contactConflict?.emails}
@@ -311,6 +317,6 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
           />
         </InputList>
       </DashboardSection>
-    </>
+    </form>
   );
 }
