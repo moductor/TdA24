@@ -50,101 +50,108 @@ export default function EventDetailsDialog({
   }
 
   return (
-    <Dialog
-      show={show}
-      onBackdropClick={hide}
-      onCancel={hide}
-      className={styleClasses(styles, "dialog")}
-    >
-      <DialogCloseButton onClick={hide} />
-      <div>
-        {event && (
-          <DialogContentCustom className={styleClasses(styles, "content")}>
-            <dl>
-              <dt>Termín:</dt>
-              <dd>
-                {dateStart!.toLocaleDateString()}
-                <br />
-                {getTimes()}
-              </dd>
-
-              {isLecturer ? (
-                <>
-                  <dt>Jméno:</dt>
-                  <dd>{event.name}</dd>
-                </>
-              ) : (
-                <>
-                  <dt>Lektor:</dt>
-                  <dd>{event.lecturerName}</dd>
-                </>
-              )}
-
-              <dt>Email:</dt>
-              <dd>{event.email}</dd>
-
-              <dt>Telefon:</dt>
-              <dd>{event.telephone}</dd>
-
-              {event.note && (
-                <>
-                  <dt>Poznámka:</dt>
-                  <dd>{event.note}</dd>
-                </>
-              )}
-            </dl>
-          </DialogContentCustom>
-        )}
-        <DialogButtons className={styleClasses(styles, "buttons")}>
-          {isLecturer && (
-            <Button
-              variant="secondary"
-              icon="trash"
-              onClick={() => setDeleteActive(true)}
-            />
-          )}
-          <Button onClick={hide}>OK</Button>
-        </DialogButtons>
-      </div>
-
-      {isLecturer && (
-        <div
-          className={styleClasses(
-            styles,
-            "confirm",
-            deleteActive ? "active" : "",
-          )}
+    <>
+      {show && (
+        <Dialog
+          show={show}
+          onBackdropClick={hide}
+          onCancel={hide}
+          className={styleClasses(styles, "dialog")}
         >
-          <DialogContent
-            className={styleClasses(styles, "content")}
-            title="Zrušit lekci"
-            content="Skutečně chcete zrušit lekci?"
-          />
+          <DialogCloseButton onClick={hide} />
+          <div>
+            {event && (
+              <DialogContentCustom className={styleClasses(styles, "content")}>
+                <dl>
+                  <dt>Termín:</dt>
+                  <dd>
+                    {dateStart!.toLocaleDateString()}
+                    <br />
+                    {getTimes()}
+                  </dd>
 
-          <DialogButtons>
-            <Button variant="secondary" onClick={() => setDeleteActive(false)}>
-              Ne
-            </Button>
-            <Button
-              variant="destructive"
-              onClick={() => {
-                if (!cancelEvent) return;
-                setIsLoading(true);
-                cancelEvent();
-              }}
+                  {isLecturer ? (
+                    <>
+                      <dt>Jméno:</dt>
+                      <dd>{event.name}</dd>
+                    </>
+                  ) : (
+                    <>
+                      <dt>Lektor:</dt>
+                      <dd>{event.lecturerName}</dd>
+                    </>
+                  )}
+
+                  <dt>Email:</dt>
+                  <dd>{event.email}</dd>
+
+                  <dt>Telefon:</dt>
+                  <dd>{event.telephone}</dd>
+
+                  {event.note && (
+                    <>
+                      <dt>Poznámka:</dt>
+                      <dd>{event.note}</dd>
+                    </>
+                  )}
+                </dl>
+              </DialogContentCustom>
+            )}
+            <DialogButtons className={styleClasses(styles, "buttons")}>
+              {isLecturer && (
+                <Button
+                  variant="secondary"
+                  icon="trash"
+                  onClick={() => setDeleteActive(true)}
+                />
+              )}
+              <Button onClick={hide}>OK</Button>
+            </DialogButtons>
+          </div>
+
+          {isLecturer && (
+            <div
+              className={styleClasses(
+                styles,
+                "confirm",
+                deleteActive ? "active" : "",
+              )}
             >
-              Ano
-            </Button>
-          </DialogButtons>
-        </div>
-      )}
+              <DialogContent
+                className={styleClasses(styles, "content")}
+                title="Zrušit lekci"
+                content="Skutečně chcete zrušit lekci?"
+              />
 
-      <div
-        className={styleClasses(styles, "loading-pane")}
-        data-visible={isLoading ? "visible" : undefined}
-      >
-        <LoadingBar />
-      </div>
-    </Dialog>
+              <DialogButtons>
+                <Button
+                  variant="secondary"
+                  onClick={() => setDeleteActive(false)}
+                >
+                  Ne
+                </Button>
+                <Button
+                  variant="destructive"
+                  onClick={() => {
+                    if (!cancelEvent) return;
+                    setIsLoading(true);
+                    cancelEvent();
+                  }}
+                >
+                  Ano
+                </Button>
+              </DialogButtons>
+            </div>
+          )}
+
+          <div
+            className={styleClasses(styles, "loading-pane")}
+            data-visible={isLoading ? "visible" : undefined}
+          >
+            <LoadingBar />
+          </div>
+        </Dialog>
+      )}
+    </>
   );
 }
