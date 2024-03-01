@@ -52,6 +52,7 @@ export default function TextFieldRow({
   const [value, setValue] = useState<string | null | undefined>(initialValue);
 
   useEffect(() => setValue(defaultValue), [defaultValue]);
+  useEffect(() => setValue(initialValue), [initialValue]);
 
   useEffect(() => {
     if (!onChange) return;
