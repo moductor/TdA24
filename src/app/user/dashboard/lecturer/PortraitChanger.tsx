@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import LecturerPortrait from "../../../../components/partials/lecturer/LecturerPortrait";
-import Dialog from "../../../../components/widgets/Dialog";
 import LoadingBar from "../../../../components/widgets/LoadingBar";
+import Dialog from "../../../../components/widgets/dialogs/Dialog";
+import DialogButtons from "../../../../components/widgets/dialogs/DialogButtons";
+import DialogCloseButton from "../../../../components/widgets/dialogs/DialogCloseButton";
+import DialogContent from "../../../../components/widgets/dialogs/DialogContent";
+import DialogContentCustom from "../../../../components/widgets/dialogs/DialogContentCustom";
 import Button from "../../../../components/widgets/forms/Button";
 import TextFieldRow from "../../../../components/widgets/forms/TextFieldRow";
 import { Lecturer } from "../../../../database/models/Lecturer";
@@ -75,65 +79,74 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
       >
         <LoadingBar />
       </div>
-      {dialogModalDelete && (
-        <Dialog show={dialogModalDelete}>
-          <div className={styleClasses(styles, "dialog-text")}>
-            Opravdu chcete vymazat profilový obrázek?
-          </div>
-          <div className={styleClasses(styles, "dialog-btns")}>
-            <Button
-              variant="destructive"
-              onClick={async () => {
-                onDelete();
-                setdialogModalDelete(false);
-                document.querySelector("body")!.style.overflow = "";
-              }}
-            >
-              Odstranit
-            </Button>
-            <Button
-              onClick={() => {
-                setdialogModalDelete(false);
-                document.querySelector("body")!.style.overflow = "";
-              }}
-            >
-              Zrušit
-            </Button>
-          </div>
-        </Dialog>
-      )}
-      {dialogModalEdit && (
-        <Dialog show={dialogModalEdit}>
+
+      <Dialog
+        show={dialogModalDelete}
+        onBackdropClick={() => setdialogModalDelete(false)}
+        onCancel={() => setdialogModalDelete(false)}
+      >
+        <DialogCloseButton onClick={() => setdialogModalDelete(false)} />
+        <DialogContent
+          title="Odebrat profilový obrázek"
+          content="Opravdu chcete odebrat profilový obrázek?"
+        />
+        <DialogButtons>
+          <Button
+            onClick={() => setdialogModalDelete(false)}
+            variant="secondary"
+          >
+            Zrušit
+          </Button>
+          <Button
+            variant="destructive"
+            onClick={async () => {
+              onDelete();
+              setdialogModalDelete(false);
+            }}
+          >
+            Odstranit
+          </Button>
+        </DialogButtons>
+      </Dialog>
+
+      <Dialog
+        show={dialogModalEdit}
+        onBackdropClick={() => setdialogModalEdit(false)}
+        onCancel={() => setdialogModalEdit(false)}
+      >
+        <DialogCloseButton onClick={() => setdialogModalEdit(false)} />
+        <DialogContentCustom>
           <TextFieldRow
-            type="text"
+            type="url"
             value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
-            className={styleClasses(styles, "dialog-btns")}
+            onChange={(val) => setImageURL(val)}
           >
             Zadejte URL obrázku:
           </TextFieldRow>
-          <div className={styleClasses(styles, "dialog-btns")}>
-            <Button
-              onClick={async () => {
-                const url = imageURL;
-                if (!url) return;
+        </DialogContentCustom>
+        <DialogButtons>
+          <Button onClick={() => setdialogModalEdit(false)} variant="secondary">
+            Zrušit
+          </Button>
+          <Button
+            onClick={async () => {
+              const url = imageURL;
+              if (!url) return;
 
-                const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
-                  method: "PUT",
-                  body: JSON.stringify({ picture_url: url }),
-                });
-                setLecturerFromRes(res);
-                setImageURL("");
+              const res = await fetch(`/api/lecturers/${lecturer.uuid}`, {
+                method: "PUT",
+                body: JSON.stringify({ picture_url: url }),
+              });
+              setLecturerFromRes(res);
+              setImageURL("");
 
-                setdialogModalEdit(false);
-                document.querySelector("body")!.style.overflow = "";
-              }}
-            >
-              Potvrdit
-            </Button>
-          </div>
-        </Dialog>
-      )}
+              setdialogModalEdit(false);
+            }}
+          >
+            Potvrdit
+          </Button>
+        </DialogButtons>
+      </Dialog>
     </div>
   );
 }

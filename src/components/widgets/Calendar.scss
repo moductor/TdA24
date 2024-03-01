@@ -11,6 +11,11 @@ $jet: #333333;
   color: currentColor;
 }
 
+.fc {
+  width: 100%;
+  height: 100%;
+}
+
 .fc-scrollgrid-section > td,
 .fc-scrollgrid-section > th,
 .fc-scrollgrid {
@@ -109,4 +114,11 @@ th {
       order: 3;
     }
   }
+}
+
+.fc-event-selected::before,
+.fc-event:focus::before,
+.fc-event-selected::after,
+.fc-event:focus::after {
+  content: unset;
 }

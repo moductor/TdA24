@@ -8,6 +8,9 @@ export type EventBase = {
   name: string;
   email: string;
   telephone: string;
+  note?: string;
 };
 
 export type Event = WithUuid<EventBase>;
+
+export type EventRes = Event & { lecturerName?: string };

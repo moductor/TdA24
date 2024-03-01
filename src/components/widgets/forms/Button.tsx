@@ -15,6 +15,7 @@ type Props = {
     | "destructive"
     | "success";
   href?: string;
+  type?: "button" | "submit" | "reset";
   icon?: string;
   className?: string;
   onClick?: MouseEventHandler<HTMLElement>;
@@ -26,6 +27,7 @@ export default forwardRef<HTMLElement, Props>(function Button(
   {
     variant = "primary",
     href,
+    type,
     icon,
     className,
     onClick,
@@ -63,6 +65,7 @@ export default forwardRef<HTMLElement, Props>(function Button(
       data-button-variant={variant}
       ref={ref as Ref<HTMLButtonElement>}
       onClick={onClick}
+      type={type}
       {...props}
     >
       {content}

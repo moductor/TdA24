@@ -1,7 +1,9 @@
-import { Filter } from "mongodb";
+import { Filter, WithId } from "mongodb";
 import { getUuid, removeId, removeIds } from "../models/DB";
-import { Event, EventBase } from "../models/Event";
+import { Event, EventBase, EventRes } from "../models/Event";
+import { getNameString } from "../models/Lecturer";
 import DB from "./DB";
+import { get as getLecturer } from "./Lecturer";
 const db = DB.collection<Event>("event");
 
 export async function insertOne(event: EventBase): Promise<string> {
@@ -25,7 +27,9 @@ export async function insertOne(event: EventBase): Promise<string> {
   });
 
   if (existing) {
-    throw Error("other event exists in this time period for this lecturer");
+    throw Error("other event exists in this time period for this lecturer", {
+      cause: 409,
+    });
   }
 
   const item: Event = {
@@ -50,7 +54,7 @@ export type EventQuery = {
   dateTimeBefore?: Date;
 };
 
-export async function getAll(q: EventQuery): Promise<Event[]> {
+export async function getAll(q: EventQuery): Promise<EventRes[]> {
   if (!q.lecturerId && !q.userId) {
     throw Error("at least one of lecturerId or userId has to be defined");
   }
@@ -62,7 +66,16 @@ export async function getAll(q: EventQuery): Promise<Event[]> {
   if (q.dateTimeBefore) filter.dateTimeEnd = { $lte: q.dateTimeBefore };
 
   const items = await db.find(filter).toArray();
-  return removeIds(items);
+
+  const events: WithId<EventRes>[] = await Promise.all(
+    items.map(async (event) => {
+      const lecturer = (await getLecturer(event.lecturerId)) || undefined;
+      const name = lecturer && getNameString(lecturer);
+      return { ...event, lecturerName: name };
+    }),
+  );
+
+  return removeIds<EventRes>(events);
 }
 
 export async function update(

@@ -1,28 +1,19 @@
 "use client";
 
-import {
-  ChangeEvent,
-  HTMLInputTypeAttribute,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEventHandler, ReactNode } from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./TextFieldRow.module.scss";
 
 type Props = {
-  type: HTMLInputTypeAttribute;
   name?: string;
   className?: string;
   placeholder?: string;
   required?: boolean;
   showRequiredLabel?: boolean;
   emphasizeRequiredLabel?: boolean;
-  pattern?: string;
   disabled?: boolean;
   value?: string | null;
-  defaultValue?: string;
-  onChange?: (value: string) => unknown;
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>;
   errorState?: boolean;
   suffix?: ReactNode;
   infoText?: string;
@@ -30,18 +21,15 @@ type Props = {
   [prop: string]: any;
 };
 
-export default function TextFieldRow({
-  type,
+export default function TextAreaRow({
   name,
   className,
   placeholder,
   required,
   showRequiredLabel,
   emphasizeRequiredLabel,
-  pattern,
   disabled,
-  value: initialValue,
-  defaultValue,
+  value,
   onChange,
   errorState = false,
   suffix,
@@ -49,19 +37,6 @@ export default function TextFieldRow({
   children,
   ...props
 }: Props) {
-  const [value, setValue] = useState<string | null | undefined>(initialValue);
-
-  useEffect(() => setValue(defaultValue), [defaultValue]);
-
-  useEffect(() => {
-    if (!onChange) return;
-    onChange(value || "");
-  }, [value]);
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
-  }
-
   return (
     <label
       className={styleClasses(
@@ -92,17 +67,14 @@ export default function TextFieldRow({
 
       <span className={styleClasses(styles, "input-box")}>
         <span className={styleClasses(styles, "input-wrapper")}>
-          <input
+          <textarea
             className={styleClasses(styles, "input")}
-            type={type}
             name={name}
             placeholder={placeholder}
             required={required}
-            pattern={pattern}
             disabled={disabled}
             value={value === null ? undefined : value}
-            defaultValue={defaultValue}
-            onChange={handleChange}
+            onChange={onChange}
           />
 
           {suffix && (

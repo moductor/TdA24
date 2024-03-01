@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Footer from "../../../components/Footer";
 import Navbar from "../../../components/Navbar";
+import EventReservationButton from "../../../components/partials/lecturer/EventReservationButton";
 import LecturerBio from "../../../components/partials/lecturer/LecturerBio";
 import LecturerContact from "../../../components/partials/lecturer/LecturerContact";
 import LecturerMetadata from "../../../components/partials/lecturer/LecturerMetadata";
@@ -11,6 +12,7 @@ import BackgroundWrapper from "../../../components/widgets/BackgroundWrapper";
 import { get } from "../../../database/functions/Lecturer";
 import { getNameString } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import { getCurrentUserWithSession } from "../../../helpers/userContext";
 import styles from "./page.module.scss";
 
 type Params = {
@@ -23,6 +25,7 @@ type Props = {
 
 export default async function Page({ params }: Props) {
   const lecturer = await getLecturerForUUID(params.uuid);
+  const user = getCurrentUserWithSession();
 
   const isTagsEmpty: boolean =
     lecturer.tags == undefined || !(lecturer.tags.length > 0);
@@ -56,6 +59,11 @@ export default async function Page({ params }: Props) {
                 location={lecturer.location}
                 price={lecturer.price_per_hour}
                 className={styleClasses(styles, "metadata")}
+                suffix={
+                  user?.lecturerId ? undefined : (
+                    <EventReservationButton lecturerId={lecturer.uuid} />
+                  )
+                }
               />
             </div>
           </header>
