@@ -6,14 +6,15 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 
 import { EventInput } from "@fullcalendar/core/index.js";
 import { MouseEvent, useRef } from "react";
-import { Event } from "../../database/models/Event";
+import { Event, EventRes } from "../../database/models/Event";
 import { styleClasses } from "../../helpers/styleClasses";
 import "./Calendar.scss";
 
 type Props = {
-  isLecturer?: boolean;
+  hideAddEvent?: boolean;
   // events?: { title: string; date: string }[];
-  events?: Event[];
+  events?: EventRes[];
+  useTitle?: "user" | "lecturer";
   onAddEvent?: (date?: Date) => void;
   cancelButtonLabel?: string;
   onCancel?: () => void;
@@ -22,8 +23,9 @@ type Props = {
 };
 
 export default function Calendar({
-  isLecturer = false,
+  hideAddEvent = false,
   events = [],
+  useTitle,
   onAddEvent,
   cancelButtonLabel,
   onCancel,
@@ -33,12 +35,20 @@ export default function Calendar({
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   function convertEvents(): EventInput[] {
-    return events.map((event) => ({
-      id: event.uuid,
-      date: event.dateTimeStart,
-      start: event.dateTimeStart,
-      end: event.dateTimeEnd,
-    }));
+    return events.map((event) => {
+      const res: EventInput = {
+        id: event.uuid,
+        date: event.dateTimeStart,
+        start: event.dateTimeStart,
+        end: event.dateTimeEnd,
+      };
+
+      if (useTitle) {
+        res.title = useTitle == "user" ? event.name : event.lecturerName;
+      }
+
+      return res;
+    });
   }
 
   function handleClick(e: MouseEvent<HTMLDivElement>) {
@@ -92,7 +102,7 @@ export default function Calendar({
         }}
         locale={"cs"}
         headerToolbar={{
-          start: isLecturer ? "today" : "addEventButton today",
+          start: hideAddEvent ? "today" : "addEventButton today",
           center: "title",
           end:
             "dayGridMonth,timeGridWeek,timeGridDay prev,next" +
