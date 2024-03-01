@@ -17,17 +17,17 @@ export default async function Page() {
     }
   }
 
-  const events = [
-    { title: "event 1", date: "2024-02-01" },
-    { title: "event 2", date: "2024-02-22" },
-  ];
+  // const events = [
+  //   { title: "event 1", date: "2024-02-01" },
+  //   { title: "event 2", date: "2024-02-22" },
+  // ];
 
   return (
     <>
       <PageHeader title="Rezervované schůzky" />
 
       <DashboardSection title="Kalendář schůzek">
-        <Calendar isLecturer={isLecturer} events={events} />
+        <Calendar isLecturer={isLecturer} />
       </DashboardSection>
     </>
   );
