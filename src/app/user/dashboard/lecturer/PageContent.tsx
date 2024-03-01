@@ -129,10 +129,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 type="text"
                 disabled={sending}
                 value={lecturer.title_before}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    title_before: val || undefined,
+                    title_before: e.target.value || undefined,
                   }))
                 }
               >
@@ -144,10 +144,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 disabled={sending}
                 value={lecturer.first_name}
                 required={true}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    first_name: val,
+                    first_name: e.target.value,
                   }))
                 }
               >
@@ -158,10 +158,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 type="text"
                 disabled={sending}
                 value={lecturer.middle_name}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    middle_name: val || undefined,
+                    middle_name: e.target.value || undefined,
                   }))
                 }
               >
@@ -173,10 +173,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 disabled={sending}
                 value={lecturer.last_name}
                 required={true}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    last_name: val,
+                    last_name: e.target.value,
                   }))
                 }
               >
@@ -187,10 +187,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 type="text"
                 disabled={sending}
                 value={lecturer.title_after}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    title_after: val || undefined,
+                    title_after: e.target.value || undefined,
                   }))
                 }
               >
@@ -201,10 +201,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                 type="text"
                 disabled={sending}
                 value={lecturer.claim}
-                onChange={(val) =>
+                onChange={(e) =>
                   setLecturer((lecturer) => ({
                     ...lecturer,
-                    claim: val || undefined,
+                    claim: e.target.value || undefined,
                   }))
                 }
               >
@@ -222,10 +222,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             type="text"
             disabled={sending}
             value={lecturer.location}
-            onChange={(val) =>
+            onChange={(e) =>
               setLecturer((lecturer) => ({
                 ...lecturer,
-                location: val || undefined,
+                location: e.target.value || undefined,
               }))
             }
           >
@@ -236,8 +236,10 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
             type="number"
             disabled={sending}
             value={lecturer.price_per_hour?.toString()}
-            onChange={(val) => {
-              const value = val ? parseInt(val) : undefined;
+            onChange={(e) => {
+              const value = e.target.value
+                ? parseInt(e.target.value)
+                : undefined;
               if (Number.isNaN(value)) return;
 
               setLecturer((lecturer) => ({

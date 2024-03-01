@@ -88,7 +88,7 @@ export default function TextFieldList({
                 type={type}
                 value={item}
                 pattern={pattern}
-                onChange={(val) => handleChange(index, val)}
+                onChange={(e) => handleChange(index, e.target.value)}
                 errorState={isErrored}
                 infoText={isErrored ? errorText : undefined}
                 suffix={
@@ -115,7 +115,7 @@ export default function TextFieldList({
           type={type}
           placeholder="Přidat…"
           value={""}
-          onChange={(val) => addItem(val)}
+          onChange={(e) => addItem(e.target.value)}
         />
       </div>
     </div>

@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ChangeEvent,
-  HTMLInputTypeAttribute,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEventHandler, HTMLInputTypeAttribute, ReactNode } from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./TextFieldRow.module.scss";
 
@@ -22,7 +16,7 @@ type Props = {
   disabled?: boolean;
   value?: string | null;
   defaultValue?: string;
-  onChange?: (value: string) => unknown;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   errorState?: boolean;
   suffix?: ReactNode;
   infoText?: string;
@@ -40,7 +34,7 @@ export default function TextFieldRow({
   emphasizeRequiredLabel,
   pattern,
   disabled,
-  value: initialValue,
+  value,
   defaultValue,
   onChange,
   errorState = false,
@@ -49,20 +43,6 @@ export default function TextFieldRow({
   children,
   ...props
 }: Props) {
-  const [value, setValue] = useState<string | null | undefined>(initialValue);
-
-  useEffect(() => setValue(defaultValue), [defaultValue]);
-  useEffect(() => setValue(initialValue), [initialValue]);
-
-  useEffect(() => {
-    if (!onChange) return;
-    onChange(value || "");
-  }, [value]);
-
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
-  }
-
   return (
     <label
       className={styleClasses(
@@ -103,7 +83,7 @@ export default function TextFieldRow({
             disabled={disabled}
             value={value === null ? undefined : value}
             defaultValue={defaultValue}
-            onChange={handleChange}
+            onChange={onChange}
           />
 
           {suffix && (

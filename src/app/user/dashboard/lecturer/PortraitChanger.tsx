@@ -119,7 +119,7 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
           <TextFieldRow
             type="url"
             value={imageURL}
-            onChange={(val) => setImageURL(val)}
+            onChange={(e) => setImageURL(e.target.value)}
           >
             Zadejte URL obrázku:
           </TextFieldRow>
