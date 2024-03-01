@@ -7,6 +7,7 @@ import { Event } from "../../../../database/models/Event";
 import { getEndpoint } from "../../../../helpers/endpointUrl";
 import DashboardSection from "../DashboardSection";
 import PageHeader from "../PageHeader";
+import EventDetailsDialog from "./EventDetailsDialog";
 
 type Props = {
   userId: string;
@@ -15,6 +16,10 @@ type Props = {
 
 export default function PageContent({ userId, lecturerId }: Props) {
   const [events, setEvents] = useState<Event[] | undefined>(undefined);
+
+  const [detailedEvent, setDetailedEvent] = useState<Event | undefined>(
+    undefined,
+  );
 
   useEffect(() => {
     loadEvents();
@@ -32,8 +37,20 @@ export default function PageContent({ userId, lecturerId }: Props) {
     setEvents((await res.json()) as Event[]);
   }
 
+  async function cancelEvent() {
+    if (!detailedEvent) return;
+
+    const res = await fetch(getEndpoint(`/api/event/${detailedEvent.uuid}`), {
+      method: "DELETE",
+    });
+
+    setDetailedEvent(undefined);
+    loadEvents();
+  }
+
   function onEventClick(event: Event) {
     console.log(event);
+    setDetailedEvent(event);
   }
 
   return (
@@ -50,6 +67,14 @@ export default function PageContent({ userId, lecturerId }: Props) {
           onEventClick={onEventClick}
         />
       </DashboardSection>
+
+      <EventDetailsDialog
+        show={Boolean(detailedEvent)}
+        hide={() => setDetailedEvent(undefined)}
+        cancelEvent={cancelEvent}
+        event={detailedEvent}
+        isLecturer={Boolean(lecturerId)}
+      />
     </>
   );
 }

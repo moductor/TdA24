@@ -1,0 +1,61 @@
+.dialog > * {
+  max-height: inherit;
+  overflow: hidden;
+
+  > div {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.content {
+  overflow-y: auto;
+
+  dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1rem;
+
+    dt {
+      grid-column: 1;
+      font-weight: 700;
+    }
+  }
+}
+
+.buttons {
+  justify-content: space-between;
+}
+
+.confirm {
+  position: absolute;
+  inset: 0;
+  background-color: inherit;
+
+  .content {
+    margin-block: auto;
+  }
+
+  &:not(.active) {
+    translate: 0 25%;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  transition: all 0.2s ease;
+}
+
+.loading-pane {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  border-radius: var(--card-border-radius);
+  backdrop-filter: blur(2px);
+  transition: opacity 0.2s ease;
+
+  &:not([data-visible="visible"]) {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
