@@ -83,6 +83,7 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
       <Dialog
         show={dialogModalDelete}
         onBackdropClick={() => setdialogModalDelete(false)}
+        onCancel={() => setdialogModalDelete(false)}
       >
         <DialogCloseButton onClick={() => setdialogModalDelete(false)} />
         <DialogContent
@@ -111,13 +112,14 @@ export default function PortraitChanger({ lecturer: lecturerBase }: Props) {
       <Dialog
         show={dialogModalEdit}
         onBackdropClick={() => setdialogModalEdit(false)}
+        onCancel={() => setdialogModalEdit(false)}
       >
         <DialogCloseButton onClick={() => setdialogModalEdit(false)} />
         <DialogContentCustom>
           <TextFieldRow
             type="url"
             value={imageURL}
-            onChange={(e) => setImageURL(e.target.value)}
+            onChange={(val) => setImageURL(val)}
           >
             Zadejte URL obrázku:
           </TextFieldRow>
