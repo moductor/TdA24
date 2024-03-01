@@ -181,6 +181,18 @@ export default function Icon({ icon, className, ...props }: Props) {
         </svg>
       );
 
+    case "check":
+      return (
+        <svg
+          className={styleClasses(styles, "icon", className || "")}
+          viewBox="0 0 16 16"
+          xmlns="http://www.w3.org/2000/svg"
+          {...props}
+        >
+          <path d="m 15 3.484375 l -1 -1 l -7.46875 7.515625 l -3.414062 -3.476562 l -2 2 l 5.414062 5.476562 l 9.46875 -9.515625 z m 0 0" />
+        </svg>
+      );
+
     default:
       return <></>;
   }
