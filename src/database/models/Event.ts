@@ -12,3 +12,5 @@ export type EventBase = {
 };
 
 export type Event = WithUuid<EventBase>;
+
+export type EventRes = Event & { lecturerName?: string };
