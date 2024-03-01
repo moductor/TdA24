@@ -1,34 +1,11 @@
-import Calendar from "../../../../components/widgets/Calendar";
-import DashboardSection from "../DashboardSection";
-import PageHeader from "../PageHeader";
-
 import { get } from "../../../../database/functions/Lecturer";
 import { getCurrentUserWithSession } from "../../../../helpers/userContext";
+import PageContent from "./PageContent";
 
 export default async function Page() {
-  let isLecturer = false;
+  const user = getCurrentUserWithSession()!;
 
-  const user = getCurrentUserWithSession();
-  if (user?.lecturerId) {
-    const lecturer = await get(user.lecturerId);
-    if (lecturer) {
-      //const lecturerStr = JSON.stringify(lecturer);
-      isLecturer = true;
-    }
-  }
+  const lecturer = user?.lecturerId ? await get(user.lecturerId) : undefined;
 
-  // const events = [
-  //   { title: "event 1", date: "2024-02-01" },
-  //   { title: "event 2", date: "2024-02-22" },
-  // ];
-
-  return (
-    <>
-      <PageHeader title="Rezervované schůzky" />
-
-      <DashboardSection title="Kalendář schůzek">
-        <Calendar isLecturer={isLecturer} />
-      </DashboardSection>
-    </>
-  );
+  return <PageContent userId={user.uuid} lecturerId={lecturer?.uuid} />;
 }
