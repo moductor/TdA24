@@ -35,9 +35,7 @@ export default function HomeView({
 
   useEffect(() => {
     (async () => {
-      console.log(filters);
       const data = await fetchLecturers(undefined, filters);
-      console.log(data);
       setLecturers(data);
     })();
   }, [filters]);
