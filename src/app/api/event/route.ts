@@ -45,7 +45,16 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 }
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
-  const data = (await request.json()) as EventBase;
+  const inputData = (await request.json()) as EventBase & {
+    dateTimeStart: string;
+    dateTimeEnd: string;
+  };
+
+  const data: EventBase = {
+    ...inputData,
+    dateTimeStart: new Date(Date.parse(inputData.dateTimeStart)),
+    dateTimeEnd: new Date(Date.parse(inputData.dateTimeEnd)),
+  };
 
   try {
     const id = await insertOne(data);
@@ -54,11 +63,13 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
   } catch (e) {
     console.log(e);
 
+    const status = (e as any).cause || 400;
+
     const error: ErrorRes = {
-      code: 400,
+      code: status,
       message: `Error: ${(e as any)["message"] || "unknown"}`,
     };
 
-    return NextResponse.json(error, { status: 400 });
+    return NextResponse.json(error, { status: status });
   }
 }
