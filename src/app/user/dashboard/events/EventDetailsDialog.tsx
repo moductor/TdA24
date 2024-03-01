@@ -36,6 +36,7 @@ export default function EventDetailsDialog({
   useEffect(() => {
     setIsLoading(false);
     setDeleteActive(false);
+    if (!show) document.body.style.removeProperty("overflow");
   }, [show]);
 
   function getTimes() {
