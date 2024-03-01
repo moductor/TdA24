@@ -59,11 +59,13 @@ export function isAuthorized(
   return false;
 }
 
-function checkToken(
-  token: string,
+export function checkToken(
+  token?: string,
   neededUserId?: string,
   neededLecturerId?: string,
 ): boolean {
+  if (!token) return false;
+
   const res = getUserFromToken(token);
   if (!res) return false;
 

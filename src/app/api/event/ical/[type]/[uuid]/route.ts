@@ -6,6 +6,12 @@ import {
 } from "../../../../../../database/functions/Event";
 import { get as getLecturer } from "../../../../../../database/functions/Lecturer";
 import { get as getUser } from "../../../../../../database/functions/User";
+import { generateToken } from "../../../../../../helpers/generateToken";
+import {
+  checkToken,
+  getUnauthorizedError,
+  isAuthorized,
+} from "../../../../checkAuthenticated";
 
 type Params = {
   type: string;
@@ -17,11 +23,16 @@ type Props = {
 };
 
 export async function GET(
-  _: NextRequest,
+  request: NextRequest,
   { params }: Props,
 ): Promise<NextResponse> {
   if (!["lecturer", "user"].includes(params.type)) {
     return new NextResponse(null, { status: 404 });
+  }
+
+  const jwt = request.nextUrl.searchParams.get("token") || undefined;
+  if (!getAuthorizedForToken(jwt, params.type, params.uuid)) {
+    return getUnauthorizedError();
   }
 
   const query = await getEventQuery(params.type, params.uuid);
@@ -54,6 +65,19 @@ export async function GET(
   });
 }
 
+export function POST(request: NextRequest, { params }: Props): NextResponse {
+  if (!["lecturer", "user"].includes(params.type)) {
+    return new NextResponse(null, { status: 404 });
+  }
+
+  if (!getAuthorizedForSession(request, params.type, params.uuid)) {
+    return getUnauthorizedError();
+  }
+
+  const token = generateToken(getTokenData(params.type, params.uuid));
+  return new NextResponse(`${request.url}?token=${token}`);
+}
+
 async function getEventQuery(
   type: string,
   uuid: string,
@@ -67,4 +91,28 @@ async function getEventQuery(
     if (!user) return;
     return { userId: user.uuid };
   }
+}
+
+function getAuthorizedForToken(
+  jwt: string | undefined,
+  type: string,
+  uuid: string,
+): boolean {
+  return type == "lecturer"
+    ? checkToken(jwt, undefined, uuid)
+    : checkToken(jwt, uuid);
+}
+
+function getAuthorizedForSession(
+  request: NextRequest,
+  type: string,
+  uuid: string,
+): boolean {
+  return type == "lecturer"
+    ? isAuthorized(request, undefined, uuid)
+    : isAuthorized(request, uuid);
+}
+
+function getTokenData(type: string, uuid: string): any {
+  return type == "lecturer" ? { lecturerId: uuid } : { uuid };
 }
