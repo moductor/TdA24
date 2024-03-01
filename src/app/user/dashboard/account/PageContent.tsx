@@ -95,10 +95,10 @@ export default function PageContent({ user, getUser }: Props) {
                 type="text"
                 disabled={sending}
                 value={userState.username}
-                onChange={(e) =>
+                onChange={(val) =>
                   setUserState((user) => ({
                     ...user,
-                    username: e.target.value,
+                    username: val,
                   }))
                 }
               >
@@ -109,10 +109,10 @@ export default function PageContent({ user, getUser }: Props) {
                 type="email"
                 disabled={sending}
                 value={userState.email}
-                onChange={(e) =>
+                onChange={(val) =>
                   setUserState((user) => ({
                     ...user,
-                    email: e.target.value || undefined,
+                    email: val || undefined,
                   }))
                 }
               >
@@ -123,10 +123,10 @@ export default function PageContent({ user, getUser }: Props) {
                 disabled={sending}
                 pattern="(\+420|00420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}"
                 value={userState.telephone}
-                onChange={(e) =>
+                onChange={(val) =>
                   setUserState((user) => ({
                     ...user,
-                    telephone: e.target.value || undefined,
+                    telephone: val || undefined,
                   }))
                 }
               >
