@@ -66,37 +66,23 @@ export default function PageContent({ user, getUser }: Props) {
       body: JSON.stringify(data),
     });
 
-    if (res.status == 200) {
-      const res = await fetch(`/api/user/${userState.uuid}`, {
-        method: "GET",
-      });
-      console.log(res.json);
-    }
-
     setResult(res.status == 200);
     clearResultTimeout = setTimeout(() => setResult(undefined), 2000);
     setHasChanged(false);
   }
 
   return (
-    <>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        save();
+      }}
+    >
       <PageHeader title="Uživatelské nastavení">
         <FixedBanner>
           <div className={styleClasses(styles, "save-section")}>
-            <Button onClick={save}>Uložit změny</Button>
+            <Button>Uložit změny</Button>
             <ResultIndicator result={result} />
-            <Button
-              onClick={async () => {
-                console.log(userState);
-                console.log(getUser);
-                console.log("API: GET /api/user/[uuid], uuid:", userState.uuid);
-                const res = await fetch(`/api/user/${userState.uuid}`, {
-                  method: "GET",
-                });
-              }}
-            >
-              Log
-            </Button>
           </div>
         </FixedBanner>
       </PageHeader>
@@ -135,6 +121,7 @@ export default function PageContent({ user, getUser }: Props) {
               <TextFieldRow
                 type="tel"
                 disabled={sending}
+                pattern="(\+420|00420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}"
                 value={userState.telephone}
                 onChange={(e) =>
                   setUserState((user) => ({
@@ -149,6 +136,6 @@ export default function PageContent({ user, getUser }: Props) {
           </div>
         </div>
       </DashboardSection>
-    </>
+    </form>
   );
 }
