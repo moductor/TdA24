@@ -100,6 +100,7 @@ export default function EventReservationDialog({
         lecturerId,
         dateTimeStart,
         dateTimeEnd,
+        userId: user?.uuid,
         name,
         email,
         telephone,
