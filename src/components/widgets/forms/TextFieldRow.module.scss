@@ -55,10 +55,16 @@
         var(--border-opacity)
       )};
     font-size: inherit;
+    font-family: inherit;
     padding: var(--padding);
 
     min-width: 0;
     width: 100%;
+
+    &:is(textarea) {
+      resize: vertical;
+      min-height: 6em;
+    }
   }
 
   .suffix {
