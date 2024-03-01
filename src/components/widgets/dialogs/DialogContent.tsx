@@ -17,7 +17,12 @@ export default function DialogContent({
 }: Props) {
   return (
     <DialogContentCustom
-      className={styleClasses(styles, "content-flow", "custom-margin")}
+      className={styleClasses(
+        styles,
+        "content-flow",
+        "custom-margin",
+        className || "",
+      )}
       {...props}
     >
       {title && (
