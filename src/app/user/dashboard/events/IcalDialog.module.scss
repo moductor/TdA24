@@ -1,0 +1,21 @@
+.copy-button {
+  appearance: none;
+  border: 2px solid var(--card-border-color);
+  background-color: var(--card-background-color);
+  font-size: 1rem;
+  padding: 0.2em;
+  cursor: pointer;
+
+  > * {
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  &:hover > * {
+    opacity: 1;
+  }
+
+  .success {
+    color: var(--color-success);
+  }
+}

@@ -8,6 +8,7 @@ import { getEndpoint } from "../../../../helpers/endpointUrl";
 import DashboardSection from "../DashboardSection";
 import PageHeader from "../PageHeader";
 import EventDetailsDialog from "./EventDetailsDialog";
+import IcalDialog from "./IcalDialog";
 
 type Props = {
   userId: string;
@@ -15,11 +16,14 @@ type Props = {
 };
 
 export default function PageContent({ userId, lecturerId }: Props) {
+  const isLecturer = Boolean(lecturerId);
+
   const [events, setEvents] = useState<Event[] | undefined>(undefined);
 
   const [detailedEvent, setDetailedEvent] = useState<Event | undefined>(
     undefined,
   );
+  const [showIcal, setShowIcal] = useState(true);
 
   useEffect(() => {
     loadEvents();
@@ -54,16 +58,16 @@ export default function PageContent({ userId, lecturerId }: Props) {
   }
 
   return (
-    <>
+    <div>
       <PageHeader title="Rezervované schůzky">
-        <Button>ICAL</Button>
+        <Button onClick={() => setShowIcal(true)}>Stáhnout</Button>
       </PageHeader>
 
       <DashboardSection>
         <Calendar
           hideAddEvent={true}
           events={events}
-          useTitle={lecturerId ? "user" : "lecturer"}
+          useTitle={isLecturer ? "user" : "lecturer"}
           onEventClick={onEventClick}
         />
       </DashboardSection>
@@ -73,8 +77,15 @@ export default function PageContent({ userId, lecturerId }: Props) {
         hide={() => setDetailedEvent(undefined)}
         cancelEvent={cancelEvent}
         event={detailedEvent}
-        isLecturer={Boolean(lecturerId)}
+        isLecturer={isLecturer}
       />
-    </>
+
+      <IcalDialog
+        show={showIcal}
+        hide={() => setShowIcal(false)}
+        isLecturer={isLecturer}
+        uuid={lecturerId || userId}
+      />
+    </div>
   );
 }
