@@ -1,4 +1,11 @@
-import { MouseEvent, MouseEventHandler, useEffect, useRef } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  ReactEventHandler,
+  SyntheticEvent,
+  useEffect,
+  useRef,
+} from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
 import Card from "../Card";
 import styles from "./Dialog.module.scss";
@@ -8,6 +15,7 @@ type Props = Readonly<{
   className?: string;
   children?: React.ReactNode;
   onBackdropClick?: MouseEventHandler<HTMLDialogElement>;
+  onCancel?: ReactEventHandler<HTMLDialogElement>;
   [prop: string]: any;
 }>;
 
@@ -16,6 +24,7 @@ export default function Dialog({
   className,
   children,
   onBackdropClick,
+  onCancel,
   ...props
 }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -27,10 +36,18 @@ export default function Dialog({
       document.body.style.setProperty("overflow", "hidden");
       dialog.showModal();
     } else {
-      document.body.style.removeProperty("overflow");
       dialog.close();
     }
   }, [show]);
+
+  function handleClose() {
+    document.body.style.removeProperty("overflow");
+  }
+
+  function handleCancel(e: SyntheticEvent<HTMLDialogElement, Event>) {
+    e.preventDefault();
+    if (onCancel) onCancel(e);
+  }
 
   function handleClick(e: MouseEvent<HTMLDialogElement>) {
     const inDialog =
@@ -44,6 +61,8 @@ export default function Dialog({
   return (
     <dialog
       ref={dialogRef}
+      onClose={handleClose}
+      onCancel={handleCancel}
       onClick={handleClick}
       className={styleClasses(styles, "dialog", className || "")}
       {...props}

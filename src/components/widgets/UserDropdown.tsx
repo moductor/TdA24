@@ -101,6 +101,7 @@ export default function UserDropdown({ user }: Props) {
       <Dialog
         show={dialogModalVisible}
         onBackdropClick={() => setDialogModalVisible(false)}
+        onCancel={() => setDialogModalVisible(false)}
       >
         <DialogCloseButton onClick={() => setDialogModalVisible(false)} />
         <DialogContent
