@@ -71,7 +71,7 @@ export async function update(
   if (user.telephone) filters.push({ telephone: user.telephone });
 
   const existing = await db.findOne({ $or: filters });
-  if (existing) {
+  if (existing && existing.uuid != uuid) {
     return {
       conflict: {
         username:

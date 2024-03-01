@@ -39,8 +39,6 @@ export default function HomeItem({
     if (reversedIndex != 0) return;
 
     const observer = new IntersectionObserver(([entry], observer) => {
-      console.log("Observing!", entry.isIntersecting);
-
       if (!entry.isIntersecting) return;
       observer.unobserve(entry.target);
       loadMoreCB();

@@ -15,6 +15,7 @@ type Props = {
   erroredValues?: string[];
   errorText?: string;
   onChange?: (value: string[]) => void;
+  pattern?: string;
 };
 
 export default function TextFieldList({
@@ -25,6 +26,7 @@ export default function TextFieldList({
   erroredValues: initialErrored,
   errorText,
   onChange,
+  pattern,
 }: Props) {
   const [values, setValues] = useState(initialValue);
   const [erroredValues, setErroredValues] = useState(initialErrored);
@@ -85,6 +87,7 @@ export default function TextFieldList({
                 className={styleClasses(styles, "field")}
                 type={type}
                 value={item}
+                pattern={pattern}
                 onChange={(e) => handleChange(index, e.target.value)}
                 errorState={isErrored}
                 infoText={isErrored ? errorText : undefined}
