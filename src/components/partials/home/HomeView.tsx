@@ -45,7 +45,9 @@ export default function HomeView({
   return (
     <div className={styleClasses(styles, "view", className || "")} {...props}>
       <FixedBanner className={styleClasses(styles, "show-filters-section")}>
-        <Button onClick={() => setFiltersSheetVisible(true)}>Filtry</Button>
+        <div>
+          <Button onClick={() => setFiltersSheetVisible(true)}>Filtry</Button>
+        </div>
       </FixedBanner>
 
       <HomeFilters
