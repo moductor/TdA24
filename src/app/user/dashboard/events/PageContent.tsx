@@ -23,7 +23,7 @@ export default function PageContent({ userId, lecturerId }: Props) {
   const [detailedEvent, setDetailedEvent] = useState<Event | undefined>(
     undefined,
   );
-  const [showIcal, setShowIcal] = useState(true);
+  const [showIcal, setShowIcal] = useState(false);
 
   useEffect(() => {
     loadEvents();
