@@ -12,7 +12,7 @@ export type UserBase = {
 export type User = WithUuid<UserBase>;
 
 export type UserInsertErrorResponse = {
-  conflict?: {
+  conflict: {
     username: boolean;
     lecturerId: boolean;
     email: boolean;
