@@ -25,7 +25,9 @@ export async function insertOne(event: EventBase): Promise<string> {
   });
 
   if (existing) {
-    throw Error("other event exists in this time period for this lecturer");
+    throw Error("other event exists in this time period for this lecturer", {
+      cause: 409,
+    });
   }
 
   const item: Event = {
