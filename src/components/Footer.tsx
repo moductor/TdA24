@@ -17,7 +17,7 @@ export default function Footer() {
         <div>
           <Link
             href="/"
-            title={t("logo-link")}
+            title={t("logoLink")}
             className={styleClasses(styles, "logo-link")}
           >
             <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />

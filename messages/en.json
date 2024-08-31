@@ -4,7 +4,7 @@
     "title": "Your <span>education</span> is in good hands with us!"
   },
   "Footer": {
-    "logo-link": "Go to homepage",
+    "logoLink": "Go to homepage",
     "gdpr": "Privacy Policy",
     "tos": "Terms of Service"
   },
