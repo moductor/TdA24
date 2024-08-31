@@ -13,6 +13,9 @@
   @media (prefers-color-scheme: light) {
     --border-lightness: 80%;
   }
+
+  min-height: 3rem;
+  min-width: 3rem;
 }
 
 .profile-button {
