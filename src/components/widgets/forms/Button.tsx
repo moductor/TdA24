@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { MouseEventHandler, ReactNode, Ref, forwardRef } from "react";
 import { styleClasses } from "../../../helpers/styleClasses";
+import { Link } from "../../../i18n/routing";
 import Icon from "../Icon";
 import styles from "./Button.module.scss";
 

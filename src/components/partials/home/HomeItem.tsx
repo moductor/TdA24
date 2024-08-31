@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Card from "../../../components/widgets/Card";
 import {
@@ -6,6 +5,7 @@ import {
   type Lecturer as LecturerModel,
 } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import { Link } from "../../../i18n/routing";
 import LecturerMetadata from "../lecturer/LecturerMetadata";
 import LecturerPortrait from "../lecturer/LecturerPortrait";
 import styles from "./HomeItem.module.scss";

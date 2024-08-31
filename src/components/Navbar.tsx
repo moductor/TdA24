@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+
 import { styleClasses } from "../helpers/styleClasses";
+import { Link } from "../i18n/routing";
 import styles from "./Navbar.module.scss";
 import Logo from "./widgets/Logo";
 import UserDropdownWrapper from "./widgets/UserDropdownWrapper";
