@@ -16,7 +16,7 @@ export default function Layout({ children }: Props) {
   if (!user) return redirect("/user/auth/login");
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
-  const t = useTranslations("Dashboard.links");
+  const t = useTranslations("Dashboard");
 
   const links: Link[] = [
     {
