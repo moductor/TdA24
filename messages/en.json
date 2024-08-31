@@ -68,11 +68,9 @@
     "contact": "Contacts"
   },
   "Dashboard": {
-    "links": {
-      "events": "Reserved meetings",
-      "account": "User settings",
-      "lecturer": "Lecturer profile"
-    }
+    "eventsTitle": "Reserved meetings",
+    "accountTitle": "User settings",
+    "lecturerTitle": "Lecturer profile"
   },
   "tos": {
     "title": "Terms of Service",

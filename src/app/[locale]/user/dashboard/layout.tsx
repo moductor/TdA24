@@ -20,18 +20,18 @@ export default function Layout({ children }: Props) {
 
   const links: Link[] = [
     {
-      title: t("events"),
+      title: t("eventsTitle"),
       path: "/user/dashboard/events",
     },
     {
-      title: t("account"),
+      title: t("accountTitle"),
       path: "/user/dashboard/account",
     },
   ];
 
   if (user.lecturerId) {
     links.push({
-      title: t("lecturer"),
+      title: t("lecturerTitle"),
       path: "/user/dashboard/lecturer",
     });
   }

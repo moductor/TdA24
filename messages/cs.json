@@ -68,11 +68,9 @@
     "contact": "Kontakt"
   },
   "Dashboard": {
-    "links": {
-      "events": "Rezervované schůzky",
-      "account": "Uživatelská nastavení",
-      "lecturer": "Profil lektora"
-    }
+    "eventsTitle": "Rezervované schůzky",
+    "accountTitle": "Uživatelská nastavení",
+    "lecturerTitle": "Profil lektora"
   },
   "tos": {
     "title": "Podmínky používání",
