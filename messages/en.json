@@ -5,7 +5,9 @@
   },
   "HomeView": {
     "filters": "Filters",
-    "noLecturers": "No lecturers matching the criteria were found. Please adjust the filter values."
+    "noLecturers": "No lecturers matching the criteria were found. Please adjust the filter values.",
+    "showMore": "Show more",
+    "lecturerLink": "Go to the lecturer's profile"
   },
   "Filters": {
     "price": "Price",

@@ -14,6 +14,7 @@ type Props = Readonly<{
   filters: LecturerFilters;
   className?: string;
   noLecturerText: string;
+  t: { showMore: string; lecturerLink: string; noLecturer: string };
   [prop: string]: any;
 }>;
 
@@ -22,6 +23,7 @@ export default function HomeList({
   filters,
   className,
   noLecturerText,
+  t,
   ...props
 }: Props) {
   const [loading, setLoading] = useState(false);
@@ -66,6 +68,7 @@ export default function HomeList({
             className={styleClasses(styles, "item")}
             lecturer={lecturer}
             loadMoreCB={loadMore}
+            t={{ showMore: t.showMore, lecturerLink: t.lecturerLink }}
           />
         );
       })}
@@ -74,7 +77,7 @@ export default function HomeList({
     </>
   ) : (
     <div className={styleClasses(styles, "empty-state", "item")}>
-      {noLecturerText}
+      {t.noLecturer}
     </div>
   );
 

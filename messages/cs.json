@@ -5,7 +5,9 @@
   },
   "HomeView": {
     "filters": "Filtry",
-    "noLecturers": "Nebyli nalezeni žádní lektoři odpovídající zadání. Zkuste upravit hodnoty filtrů."
+    "noLecturers": "Nebyli nalezeni žádní lektoři odpovídající zadání. Zkuste upravit hodnoty filtrů.",
+    "showMore": "Zobrazit více",
+    "lecturerLink": "Přejít na stránku lektora"
   },
   "Filters": {
     "price": "Cena",

@@ -16,6 +16,7 @@ type Props = Readonly<{
   itemCount: number;
   className?: string;
   loadMoreCB?: () => void;
+  t: { showMore: string; lecturerLink: string };
   [prop: string]: any;
 }>;
 
@@ -25,6 +26,7 @@ export default function HomeItem({
   itemCount,
   className,
   loadMoreCB,
+  t,
   ...props
 }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
@@ -77,9 +79,9 @@ export default function HomeItem({
       <Link
         href={`/lecturer/${lecturer.uuid}`}
         className={styleClasses(styles, "link")}
-        aria-label="Přejít na stránku lektora"
+        aria-label={t.lecturerLink}
       >
-        <Card className={styleClasses(styles, "card")}>Zobrazit více</Card>
+        <Card className={styleClasses(styles, "card")}>{t.showMore}</Card>
       </Link>
     </div>
   );
