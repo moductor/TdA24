@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
+import { redirect } from "../../../../../i18n/routing";
 import PageContent from "./PageContent";
 
 export default function Page() {
@@ -7,5 +7,5 @@ export default function Page() {
 
   if (user == undefined) redirect("/user/auth/login/");
 
-  return <PageContent user={user} getUser={getCurrentUserWithSession()} />;
+  return <PageContent user={user!} getUser={getCurrentUserWithSession()} />;
 }

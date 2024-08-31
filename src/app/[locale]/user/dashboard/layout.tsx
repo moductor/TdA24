@@ -1,8 +1,8 @@
-import { redirect } from "next/navigation";
 import { ReactNode } from "react";
 import Header from "../../../../components/Header";
 import { styleClasses } from "../../../../helpers/styleClasses";
 import { getCurrentUserWithSession } from "../../../../helpers/userContext";
+import { redirect } from "../../../../i18n/routing";
 import MenuLink, { Link } from "./MenuLink";
 import styles from "./layout.module.scss";
 
@@ -25,7 +25,7 @@ export default function Layout({ children }: Props) {
     },
   ];
 
-  if (user.lecturerId) {
+  if (user!.lecturerId) {
     links.push({
       title: "Profil lektora",
       path: "/user/dashboard/lecturer",

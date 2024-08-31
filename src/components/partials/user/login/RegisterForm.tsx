@@ -1,13 +1,13 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
+
 import { useState } from "react";
 import { RegisterQuery } from "../../../../app/api/user/register/RegisterQuery";
 import { UserInsertErrorResponse } from "../../../../database/models/User";
 import { getEndpoint } from "../../../../helpers/endpointUrl";
 import { styleClasses } from "../../../../helpers/styleClasses";
-import { useRouter } from "../../../../i18n/routing";
+import { Link, useRouter } from "../../../../i18n/routing";
 import LoadingBar from "../../../widgets/LoadingBar";
 import Tag from "../../../widgets/Tag";
 import Button from "../../../widgets/forms/Button";
