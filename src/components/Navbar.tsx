@@ -2,6 +2,7 @@ import { useTranslations } from "next-intl";
 
 import { styleClasses } from "../helpers/styleClasses";
 import { Link } from "../i18n/routing";
+import LanguageChanger from "./LanguageChanger";
 import styles from "./Navbar.module.scss";
 import Logo from "./widgets/Logo";
 import UserDropdownWrapper from "./widgets/UserDropdownWrapper";
@@ -30,6 +31,7 @@ export default function Navbar({
         <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />
       </Link>
       <div className={styleClasses(styles, "menu-wrapper")}>
+        <LanguageChanger />
         {showBackButton && (
           <Link
             href="/"

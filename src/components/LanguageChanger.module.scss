@@ -1,0 +1,39 @@
+.select {
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.375rem;
+  border-width: 1px;
+  height: 2.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  width: 100px;
+  color: currentColor;
+  background-color: var(--color-jet);
+
+  @media (prefers-color-scheme: light) {
+    background-color: var(--color-white);
+  }
+
+  option {
+    color: var(--color-white);
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    border: 1px solid currentColor;
+    height: 2.5rem;
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @media (prefers-color-scheme: light) {
+      color: var(--color-jet);
+    }
+  }
+}
