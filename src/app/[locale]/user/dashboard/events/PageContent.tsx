@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import Calendar from "../../../../../components/widgets/Calendar";
 import Button from "../../../../../components/widgets/forms/Button";
@@ -57,10 +58,12 @@ export default function PageContent({ userId, lecturerId }: Props) {
     setDetailedEvent(event);
   }
 
+  const t = useTranslations("Dashboard");
+
   return (
     <div>
-      <PageHeader title="Rezervované schůzky">
-        <Button onClick={() => setShowIcal(true)}>Stáhnout</Button>
+      <PageHeader title={t("eventsTitle")}>
+        <Button onClick={() => setShowIcal(true)}>{t("download")}</Button>
       </PageHeader>
 
       <DashboardSection>

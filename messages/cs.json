@@ -72,6 +72,7 @@
     "accountTitle": "Uživatelská nastavení",
     "lecturerTitle": "Profil lektora",
     "saveChanges": "Uložit změny",
+    "download": "Stáhnout",
     "generalInformation": "Základní informace",
     "username": "Uživatelské jméno",
     "email": "Email",
@@ -96,6 +97,14 @@
       "emails": "Emailové adresy",
       "phoneNumberExists": "Toto telefonní číslo již existuje",
       "emailExists": "Tento email již existuje"
+    },
+    "calendar": {
+      "addEventButton": "Přidat schůzku",
+      "cancelButton": "Zrušit",
+      "month": "Měsíc",
+      "week": "Týden",
+      "day": "Den",
+      "today": "Dnes"
     }
   },
   "tos": {

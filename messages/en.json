@@ -72,6 +72,7 @@
     "accountTitle": "User settings",
     "lecturerTitle": "Lecturer profile",
     "saveChanges": "Save changes",
+    "download": "Download",
     "generalInformation": "General information",
     "username": "Username",
     "email": "Email",
@@ -96,6 +97,14 @@
       "emails": "Email Addresses",
       "phoneNumberExists": "This phone number already exists",
       "emailExists": "This email already exists"
+    },
+    "calendar": {
+      "addEventButton": "Add Event",
+      "cancelButton": "Cancel",
+      "month": "Month",
+      "week": "Week",
+      "day": "Day",
+      "today": "Today"
     }
   },
   "tos": {

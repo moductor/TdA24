@@ -1,10 +1,10 @@
 "use client";
 
+import { EventInput } from "@fullcalendar/core/index.js";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
-
-import { EventInput } from "@fullcalendar/core/index.js";
+import { useLocale, useTranslations } from "next-intl";
 import { MouseEvent, useRef } from "react";
 import { Event, EventRes } from "../../database/models/Event";
 import { styleClasses } from "../../helpers/styleClasses";
@@ -12,7 +12,6 @@ import "./Calendar.scss";
 
 type Props = {
   hideAddEvent?: boolean;
-  // events?: { title: string; date: string }[];
   events?: EventRes[];
   useTitle?: "user" | "lecturer";
   onAddEvent?: (date?: Date) => void;
@@ -82,6 +81,8 @@ export default function Calendar({
 
     if (onAddEvent) onAddEvent(date);
   }
+  const t = useTranslations("Dashboard.calendar");
+  const locale = useLocale();
 
   return (
     <div
@@ -100,7 +101,7 @@ export default function Calendar({
           if (!event) return;
           onEventClick(event);
         }}
-        locale={"cs"}
+        locale={locale}
         headerToolbar={{
           start: hideAddEvent ? "today" : "addEventButton today",
           center: "title",
@@ -115,10 +116,10 @@ export default function Calendar({
         }}
         allDaySlot={false}
         buttonText={{
-          month: "Měsíc",
-          week: "Týden",
-          day: "Den",
-          today: "Dnes",
+          month: t("month"),
+          week: t("week"),
+          day: t("day"),
+          today: t("today"),
         }}
         firstDay={1}
         eventColor={"#74C7D3"}
@@ -126,14 +127,14 @@ export default function Calendar({
         eventBackgroundColor={"#74C7D3"}
         customButtons={{
           addEventButton: {
-            text: "Přidat schůzku",
+            text: t("addEventButton"),
             click: () => {
               if (!onAddEvent) return;
               onAddEvent();
             },
           },
           cancelButton: {
-            text: cancelButtonLabel || "Zrušit",
+            text: cancelButtonLabel || t("cancelButton"),
             click: () => {
               if (!onCancel) return;
               onCancel();
