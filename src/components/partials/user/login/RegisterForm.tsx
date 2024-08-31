@@ -7,6 +7,7 @@ import { RegisterQuery } from "../../../../app/api/user/register/RegisterQuery";
 import { UserInsertErrorResponse } from "../../../../database/models/User";
 import { getEndpoint } from "../../../../helpers/endpointUrl";
 import { styleClasses } from "../../../../helpers/styleClasses";
+import { useRouter } from "../../../../i18n/routing";
 import LoadingBar from "../../../widgets/LoadingBar";
 import Tag from "../../../widgets/Tag";
 import Button from "../../../widgets/forms/Button";
@@ -18,6 +19,8 @@ export default function RegisterForm() {
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
 
   const t = useTranslations("Auth.register");
+
+  const router = useRouter();
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
@@ -50,7 +53,7 @@ export default function RegisterForm() {
     });
 
     if (res.status == 201) {
-      window.location.assign("/user/auth/login?registered");
+      router.replace("/user/auth/login?registered");
       return;
     }
 
