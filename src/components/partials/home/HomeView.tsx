@@ -58,6 +58,7 @@ export default function HomeView({
       <HomeFilters
         visible={filtersSheetVisible}
         onClose={() => setFiltersSheetVisible(false)}
+        filterBtnText={t("filters")}
       >
         <Filters
           filters={filters}

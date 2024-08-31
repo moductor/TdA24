@@ -6,6 +6,11 @@
   "HomeView": {
     "filters": "Filters"
   },
+  "Filters": {
+    "price": "Price",
+    "location": "Location",
+    "specialization": "Specialization"
+  },
   "NavBar": {
     "home": "Home",
     "logoLink": "Go to homepage"

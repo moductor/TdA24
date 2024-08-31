@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { LecturerFilters } from "../../../../database/models/Lecturer";
 import { delay } from "../../../../helpers/delay";
@@ -31,23 +32,25 @@ export default function Filters({ filters, onFiltered }: Props) {
     });
   }, [priceRange, locations, tags]); // eslint-disable-line
 
+  const t = useTranslations("Filters");
+
   return (
     <>
-      <FilterCategory title="Cena" expanded={true}>
+      <FilterCategory title={t("price")} expanded={true}>
         <FilterVariantRange
           limits={limitPriceRange}
           onChange={(limits) => setPriceRange(limits)}
         />
       </FilterCategory>
 
-      <FilterCategory title="Lokace" expanded={true}>
+      <FilterCategory title={t("location")} expanded={true}>
         <FilterVariantOptions
           items={locations}
           onChange={(items) => setLocations(items)}
         />
       </FilterCategory>
 
-      <FilterCategory title="Zaměření" expanded={true}>
+      <FilterCategory title={t("specialization")} expanded={true}>
         <FilterVariantOptions
           items={tags}
           onChange={(items) => setTags(items)}

@@ -6,6 +6,11 @@
   "HomeView": {
     "filters": "Filtry"
   },
+  "Filters": {
+    "price": "Cena",
+    "location": "Lokace",
+    "specialization": "Zaměření"
+  },
   "NavBar": {
     "home": "Domů",
     "logoLink": "Přejít na domovskou stránku"

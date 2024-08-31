@@ -9,12 +9,14 @@ type Props = Readonly<{
   visible?: boolean;
   onClose?: () => void;
   children?: React.ReactNode;
+  filterBtnText: string;
 }>;
 
 export default function HomeFilters({
   visible = false,
   onClose,
   children,
+  filterBtnText,
 }: Props) {
   return (
     <div
@@ -24,7 +26,7 @@ export default function HomeFilters({
       <Card className={styleClasses(styles, "card")}>
         <div className={styleClasses(styles, "card-content")}>
           <div className={styleClasses(styles, "card-title")}>
-            <h2>Filtry</h2>
+            <h2>{filterBtnText}</h2>
 
             <button
               className={styleClasses(styles, "close-button")}
