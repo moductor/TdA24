@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 import Header from "../../../../components/Header";
 import { styleClasses } from "../../../../helpers/styleClasses";
@@ -14,20 +15,23 @@ export default function Layout({ children }: Props) {
   const user = getCurrentUserWithSession();
   if (!user) return redirect("/user/auth/login");
 
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const t = useTranslations("Dashboard.links");
+
   const links: Link[] = [
     {
-      title: "Rezervované schůzky",
+      title: t("events"),
       path: "/user/dashboard/events",
     },
     {
-      title: "Uživatelská nastavení",
+      title: t("account"),
       path: "/user/dashboard/account",
     },
   ];
 
   if (user.lecturerId) {
     links.push({
-      title: "Profil lektora",
+      title: t("lecturer"),
       path: "/user/dashboard/lecturer",
     });
   }
