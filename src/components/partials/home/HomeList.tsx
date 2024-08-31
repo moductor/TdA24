@@ -13,6 +13,7 @@ type Props = Readonly<{
   initialLecturers: Lecturer[];
   filters: LecturerFilters;
   className?: string;
+  noLecuterText: string;
   [prop: string]: any;
 }>;
 
@@ -20,6 +21,7 @@ export default function HomeList({
   initialLecturers,
   filters,
   className,
+  noLecuterText,
   ...props
 }: Props) {
   const [loading, setLoading] = useState(false);
@@ -72,8 +74,7 @@ export default function HomeList({
     </>
   ) : (
     <div className={styleClasses(styles, "empty-state", "item")}>
-      Nebyli nalezeni žádní lektoři odpovídající zadání. Prosím, upravte hodnoty
-      filtrů.
+      {noLecuterText}
     </div>
   );
 

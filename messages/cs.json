@@ -4,7 +4,8 @@
     "title": "Vaše <span>vzdělání</span> je u nás v dobrých rukou!"
   },
   "HomeView": {
-    "filters": "Filtry"
+    "filters": "Filtry",
+    "noLecturers": "Nebyli nalezeni žádní lektoři odpovídající zadání. Zkuste upravit hodnoty filtrů."
   },
   "Filters": {
     "price": "Cena",

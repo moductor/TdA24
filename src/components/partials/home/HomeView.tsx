@@ -65,7 +65,11 @@ export default function HomeView({
           onFiltered={(filters) => setFilters(filters)}
         />
       </HomeFilters>
-      <HomeList initialLecturers={lecturers} filters={filters} />
+      <HomeList
+        initialLecturers={lecturers}
+        filters={filters}
+        noLecuterText={t("noLecturers")}
+      />
     </div>
   );
 }

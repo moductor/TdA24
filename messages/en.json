@@ -4,7 +4,8 @@
     "title": "Your <span>education</span> is in good hands with us!"
   },
   "HomeView": {
-    "filters": "Filters"
+    "filters": "Filters",
+    "noLecturers": "No lecturers matching the criteria were found. Please adjust the filter values."
   },
   "Filters": {
     "price": "Price",
