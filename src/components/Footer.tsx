@@ -1,5 +1,7 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import { styleClasses } from "../helpers/styleClasses";
+import { Link } from "../i18n/routing";
 import styles from "./Footer.module.scss";
 import Logo from "./widgets/Logo";
 
@@ -7,13 +9,15 @@ export default function Footer() {
   const date = new Date();
   const year = date.getFullYear();
 
+  const t = useTranslations("Footer");
+
   return (
     <footer className={styleClasses(styles, "footer")}>
       <div className={styleClasses(styles, "footer-info")}>
         <div>
           <Link
             href="/"
-            title="Přejít na domovskou stránku"
+            title={t("logo-link")}
             className={styleClasses(styles, "logo-link")}
           >
             <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />
@@ -24,10 +28,10 @@ export default function Footer() {
         </div>
         <ul className={styleClasses(styles, "footer-list")}>
           <li>
-            <Link href="/gdpr">Zásady ochrany osobních údajů</Link>
+            <Link href="/gdpr">{t("gdpr")}</Link>
           </li>
           <li>
-            <Link href="/tos">Podmínky používání</Link>
+            <Link href="/tos">{t("tos")}</Link>
           </li>
         </ul>
       </div>
