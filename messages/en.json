@@ -10,7 +10,7 @@
   "Filters": {
     "price": "Price",
     "location": "Location",
-    "specialization": "Specialization"
+    "specialization": "Specializations"
   },
   "NavBar": {
     "home": "Home",
