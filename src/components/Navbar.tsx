@@ -1,5 +1,8 @@
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import { styleClasses } from "../helpers/styleClasses";
+import { Link } from "../i18n/routing";
+import LanguageChanger from "./LanguageChanger";
 import styles from "./Navbar.module.scss";
 import Logo from "./widgets/Logo";
 import UserDropdownWrapper from "./widgets/UserDropdownWrapper";
@@ -17,23 +20,25 @@ export default function Navbar({
   className,
   ...props
 }: Props) {
+  const t = useTranslations("NavBar");
   return (
     <nav {...props} className={styleClasses(styles, "navbar", className || "")}>
       <Link
         href="/"
-        title="Přejít na domovskou stránku"
+        title={t("logoLink")}
         className={styleClasses(styles, "logo-link")}
       >
         <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />
       </Link>
       <div className={styleClasses(styles, "menu-wrapper")}>
+        <LanguageChanger />
         {showBackButton && (
           <Link
             href="/"
             aria-hidden="true"
             className={styleClasses(styles, "menu-button")}
           >
-            Domů
+            {t("home")}
           </Link>
         )}
         {showUserMenu && <UserDropdownWrapper />}

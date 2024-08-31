@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useEffect, useRef } from "react";
 import Card from "../../../components/widgets/Card";
 import {
@@ -6,6 +5,7 @@ import {
   type Lecturer as LecturerModel,
 } from "../../../database/models/Lecturer";
 import { styleClasses } from "../../../helpers/styleClasses";
+import { Link } from "../../../i18n/routing";
 import LecturerMetadata from "../lecturer/LecturerMetadata";
 import LecturerPortrait from "../lecturer/LecturerPortrait";
 import styles from "./HomeItem.module.scss";
@@ -16,6 +16,7 @@ type Props = Readonly<{
   itemCount: number;
   className?: string;
   loadMoreCB?: () => void;
+  t: { showMore: string; lecturerLink: string };
   [prop: string]: any;
 }>;
 
@@ -25,6 +26,7 @@ export default function HomeItem({
   itemCount,
   className,
   loadMoreCB,
+  t,
   ...props
 }: Props) {
   const itemRef = useRef<HTMLDivElement>(null);
@@ -57,12 +59,12 @@ export default function HomeItem({
       ref={itemRef}
       {...props}
     >
-      <a href={`/lecturer/${lecturer.uuid}`}>
+      <Link href={`/lecturer/${lecturer.uuid}`}>
         <LecturerPortrait
           lecturer={lecturer}
           className={styleClasses(styles, "portrait")}
         />
-      </a>
+      </Link>
 
       <LecturerMetadata
         href={`/lecturer/${lecturer.uuid}`}
@@ -77,9 +79,9 @@ export default function HomeItem({
       <Link
         href={`/lecturer/${lecturer.uuid}`}
         className={styleClasses(styles, "link")}
-        aria-label="Přejít na stránku lektora"
+        aria-label={t.lecturerLink}
       >
-        <Card className={styleClasses(styles, "card")}>Zobrazit více</Card>
+        <Card className={styleClasses(styles, "card")}>{t.showMore}</Card>
       </Link>
     </div>
   );

@@ -6,14 +6,15 @@ import styles from "./LecturerBio.module.scss";
 
 type Props = Readonly<{
   content: string;
+  aboutMeText: string;
   [prop: string]: any;
 }>;
 
-export default function LecturerBio({ content, ...props }: Props) {
+export default function LecturerBio({ content, aboutMeText, ...props }: Props) {
   return (
     <Card {...props}>
       <section className={styleClasses(styles, "bio", "content-flow")}>
-        <h2 className="title-2">O mně</h2>
+        <h2 className="title-2">{aboutMeText}</h2>
         {parse(sanitizeHtml(content))}
       </section>
     </Card>

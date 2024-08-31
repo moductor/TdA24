@@ -1,11 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
 import { useState } from "react";
 import { RegisterQuery } from "../../../../app/api/user/register/RegisterQuery";
 import { UserInsertErrorResponse } from "../../../../database/models/User";
 import { getEndpoint } from "../../../../helpers/endpointUrl";
 import { styleClasses } from "../../../../helpers/styleClasses";
+import { Link, useRouter } from "../../../../i18n/routing";
 import LoadingBar from "../../../widgets/LoadingBar";
 import Tag from "../../../widgets/Tag";
 import Button from "../../../widgets/forms/Button";
@@ -15,6 +17,10 @@ import styles from "./LoginForm.module.scss";
 export default function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | undefined>();
+
+  const t = useTranslations("Auth.register");
+
+  const router = useRouter();
 
   async function onSubmit(data: FormData) {
     setIsLoading(true);
@@ -29,15 +35,13 @@ export default function RegisterForm() {
 
     if (!regularExpression.test(password)) {
       setIsLoading(false);
-      setErrorMessage(
-        "Heslo musí obsahovat nejméně 8 znaků, velká a malá písmena, alespoň 1 číslo a speciální znak!",
-      );
+      setErrorMessage(t("passwordError"));
       return;
     }
 
     if (password !== passwordCheck) {
       setIsLoading(false);
-      setErrorMessage("Hesla se neshodují!");
+      setErrorMessage(t("passwordMatchError"));
       return;
     }
 
@@ -49,7 +53,7 @@ export default function RegisterForm() {
     });
 
     if (res.status == 201) {
-      window.location.assign("/user/auth/login?registered");
+      router.replace("/user/auth/login?registered");
       return;
     }
 
@@ -60,27 +64,27 @@ export default function RegisterForm() {
       const conflict = resData.conflict;
 
       if (conflict?.username && conflict?.email) {
-        setErrorMessage("Zadané uživatelské jméno a email už existují.");
+        setErrorMessage(t("conflictUsernameEmailError"));
         return;
       }
 
       if (conflict?.username) {
-        setErrorMessage("Zadané uživatelské jméno už existuje.");
+        setErrorMessage(t("conflictUsernameError"));
         return;
       }
 
       if (conflict?.email) {
-        setErrorMessage("Zadaný email už existuje.");
+        setErrorMessage(t("conflictEmailError"));
         return;
       }
     }
 
-    setErrorMessage("Při registraci došlo k chybě.");
+    setErrorMessage(t("generalError"));
   }
 
   return (
     <form action={onSubmit} className={styleClasses(styles, "form")}>
-      <h1 className={styleClasses(styles, "title", "title-2")}>Registrace</h1>
+      <h1 className={styleClasses(styles, "title", "title-2")}>{t("title")}</h1>
 
       {errorMessage && (
         <div className={styleClasses(styles, "error-box")}>{errorMessage}</div>
@@ -92,7 +96,7 @@ export default function RegisterForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Uživatelské jméno
+        {t("username")}
       </TextFieldRow>
 
       <TextFieldRow
@@ -101,7 +105,7 @@ export default function RegisterForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Email
+        {t("email")}
       </TextFieldRow>
 
       <TextFieldRow
@@ -110,7 +114,7 @@ export default function RegisterForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Heslo
+        {t("password")}
       </TextFieldRow>
 
       <TextFieldRow
@@ -119,17 +123,17 @@ export default function RegisterForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Kontrola hesla
+        {t("passwordCheck")}
       </TextFieldRow>
 
       <div className={styleClasses(styles, "submit-row", "form-field")}>
-        <Button>Zaregistrovat se</Button>
+        <Button>{t("registerButton")}</Button>
       </div>
 
       <p className={styleClasses(styles, "footer")}>
-        Již máte účet?{" "}
+        {t("footer")}{" "}
         <Link href="/user/auth/login">
-          <Tag className="text-jet background-sky-blue">Přihlaste se!</Tag>
+          <Tag className="text-jet background-sky-blue">{t("loginLink")}</Tag>
         </Link>
       </p>
 

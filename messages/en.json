@@ -1,0 +1,119 @@
+{
+  "HomePage": {
+    "subtitle": "Dynamic catalog of lecturers",
+    "title": "Your <span>education</span> is in good hands with us!"
+  },
+  "HomeView": {
+    "filters": "Filters",
+    "noLecturers": "No lecturers matching the criteria were found. Please adjust the filter values.",
+    "showMore": "Show more",
+    "lecturerLink": "Go to the lecturer's profile"
+  },
+  "Filters": {
+    "price": "Price",
+    "location": "Location",
+    "specialization": "Specializations"
+  },
+  "NavBar": {
+    "home": "Home",
+    "logoLink": "Go to homepage",
+    "userDropdown": {
+      "login": "Log in",
+      "logout": {
+        "title": "Log out",
+        "message": "Are you sure you want to log out?",
+        "cancel": "Cancel"
+      },
+      "profile": "Profile",
+      "dashboard": "Dashboard"
+    }
+  },
+  "Footer": {
+    "logoLink": "Go to homepage",
+    "gdpr": "Privacy Policy",
+    "tos": "Terms of Service"
+  },
+  "Auth": {
+    "register": {
+      "title": "Registration",
+      "username": "Username",
+      "email": "Email",
+      "password": "Password",
+      "passwordCheck": "Confirm Password",
+      "registerButton": "Register",
+      "footer": "Already have an account?",
+      "loginLink": "Log in!",
+      "passwordError": "The password must be at least 8 characters long, contain uppercase and lowercase letters, at least 1 number, and a special character!",
+      "passwordMatchError": "Passwords do not match!",
+      "conflictUsernameEmailError": "The username and email already exist.",
+      "conflictUsernameError": "The username already exists.",
+      "conflictEmailError": "The email already exists.",
+      "generalError": "An error occurred during registration."
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "remember": "Remember me",
+      "loginButton": "Log in",
+      "footer": "Don't have an account?",
+      "registerLink": "Sign up!",
+      "registrationSuccess": "Registration was successful. You can now log in.",
+      "loginError": "The credentials are incorrect. Please try again."
+    }
+  },
+  "Lecturer": {
+    "reservation": "Book a lesson",
+    "aboutMe": "About me",
+    "contact": "Contacts"
+  },
+  "Dashboard": {
+    "eventsTitle": "Reserved meetings",
+    "accountTitle": "User settings",
+    "lecturerTitle": "Lecturer profile",
+    "saveChanges": "Save changes",
+    "download": "Download",
+    "generalInformation": "General information",
+    "username": "Username",
+    "email": "Email",
+    "phone": "Phone number",
+    "lecturerProfile": {
+      "pageTitle": "Lecturer Profile",
+      "saveChanges": "Save Changes",
+      "basicInfo": "Basic Information",
+      "firstName": "First Name",
+      "middleName": "Middle Name",
+      "lastName": "Last Name",
+      "titleBefore": "Title Before Name",
+      "titleAfter": "Title After Name",
+      "claim": "Personal Slogan",
+      "businessInfo": "Business Information",
+      "location": "City of Operation",
+      "pricePerHour": "Price Per Hour",
+      "aboutMe": "About Me",
+      "tags": "Tags",
+      "contactInfo": "Contact Information",
+      "telephoneNumbers": "Telephone Numbers",
+      "emails": "Email Addresses",
+      "phoneNumberExists": "This phone number already exists",
+      "emailExists": "This email already exists"
+    },
+    "calendar": {
+      "addEventButton": "Add Event",
+      "cancelButton": "Cancel",
+      "month": "Month",
+      "week": "Week",
+      "day": "Day",
+      "today": "Today"
+    }
+  },
+  "tos": {
+    "title": "Terms of Service",
+    "content": "<h3>1. Terms</h3> <br></br> By accessing this website, you agree to be bound by these Terms <br></br> of Service, all applicable laws and regulations, and agree that <br></br> you are responsible for compliance with any applicable local laws. <br></br> If you do not agree with any of these terms, you are prohibited <br></br> from using or accessing this site. The materials contained in <br></br> this website are protected by applicable copyright and trademark <br></br> law. <br></br>             <h3>2. Use License</h3> <br></br> Permission is granted to temporarily download one copy of the <br></br>             materials on Teacher Digital Agency's website for personal, <br></br>             non-commercial transitory viewing only. This is the grant of <br></br>             a license, not a transfer of title, and under this license you <br></br>             may not: modify or copy the materials; use the materials for <br></br>             any commercial purpose, or for any public display (commercial <br></br>             or non-commercial); attempt to decompile or reverse engineer <br></br>             any software contained on Teacher Digital Agency's website; <br></br>             remove any copyright or other proprietary notations from the <br></br>             materials; or transfer the materials to another person or <br></br>            mirror the materials on any other server. This license shall <br></br>             automatically terminate if you violate any of these restrictions <br></br>             and may be terminated by Teacher Digital Agency at any time. <br></br>             Upon terminating your viewing of these materials or upon the <br></br>             termination of this license, you must destroy any downloaded <br></br>             materials in your possession whether in electronic or printed <br></br>             format. These Terms of Service have been created with the help <br></br>             of the Terms of Service Generator. <br></br>             <h3>3. Disclaimer</h3> <br></br>             The materials on Teacher Digital Agency's website are provided <br></br>             on an 'as is' basis. Teacher Digital Agency makes no warranties, <br></br>             expressed or implied, and hereby disclaims and negates all <br></br>             other warranties including, without limitation, implied warranties <br></br>             or conditions of merchantability, fitness for a particular purpose, <br></br>             or non-infringement of intellectual property or other violation <br></br>             of rights. Further, Teacher Digital Agency does not warrant or <br></br>             make any representations concerning the accuracy, likely results, <br></br>             or reliability of the use of the materials on its website or <br></br>             otherwise relating to such materials or on any sites linked to <br></br>             this site. <br></br>             <h3>4. Limitations</h3> <br></br>             In no event shall Teacher Digital Agency or its suppliers be <br></br>             liable for any damages (including, without limitation, damages <br></br>             for loss of data or profit, or due to business interruption) <br></br>             arising out of the use or inability to use the materials on <br></br>             Teacher Digital Agency's website, even if Teacher Digital Agency <br></br>             or a Teacher Digital Agency authorized representative has been <br></br>             notified orally or in writing of the possibility of such damage. <br></br>             Because some jurisdictions do not allow limitations on implied <br></br>             warranties, or limitations of liability for consequential or <br></br>             incidental damages, these limitations may not apply to you. <br></br>             <h3>5. Revisions and Errata</h3> <br></br>             The materials appearing on Teacher Digital Agency's website <br></br>             could include technical, typographical, or photographic errors. <br></br>             Teacher Digital Agency does not warrant that any of the materials <br></br>             on its website are accurate, complete or current. Teacher Digital <br></br>             Agency may make changes to the materials contained on its website <br></br>             at any time without notice. Teacher Digital Agency does not, <br></br>             however, make any commitment to update the materials. <br></br>             <h3>6. Links</h3> <br></br>             Teacher Digital Agency has not reviewed all of the sites linked <br></br>             to its website and is not responsible for the contents of any <br></br>             such linked site. The inclusion of any link does not imply <br></br>             endorsement by Teacher Digital Agency of the site. Use of any <br></br>             such linked website is at the user's own risk. <br></br>             <h3>7. Modifications of Terms of Service</h3> <br></br>             Teacher Digital Agency may revise these terms of service for <br></br>             its website at any time without notice. By using this website <br></br>             you are agreeing to be bound by the then current version of <br></br>             these Terms of Service. <br></br>             <h3>8. Your Privacy</h3> <br></br>             Please read our Privacy Policy. <br></br>             <h3>9. Governing Law</h3> <br></br>             Any claim relating to Teacher Digital Agency's website shall <br></br>             be governed by the laws of the Czech Republic without regard <br></br>             to its conflict of law provisions."
+  },
+  "gdpr": {
+    "title": "Privacy Policy",
+    "lastUpdate": "Last updated on August 31, 2024.",
+    "content": "The website management is committed to respecting the principles of protecting your personal data on the Internet. We place great emphasis on protecting the data provided. Our privacy policy is based on the provisions of the General Data Protection Regulation (GDPR) of the European Union. The purposes for which we collect personal data are as follows: improving our services, communicating with visitors to this website, providing user-requested information, providing services related to the focus of the respective website, and also for the following purposes. <h3>Collection and use of personal data</h3> We collect and use personal data only with your voluntary consent. If you agree, you allow us to collect and use the following data: name, email, phone number, personal photo. The collection and processing of your data is carried out in accordance with the laws applicable in the European Union and the Czech Republic. <h3>Storage, modification, and deletion of data</h3> The user who has provided their personal data to the website has the right to modify and delete them, as well as to revoke their consent to their use. The period for which your personal data will be stored is the time required to use the data for the main activity of the website. In case of termination of the use of your data, the website management will delete them. To access your personal data, you can contact the website management at the email address support@teacherdigitalagency.cz or the phone number +420 987 654 321. We may provide your personal data to third parties only with your voluntary consent. However, if they have already been transferred, we cannot modify them if they are already listed with other organizations not related to us. <h3>Use of data when visiting the website</h3> When you visit the website, settings for the browser, operating system, and other technical information necessary for the correct display of the website content will be stored in the database. However, based on this data, we cannot identify the visitor's identity. <h3>Provision of information by children</h3> If you are a parent or guardian and have found that your children have provided their personal data to us without your consent, please contact us either by email at @teacherdigitalagency or by phone at +420 987 654 321. Our service prohibits the storage of personal data of minors without the consent or guardianship. <h3>Use of cookies</h3> We use cookies to display content correctly and facilitate the use of the website. These are small files stored on your device. These files help the website remember information about you, such as the language in which you browse the pages and which pages you have already visited, which will be useful for your next visit. Thanks to cookies, browsing the website will be much more convenient for you. You can set your browser to accept or block cookies separately. However, the inability to accept cookies may limit the performance of the website. <h3>Use of personal data by other services</h3> This website uses third-party internet services that collect information independently of us. The collected data may be shared with other services within these organizations and may be used to personalize ads in their own advertising network. You can read the terms of use of these organizations on their websites. You can also refuse the collection of your personal data, for example, by using a Google Analytics service blocker. We do not provide personal data to other organizations and services not mentioned in these privacy policies, except for the transfer of information according to legal requirements of state authorities authorized to perform such actions. <h3>Links to other websites</h3> Our website may contain links to other websites that are not operated by us. We are not responsible for their content. We recommend that you read the privacy policies on those websites if they are provided. <h3>Changes to the privacy policies</h3> Our website may occasionally update its privacy policies. All changes are announced by publishing new privacy policies on this page. We monitor changes in legislation regarding the protection of personal data in the European Union and the Czech Republic. If you have entrusted us with your personal data, we will notify you of any changes to the privacy policies. If your contact details were entered incorrectly, we cannot contact you. <h3>Feedback, final provisions</h3> If you have any questions regarding the privacy policies, please contact the website administrator at support@teacherdigitalagency.cz or +420 987 654 321. In such a case, you must give up the possibility of visiting our website."
+  }
+}

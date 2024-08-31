@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../database/models/User";
 import { styleClasses } from "../../helpers/styleClasses";
 import { deleteUserSession } from "../../helpers/userSession";
+import { Link } from "../../i18n/routing";
 import ProfilePicture from "./ProfilePicture";
 import styles from "./UserDropdown.module.scss";
 import Dialog from "./dialogs/Dialog";
@@ -48,10 +49,13 @@ export default function UserDropdown({ user }: Props) {
     };
   }, []);
 
+  const t = useTranslations("NavBar.userDropdown");
+
   if (!user) {
     return (
       <div>
-        <Button href="/user/auth/login">Přihlásit se</Button>
+        <Link href="/user/auth/login"></Link>
+        <Button href="/user/auth/login">{t("login")}</Button>
       </div>
     );
   }
@@ -79,21 +83,21 @@ export default function UserDropdown({ user }: Props) {
             className={styleClasses(styles, "button-item")}
             href="/user/dashboard"
           >
-            Nástěnka
+            {t("dashboard")}
           </Link>
           {user.lecturerId && (
             <Link
               className={styleClasses(styles, "button-item")}
               href={`/lecturer/${user.lecturerId}`}
             >
-              Profil
+              {t("profile")}
             </Link>
           )}
           <button
             className={styleClasses(styles, "button-item", "text-error")}
             onClick={() => setDialogModalVisible(true)}
           >
-            Odhlásit se
+            {t("logout.title")}
           </button>
         </div>
       </div>
@@ -105,15 +109,15 @@ export default function UserDropdown({ user }: Props) {
       >
         <DialogCloseButton onClick={() => setDialogModalVisible(false)} />
         <DialogContent
-          title="Odhlásit se"
-          content="Opravdu se chcete odhlásit?"
+          title={t("logout.title")}
+          content={t("logout.message")}
         />
         <DialogButtons>
           <Button
             onClick={() => setDialogModalVisible(false)}
             variant="secondary"
           >
-            Zrušit
+            {t("logout.cancel")}
           </Button>
           <Button
             variant="destructive"
@@ -123,7 +127,7 @@ export default function UserDropdown({ user }: Props) {
               setDialogModalVisible(false);
             }}
           >
-            Odhlásit se
+            {t("logout.title")}
           </Button>
         </DialogButtons>
       </Dialog>
