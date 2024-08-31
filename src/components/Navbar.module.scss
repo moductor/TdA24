@@ -29,8 +29,12 @@
   padding-block-start: 5%;
   text-decoration: none;
   font-family: var(--font-accent);
-  font-size: 1.3rem;
+  font-size: 1.15rem;
   transition: color 0.2s ease;
+
+  @media (min-width: 1200px) {
+    font-size: 1.3rem;
+  }
 
   &:hover {
     color: var(--color-sky-blue);
