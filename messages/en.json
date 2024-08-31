@@ -49,6 +49,17 @@
       "conflictUsernameError": "The username already exists.",
       "conflictEmailError": "The email already exists.",
       "generalError": "An error occurred during registration."
+    },
+    "login": {
+      "title": "Login",
+      "username": "Username",
+      "password": "Password",
+      "remember": "Remember me",
+      "loginButton": "Log in",
+      "footer": "Don't have an account?",
+      "registerLink": "Sign up!",
+      "registrationSuccess": "Registration was successful. You can now log in.",
+      "loginError": "The credentials are incorrect. Please try again."
     }
   },
   "tos": {

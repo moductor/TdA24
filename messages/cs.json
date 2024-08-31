@@ -49,6 +49,17 @@
       "conflictUsernameError": "Zadané uživatelské jméno už existuje.",
       "conflictEmailError": "Zadaný email už existuje.",
       "generalError": "Při registraci došlo k chybě."
+    },
+    "login": {
+      "title": "Přihlášení",
+      "username": "Uživatelské jméno",
+      "password": "Heslo",
+      "remember": "Zapamatovat si údaje",
+      "loginButton": "Přihlásit se",
+      "footer": "Ještě nemáte účet?",
+      "registerLink": "Zaregistrujte se!",
+      "registrationSuccess": "Registrace proběhla úspěšně. Nyní se můžete přihlásit.",
+      "loginError": "Zadané údaje nejsou správné. Zkuste to znovu."
     }
   },
   "tos": {

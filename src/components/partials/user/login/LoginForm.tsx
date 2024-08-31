@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AuthQuery } from "../../../../app/api/user/auth/AuthQuery";
@@ -17,13 +18,15 @@ export default function LoginForm() {
   const [message, setMessage] = useState<string | undefined>();
   const [messageIsError, setMessageIsError] = useState(true);
 
+  const t = useTranslations("Auth.login");
+
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const registered = params.get("registered") !== null;
     if (!registered) return;
-    setMessage("Registrace proběhla úspěšně. Nyní se můžete přihlásit.");
+    setMessage(t("registrationSuccess"));
     setMessageIsError(false);
-  }, []);
+  }, [t]);
 
   async function onSubmit(form: FormData) {
     setIsLoading(true);
@@ -53,13 +56,13 @@ export default function LoginForm() {
     setIsLoading(false);
 
     if (res.status == 404) {
-      setMessage("Zadané údaje nejsou správné. Zkuste to znovu.");
+      setMessage(t("loginError"));
     }
   }
 
   return (
     <form action={onSubmit} className={styleClasses(styles, "form")}>
-      <h1 className={styleClasses(styles, "title", "title-2")}>Přihlášení</h1>
+      <h1 className={styleClasses(styles, "title", "title-2")}>{t("title")}</h1>
 
       {message && (
         <div
@@ -79,7 +82,7 @@ export default function LoginForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Uživatelské jméno
+        {t("username")}
       </TextFieldRow>
 
       <TextFieldRow
@@ -88,20 +91,22 @@ export default function LoginForm() {
         required={true}
         className={styleClasses(styles, "form-field")}
       >
-        Heslo
+        {t("password")}
       </TextFieldRow>
 
       <div className={styleClasses(styles, "submit-row", "form-field")}>
         <CheckBoxRow name="remember" className={styleClasses(styles, "check")}>
-          Zapamatovat si údaje
+          {t("remember")}
         </CheckBoxRow>
-        <Button>Přihlásit se</Button>
+        <Button>{t("loginButton")}</Button>
       </div>
 
       <p className={styleClasses(styles, "footer")}>
-        Ještě nemáte účet?{" "}
+        {t("footer")}{" "}
         <Link href="/user/auth/register">
-          <Tag className="text-jet background-sky-blue">Zaregistrujte se!</Tag>
+          <Tag className="text-jet background-sky-blue">
+            {t("registerLink")}
+          </Tag>
         </Link>
       </p>
 
