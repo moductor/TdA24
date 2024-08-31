@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import {
   LecturerFilters,
@@ -42,11 +43,15 @@ export default function HomeView({
 
   const [filtersSheetVisible, setFiltersSheetVisible] = useState(false);
 
+  const t = useTranslations("HomeView");
+
   return (
     <div className={styleClasses(styles, "view", className || "")} {...props}>
       <FixedBanner className={styleClasses(styles, "show-filters-section")}>
         <div>
-          <Button onClick={() => setFiltersSheetVisible(true)}>Filtry</Button>
+          <Button onClick={() => setFiltersSheetVisible(true)}>
+            {t("filters")}
+          </Button>
         </div>
       </FixedBanner>
 
