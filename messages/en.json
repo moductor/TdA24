@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "Hello world!",
-    "about": "Go to the about page"
+    "subtitle": "Dynamic catalog of lecturers",
+    "title": "Your <span>education</span> is in good hands with us!"
   }
 }

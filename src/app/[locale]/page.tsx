@@ -17,11 +17,11 @@ export default async function Page() {
     <>
       <Header breakout={true}>
         <div className={styleClasses(styles, "hero", "breakout")}>
-          <h1 className={styleClasses(styles, "subtitle")}>
-            Dynamický katalog lektorů {t("title")}
-          </h1>
+          <h1 className={styleClasses(styles, "subtitle")}>{t("subtitle")}</h1>
           <p className={styleClasses(styles, "title")}>
-            Vaše <span>vzdělání</span> je u nás v dobrých rukou!
+            {t.rich("title", {
+              span: (chunks) => <span>{chunks}</span>,
+            })}
           </p>
         </div>
       </Header>

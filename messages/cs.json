@@ -1,6 +1,6 @@
 {
   "HomePage": {
-    "title": "Ahoj světe!",
-    "about": "Go to the about page"
+    "subtitle": "Dynamický katalog lektorů",
+    "title": "Vaše <span>vzdělání</span> je u nás v dobrých rukou!"
   }
 }
