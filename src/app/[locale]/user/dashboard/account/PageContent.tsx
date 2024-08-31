@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import FixedBanner from "../../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../../components/widgets/ResultIndicator";
@@ -71,6 +72,8 @@ export default function PageContent({ user, getUser }: Props) {
     setHasChanged(false);
   }
 
+  const t = useTranslations("Dashboard");
+
   return (
     <form
       onSubmit={(e) => {
@@ -78,16 +81,16 @@ export default function PageContent({ user, getUser }: Props) {
         save();
       }}
     >
-      <PageHeader title="Uživatelské nastavení">
+      <PageHeader title={t("accountTitle")}>
         <FixedBanner>
           <div className={styleClasses(styles, "save-section")}>
-            <Button>Uložit změny</Button>
+            <Button>{t("saveChanges")}</Button>
             <ResultIndicator result={result} />
           </div>
         </FixedBanner>
       </PageHeader>
 
-      <DashboardSection title="Základní údaje">
+      <DashboardSection title={t("generalInformation")}>
         <div className={styleClasses(styles, "metadata")}>
           <div className={styleClasses(styles, "inputs")}>
             <InputList>
@@ -102,7 +105,7 @@ export default function PageContent({ user, getUser }: Props) {
                   }))
                 }
               >
-                Uživatelské jméno
+                {t("username")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -116,7 +119,7 @@ export default function PageContent({ user, getUser }: Props) {
                   }))
                 }
               >
-                Email
+                {t("email")}
               </TextFieldRow>
               <TextFieldRow
                 type="tel"
@@ -130,7 +133,7 @@ export default function PageContent({ user, getUser }: Props) {
                   }))
                 }
               >
-                Telefonní číslo
+                {t("phone")}
               </TextFieldRow>
             </InputList>
           </div>

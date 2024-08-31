@@ -70,7 +70,12 @@
   "Dashboard": {
     "eventsTitle": "Rezervované schůzky",
     "accountTitle": "Uživatelská nastavení",
-    "lecturerTitle": "Profil lektora"
+    "lecturerTitle": "Profil lektora",
+    "saveChanges": "Uložit změny",
+    "generalInformation": "Základní informace",
+    "username": "Uživatelské jméno",
+    "email": "Email",
+    "phone": "Telefonní číslo"
   },
   "tos": {
     "title": "Podmínky používání",

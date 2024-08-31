@@ -70,7 +70,12 @@
   "Dashboard": {
     "eventsTitle": "Reserved meetings",
     "accountTitle": "User settings",
-    "lecturerTitle": "Lecturer profile"
+    "lecturerTitle": "Lecturer profile",
+    "saveChanges": "Save changes",
+    "generalInformation": "General information",
+    "username": "Username",
+    "email": "Email",
+    "phone": "Phone number"
   },
   "tos": {
     "title": "Terms of Service",
