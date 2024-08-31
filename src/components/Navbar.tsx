@@ -18,7 +18,7 @@ export default function Navbar({
   className,
   ...props
 }: Props) {
-  const t = useTranslations("Navbar");
+  const t = useTranslations("NavBar");
   return (
     <nav {...props} className={styleClasses(styles, "navbar", className || "")}>
       <Link
