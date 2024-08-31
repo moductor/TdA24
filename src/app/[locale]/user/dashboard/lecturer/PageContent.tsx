@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import FixedBanner from "../../../../../components/widgets/FixedBanner";
 import ResultIndicator from "../../../../../components/widgets/ResultIndicator";
@@ -76,34 +77,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
     setHasChanged(false);
   }
 
-  // const [contactConflict, setContactConflict] = useState<
-  //   ContactInfo | undefined
-  // >(undefined);
-
-  // function checkUniqueContact() {
-  //   delay(
-  //     "lecturer dashboard - check unique contact",
-  //     async () => {
-  //       const res = await fetch(
-  //         `/api/lecturers/${lecturer.uuid}/unique-contact`,
-  //         {
-  //           method: "POST",
-  //           body: JSON.stringify(lecturer.contact),
-  //         },
-  //       );
-
-  //       if (res.status == 200) {
-  //         setContactConflict(undefined);
-  //         return;
-  //       }
-
-  //       setContactConflict((await res.json()) as ContactInfo);
-  //     },
-  //     1000,
-  //   );
-  // }
-
-  // useEffect(() => checkUniqueContact(), [lecturer]);
+  const t = useTranslations("Dashboard.lecturerProfile");
 
   return (
     <form
@@ -112,16 +86,16 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
         save();
       }}
     >
-      <PageHeader title="Profil lektora">
+      <PageHeader title={t("pageTitle")}>
         <FixedBanner>
           <div className={styleClasses(styles, "save-section")}>
-            <Button>Uložit změny</Button>
+            <Button>{t("saveChanges")}</Button>
             <ResultIndicator result={result} />
           </div>
         </FixedBanner>
       </PageHeader>
 
-      <DashboardSection title="Základní údaje">
+      <DashboardSection title={t("basicInfo")}>
         <div className={styleClasses(styles, "metadata")}>
           <div className={styleClasses(styles, "inputs")}>
             <InputList>
@@ -136,7 +110,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Tituly před jménem
+                {t("titleBefore")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -151,7 +125,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Křestní jméno
+                {t("firstName")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -165,7 +139,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Prostřední jméno
+                {t("middleName")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -180,7 +154,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Příjmení
+                {t("lastName")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -194,7 +168,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Tituly za jménem
+                {t("titleAfter")}
               </TextFieldRow>
 
               <TextFieldRow
@@ -208,7 +182,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
                   }))
                 }
               >
-                Osobní slogan
+                {t("claim")}
               </TextFieldRow>
             </InputList>
           </div>
@@ -216,7 +190,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
         </div>
       </DashboardSection>
 
-      <DashboardSection title="Obchodní údaje">
+      <DashboardSection title={t("businessInfo")}>
         <InputList>
           <TextFieldRow
             type="text"
@@ -229,7 +203,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
               }))
             }
           >
-            Město působění
+            {t("location")}
           </TextFieldRow>
 
           <TextFieldRow
@@ -248,12 +222,12 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
               }));
             }}
           >
-            Cena za hodinu
+            {t("pricePerHour")}
           </TextFieldRow>
         </InputList>
       </DashboardSection>
 
-      <DashboardSection title="O mně">
+      <DashboardSection title={t("aboutMe")}>
         <WysiwygEditor
           value={lecturer.bio}
           onChange={(e) => {
@@ -265,7 +239,7 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
         />
       </DashboardSection>
 
-      <DashboardSection title="Tagy">
+      <DashboardSection title={t("tags")}>
         <TagsEditor
           type="text"
           disabled={sending}
@@ -279,15 +253,14 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
         ></TagsEditor>
       </DashboardSection>
 
-      <DashboardSection title="Kontaktní údaje">
+      <DashboardSection title={t("contactInfo")}>
         <InputList>
           <TextFieldList
             type="tel"
-            label="Telefonní čísla"
+            label={t("telephoneNumbers")}
             value={lecturer.contact.telephone_numbers}
             pattern="(\+420|00420)? ?[1-9][0-9]{2} ?[0-9]{3} ?[0-9]{3}"
-            // erroredValues={contactConflict?.telephone_numbers}
-            errorText="Toto telefonní číslo již existuje"
+            errorText={t("phoneNumberExists")}
             onChange={(value) => {
               setLecturer((lecturer) => ({
                 ...lecturer,
@@ -301,10 +274,9 @@ export default function PageContent({ lecturer: lecturerStr }: Props) {
 
           <TextFieldList
             type="email"
-            label="Emailové adresy"
+            label={t("emails")}
             value={lecturer.contact.emails}
-            // erroredValues={contactConflict?.emails}
-            errorText="Tento email již existuje"
+            errorText={t("emailExists")}
             onChange={(value) => {
               setLecturer((lecturer) => ({
                 ...lecturer,

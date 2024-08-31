@@ -75,7 +75,28 @@
     "generalInformation": "Základní informace",
     "username": "Uživatelské jméno",
     "email": "Email",
-    "phone": "Telefonní číslo"
+    "phone": "Telefonní číslo",
+    "lecturerProfile": {
+      "pageTitle": "Profil lektora",
+      "saveChanges": "Uložit změny",
+      "basicInfo": "Základní údaje",
+      "firstName": "Křestní jméno",
+      "middleName": "Prostřední jméno",
+      "lastName": "Příjmení",
+      "titleBefore": "Tituly před jménem",
+      "titleAfter": "Tituly za jménem",
+      "claim": "Osobní slogan",
+      "businessInfo": "Obchodní údaje",
+      "location": "Město působení",
+      "pricePerHour": "Cena za hodinu",
+      "aboutMe": "O mně",
+      "tags": "Tagy",
+      "contactInfo": "Kontaktní údaje",
+      "telephoneNumbers": "Telefonní čísla",
+      "emails": "Emailové adresy",
+      "phoneNumberExists": "Toto telefonní číslo již existuje",
+      "emailExists": "Tento email již existuje"
+    }
   },
   "tos": {
     "title": "Podmínky používání",

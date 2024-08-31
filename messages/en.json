@@ -75,7 +75,28 @@
     "generalInformation": "General information",
     "username": "Username",
     "email": "Email",
-    "phone": "Phone number"
+    "phone": "Phone number",
+    "lecturerProfile": {
+      "pageTitle": "Lecturer Profile",
+      "saveChanges": "Save Changes",
+      "basicInfo": "Basic Information",
+      "firstName": "First Name",
+      "middleName": "Middle Name",
+      "lastName": "Last Name",
+      "titleBefore": "Title Before Name",
+      "titleAfter": "Title After Name",
+      "claim": "Personal Slogan",
+      "businessInfo": "Business Information",
+      "location": "City of Operation",
+      "pricePerHour": "Price Per Hour",
+      "aboutMe": "About Me",
+      "tags": "Tags",
+      "contactInfo": "Contact Information",
+      "telephoneNumbers": "Telephone Numbers",
+      "emails": "Email Addresses",
+      "phoneNumberExists": "This phone number already exists",
+      "emailExists": "This email already exists"
+    }
   },
   "tos": {
     "title": "Terms of Service",
