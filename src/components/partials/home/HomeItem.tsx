@@ -59,12 +59,12 @@ export default function HomeItem({
       ref={itemRef}
       {...props}
     >
-      <a href={`/lecturer/${lecturer.uuid}`}>
+      <Link href={`/lecturer/${lecturer.uuid}`}>
         <LecturerPortrait
           lecturer={lecturer}
           className={styleClasses(styles, "portrait")}
         />
-      </a>
+      </Link>
 
       <LecturerMetadata
         href={`/lecturer/${lecturer.uuid}`}
