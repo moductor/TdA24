@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import InputList from "../../../app/user/dashboard/InputList";
+import InputList from "../../../app/[locale]/user/dashboard/InputList";
 import { Event, EventBase } from "../../../database/models/Event";
 import { User } from "../../../database/models/User";
 import { getEndpoint } from "../../../helpers/endpointUrl";
