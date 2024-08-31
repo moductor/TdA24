@@ -12,7 +12,7 @@ type Props = {
 
 export default function Layout({ children }: Props) {
   const user = getCurrentUserWithSession();
-  if (!user) redirect("/user/auth/login");
+  if (!user) return redirect("/user/auth/login");
 
   const links: Link[] = [
     {
@@ -25,7 +25,7 @@ export default function Layout({ children }: Props) {
     },
   ];
 
-  if (user!.lecturerId) {
+  if (user.lecturerId) {
     links.push({
       title: "Profil lektora",
       path: "/user/dashboard/lecturer",

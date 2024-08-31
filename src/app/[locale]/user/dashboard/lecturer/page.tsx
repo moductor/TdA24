@@ -5,9 +5,10 @@ import PageContent from "./PageContent";
 
 export default async function Page() {
   const user = getCurrentUserWithSession();
-  if (!user?.lecturerId) redirect("/user/dashboard");
-  const lecturer = await get(user!.lecturerId!);
-  if (!lecturer) redirect("/user/dashboard");
+  if (!user?.lecturerId) return redirect("/user/dashboard");
+
+  const lecturer = await get(user.lecturerId);
+  if (!lecturer) return redirect("/user/dashboard");
 
   const lecturerStr = JSON.stringify(lecturer);
 

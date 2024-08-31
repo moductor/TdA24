@@ -5,7 +5,7 @@ import PageContent from "./PageContent";
 export default function Page() {
   const user = getCurrentUserWithSession();
 
-  if (user == undefined) redirect("/user/auth/login/");
+  if (user == undefined) return redirect("/user/auth/login/");
 
-  return <PageContent user={user!} getUser={getCurrentUserWithSession()} />;
+  return <PageContent user={user} getUser={getCurrentUserWithSession()} />;
 }

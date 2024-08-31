@@ -21,7 +21,7 @@ type Props = {
 export default function Page({ params }: Props) {
   const action = params.action;
 
-  if (getCurrentUserWithSession()) redirect("/user/dashboard");
+  if (getCurrentUserWithSession()) return redirect("/user/dashboard");
 
   function wrap(children?: ReactNode) {
     return (
