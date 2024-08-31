@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AuthQuery } from "../../../../app/api/user/auth/AuthQuery";
 import { getEndpoint } from "../../../../helpers/endpointUrl";
 import { styleClasses } from "../../../../helpers/styleClasses";
+import { Link } from "../../../../i18n/routing";
 import LoadingBar from "../../../widgets/LoadingBar";
 import Tag from "../../../widgets/Tag";
 import Button from "../../../widgets/forms/Button";
