@@ -16,7 +16,17 @@
   },
   "NavBar": {
     "home": "Domů",
-    "logoLink": "Přejít na domovskou stránku"
+    "logoLink": "Přejít na domovskou stránku",
+    "userDropdown": {
+      "login": "Přihlásit se",
+      "logout": {
+        "title": "Odhlásit se",
+        "message": "Opravdu se chcete odhlásit?",
+        "cancel": "Zrušit"
+      },
+      "profile": "Profil",
+      "dashboard": "Nástěnka"
+    }
   },
   "Footer": {
     "logoLink": "Přejít na domovskou stránku",

@@ -16,7 +16,17 @@
   },
   "NavBar": {
     "home": "Home",
-    "logoLink": "Go to homepage"
+    "logoLink": "Go to homepage",
+    "userDropdown": {
+      "login": "Log in",
+      "logout": {
+        "title": "Log out",
+        "message": "Are you sure you want to log out?",
+        "cancel": "Cancel"
+      },
+      "profile": "Profile",
+      "dashboard": "Dashboard"
+    }
   },
   "Footer": {
     "logoLink": "Go to homepage",
