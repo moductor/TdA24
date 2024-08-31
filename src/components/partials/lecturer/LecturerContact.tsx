@@ -8,6 +8,7 @@ type Props = Readonly<{
   contact: ContactInfo;
   isEmailsEmpty: boolean;
   isTelNumbersEmpty: boolean;
+  contactText: string;
   [prop: string]: any;
 }>;
 
@@ -15,12 +16,13 @@ export default function LecturerContact({
   contact,
   isEmailsEmpty,
   isTelNumbersEmpty,
+  contactText,
   ...props
 }: Props) {
   return (
     <Card {...props}>
       <section className={styleClasses(styles, "contact", "content-flow")}>
-        <h2 className="title-2">Kontakt</h2>
+        <h2 className="title-2">{contactText}</h2>
 
         {!isTelNumbersEmpty && (
           <>

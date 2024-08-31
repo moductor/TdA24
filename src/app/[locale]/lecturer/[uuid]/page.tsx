@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import Footer from "../../../../components/Footer";
 import Navbar from "../../../../components/Navbar";
@@ -36,6 +37,8 @@ export default async function Page({ params }: Props) {
   );
   const isEmailsEmpty: boolean = !(lecturer.contact.emails.length > 0);
 
+  const t = await getTranslations("Lecturer");
+
   return (
     <BackgroundWrapper>
       <div className={styleClasses(styles, "wrapper", "content-grid")}>
@@ -61,7 +64,10 @@ export default async function Page({ params }: Props) {
                 className={styleClasses(styles, "metadata")}
                 suffix={
                   user?.lecturerId ? undefined : (
-                    <EventReservationButton lecturerId={lecturer.uuid} />
+                    <EventReservationButton
+                      lecturerId={lecturer.uuid}
+                      buttonText={t("reservation")}
+                    />
                   )
                 }
               />
@@ -89,6 +95,7 @@ export default async function Page({ params }: Props) {
                   "bio",
                   isTelNumbersEmpty && isEmailsEmpty ? "bio-no-contact" : "",
                 )}
+                aboutMeText={t("aboutMe")}
               />
             )}
             {(!isTelNumbersEmpty || !isEmailsEmpty) && (
@@ -105,6 +112,7 @@ export default async function Page({ params }: Props) {
                       ? "contact-no-bio"
                       : "",
                 )}
+                contactText={t("contact")}
               />
             )}
           </main>
