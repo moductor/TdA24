@@ -1,4 +1,4 @@
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 import Navbar from "../../../../../components/Navbar";
 import LoginForm from "../../../../../components/partials/user/login/LoginForm";
@@ -7,6 +7,7 @@ import BackgroundWrapper from "../../../../../components/widgets/BackgroundWrapp
 import Card from "../../../../../components/widgets/Card";
 import { styleClasses } from "../../../../../helpers/styleClasses";
 import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
+import { redirect } from "../../../../../i18n/routing";
 import styles from "./page.module.scss";
 
 type Params = {
