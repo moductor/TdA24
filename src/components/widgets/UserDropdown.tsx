@@ -1,11 +1,11 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { User } from "../../database/models/User";
 import { styleClasses } from "../../helpers/styleClasses";
 import { deleteUserSession } from "../../helpers/userSession";
+import { Link } from "../../i18n/routing";
 import ProfilePicture from "./ProfilePicture";
 import styles from "./UserDropdown.module.scss";
 import Dialog from "./dialogs/Dialog";
@@ -54,6 +54,7 @@ export default function UserDropdown({ user }: Props) {
   if (!user) {
     return (
       <div>
+        <Link href="/user/auth/login"></Link>
         <Button href="/user/auth/login">{t("login")}</Button>
       </div>
     );
