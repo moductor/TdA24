@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { styleClasses } from "../helpers/styleClasses";
 import styles from "./Navbar.module.scss";
@@ -17,11 +18,12 @@ export default function Navbar({
   className,
   ...props
 }: Props) {
+  const t = useTranslations("Navbar");
   return (
     <nav {...props} className={styleClasses(styles, "navbar", className || "")}>
       <Link
         href="/"
-        title="Přejít na domovskou stránku"
+        title={t("logoLink")}
         className={styleClasses(styles, "logo-link")}
       >
         <Logo className={styleClasses(styles, "logo")} aria-hidden="true" />
@@ -33,7 +35,7 @@ export default function Navbar({
             aria-hidden="true"
             className={styleClasses(styles, "menu-button")}
           >
-            Domů
+            {t("home")}
           </Link>
         )}
         {showUserMenu && <UserDropdownWrapper />}
