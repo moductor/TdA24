@@ -1,4 +1,3 @@
-"use server";
 /* eslint-disable react/no-unescaped-entities */
 import { getTranslations } from "next-intl/server";
 import Footer from "../../../components/Footer";
