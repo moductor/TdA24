@@ -9,11 +9,11 @@ ENV PORT=80
 WORKDIR /app
 COPY . .
 
-RUN bun install; \
-    bun run build;
+RUN npm install --legacy-peer-deps; \
+    npm run build;
 
 # Run the app.
 
-CMD bun run start -- -H "$HOST" -p "$PORT";
+CMD npm run start -- -H "$HOST" -p "$PORT";
 
 EXPOSE 80
