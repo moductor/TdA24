@@ -5,6 +5,8 @@ import Navbar from "../../../components/Navbar";
 import { styleClasses } from "../../../helpers/styleClasses";
 import styles from "./page.module.scss";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const t = await getTranslations("gdpr");
   return (
