@@ -3,6 +3,8 @@ import { insertOne } from "../../../../database/functions/User";
 import { hash } from "../../../../helpers/passwordHash";
 import { RegisterQuery } from "./RegisterQuery";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const data = (await request.json()) as RegisterQuery;
 

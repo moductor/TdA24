@@ -4,6 +4,8 @@ import { Error as ErrorRes } from "../../../../database/models/Error";
 import { EventBase } from "../../../../database/models/Event";
 import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   uuid: string;
 };

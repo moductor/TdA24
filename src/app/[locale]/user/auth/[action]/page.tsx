@@ -10,6 +10,8 @@ import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
 import { redirect } from "../../../../../i18n/routing";
 import styles from "./page.module.scss";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   action: string;
 };

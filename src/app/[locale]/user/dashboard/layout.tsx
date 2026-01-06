@@ -7,6 +7,8 @@ import { redirect } from "../../../../i18n/routing";
 import MenuLink, { Link } from "./MenuLink";
 import styles from "./layout.module.scss";
 
+export const dynamic = "force-dynamic";
+
 type Props = {
   children: ReactNode;
 };

@@ -13,6 +13,8 @@ import {
   isAuthorized,
 } from "../../../../checkAuthenticated";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   type: string;
   uuid: string;

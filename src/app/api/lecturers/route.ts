@@ -19,6 +19,8 @@ import { UserBase } from "../../../database/models/User";
 import { hash } from "../../../helpers/passwordHash";
 import { getUnauthorizedError, isAuthorized } from "../checkAuthenticated";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const params = request.nextUrl.searchParams;
 

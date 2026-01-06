@@ -7,6 +7,8 @@ import { getAll, getFilters } from "../../database/functions/Lecturer";
 import { styleClasses } from "../../helpers/styleClasses";
 import styles from "./page.module.scss";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const lecturers = await getAll({ skip: 0, limit: loadCount });
   const filters = await getFilters();

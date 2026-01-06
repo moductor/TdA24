@@ -13,6 +13,8 @@ import { User, UserBase } from "../../../../database/models/User";
 import { generateToken } from "../../../../helpers/generateToken";
 import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   uuid: string;
 };

@@ -2,6 +2,8 @@ import { get } from "../../../../../database/functions/Lecturer";
 import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
 import PageContent from "./PageContent";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const user = getCurrentUserWithSession()!;
 

@@ -2,6 +2,8 @@ import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
 import { redirect } from "../../../../../i18n/routing";
 import PageContent from "./PageContent";
 
+export const dynamic = "force-dynamic";
+
 export default function Page() {
   const user = getCurrentUserWithSession();
 

@@ -8,6 +8,8 @@ import {
 import { Error as ErrorRes } from "../../../database/models/Error";
 import { EventBase } from "../../../database/models/Event";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(request: NextRequest): Promise<NextResponse> {
   const params = request.nextUrl.searchParams;
   function param(name: string): string | undefined {

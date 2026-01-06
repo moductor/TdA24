@@ -16,6 +16,8 @@ import { styleClasses } from "../../../../helpers/styleClasses";
 import { getCurrentUserWithSession } from "../../../../helpers/userContext";
 import styles from "./page.module.scss";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   uuid: string;
 };

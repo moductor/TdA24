@@ -3,6 +3,8 @@ import { getCurrentUserWithSession } from "../../../../../helpers/userContext";
 import { redirect } from "../../../../../i18n/routing";
 import PageContent from "./PageContent";
 
+export const dynamic = "force-dynamic";
+
 export default async function Page() {
   const user = getCurrentUserWithSession();
   if (!user?.lecturerId) return redirect("/user/dashboard");

@@ -15,6 +15,8 @@ import { UserBase } from "../../../../database/models/User";
 import { hash } from "../../../../helpers/passwordHash";
 import { getUnauthorizedError, isAuthorized } from "../../checkAuthenticated";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   uuid: string;
 };

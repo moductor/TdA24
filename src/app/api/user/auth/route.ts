@@ -8,6 +8,8 @@ import {
 import { compare } from "../../../../helpers/passwordHash";
 import { AuthQuery, AuthResponse } from "./AuthQuery";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: NextRequest): Promise<NextResponse> {
   const data = (await request.json()) as AuthQuery;
 

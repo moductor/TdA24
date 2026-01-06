@@ -3,6 +3,8 @@ import { get } from "../../../../../database/functions/Lecturer";
 import { getProfileImageResponse } from "../../imageGenerator";
 import { getLecturerPortrait } from "../../lecturerPortrait";
 
+export const dynamic = "force-dynamic";
+
 type Params = {
   uuid: string;
 };
