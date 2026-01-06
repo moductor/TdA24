@@ -14,17 +14,20 @@ export const dynamic = "force-dynamic";
 
 type Params = {
   action: string;
+  locale: string;
 };
 
 type Props = {
-  params: Params;
+  params: Promise<Params>;
 };
 
 export default async function Page(props: Props) {
   const params = await props.params;
   const action = params.action;
 
-  if (getCurrentUserWithSession()) return redirect("/user/dashboard");
+  if (await getCurrentUserWithSession()) {
+    return redirect({ href: "/user/dashboard", locale: params.locale });
+  }
 
   function wrap(children?: ReactNode) {
     return (

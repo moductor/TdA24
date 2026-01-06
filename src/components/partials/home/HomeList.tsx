@@ -13,7 +13,6 @@ type Props = Readonly<{
   initialLecturers: Lecturer[];
   filters: LecturerFilters;
   className?: string;
-  noLecturerText: string;
   t: { showMore: string; lecturerLink: string; noLecturer: string };
   [prop: string]: any;
 }>;
@@ -22,7 +21,6 @@ export default function HomeList({
   initialLecturers,
   filters,
   className,
-  noLecturerText,
   t,
   ...props
 }: Props) {

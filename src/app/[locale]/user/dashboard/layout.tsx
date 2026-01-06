@@ -11,11 +11,13 @@ export const dynamic = "force-dynamic";
 
 type Props = {
   children: ReactNode;
+  params: Promise<{ locale: string }>;
 };
 
-export default function Layout({ children }: Props) {
-  const user = getCurrentUserWithSession();
-  if (!user) return redirect("/user/auth/login");
+export default async function Layout({ children, params }: Props) {
+  const locale = (await params).locale;
+  const user = await getCurrentUserWithSession();
+  if (!user) return redirect({ href: "/user/auth/login", locale });
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const t = useTranslations("Dashboard");

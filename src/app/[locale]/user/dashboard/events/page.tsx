@@ -5,7 +5,7 @@ import PageContent from "./PageContent";
 export const dynamic = "force-dynamic";
 
 export default async function Page() {
-  const user = getCurrentUserWithSession()!;
+  const user = (await getCurrentUserWithSession())!;
 
   const lecturer = user?.lecturerId ? await get(user.lecturerId) : undefined;
 

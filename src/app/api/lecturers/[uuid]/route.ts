@@ -22,7 +22,7 @@ type Params = {
 };
 
 type Props = {
-  params: Params;
+  params: Promise<Params>;
 };
 
 export async function GET(_: NextRequest, props: Props): Promise<NextResponse> {
@@ -45,7 +45,10 @@ export async function GET(_: NextRequest, props: Props): Promise<NextResponse> {
   return NextResponse.json(lecturer);
 }
 
-export async function DELETE(request: NextRequest, props: Props): Promise<NextResponse> {
+export async function DELETE(
+  request: NextRequest,
+  props: Props,
+): Promise<NextResponse> {
   const params = await props.params;
   console.log("API: DELETE /api/lecturers/[uuid], uuid:", params.uuid);
 
@@ -73,7 +76,10 @@ export async function DELETE(request: NextRequest, props: Props): Promise<NextRe
 
 type UpdateQuery = LecturerInput & { username?: string; password?: string };
 
-export async function PUT(request: NextRequest, props: Props): Promise<NextResponse> {
+export async function PUT(
+  request: NextRequest,
+  props: Props,
+): Promise<NextResponse> {
   const params = await props.params;
   console.log("API: PUT /api/lecturers/[uuid], uuid:", params.uuid);
 

@@ -10,7 +10,7 @@ type Params = {
 };
 
 type Props = {
-  params: Params;
+  params: Promise<Params>;
 };
 
 export async function GET(_: NextRequest, props: Props) {

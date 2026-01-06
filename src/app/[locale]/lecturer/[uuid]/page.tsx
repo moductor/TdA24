@@ -23,13 +23,13 @@ type Params = {
 };
 
 type Props = {
-  params: Params;
+  params: Promise<Params>;
 };
 
 export default async function Page(props: Props) {
   const params = await props.params;
   const lecturer = await getLecturerForUUID(params.uuid);
-  const user = getCurrentUserWithSession();
+  const user = await getCurrentUserWithSession();
 
   const isTagsEmpty: boolean =
     lecturer.tags == undefined || !(lecturer.tags.length > 0);

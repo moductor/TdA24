@@ -38,33 +38,6 @@ const lecturers: LecturerInput[] = [
       emails: ["user@example.com"],
     },
   },
-  {
-    title_before: "Mgr.",
-    first_name: "Petra",
-    middle_name: "Swil",
-    last_name: "Plachá",
-    title_after: "MBA",
-    picture_url:
-      "https://tourdeapp.cz/storage/images/2023_02_25/412ff296a291f021bbb6de10e8d0b94863fa89308843b/big.png.webp",
-    location: "Brno",
-    price_per_hour: 720,
-    claim: "Aktivní studentka / Předsedkyně spolku / Projektová manažerka",
-    bio: "<p>Baví mě organizovat věci. Ať už to bylo vyvíjení mobilních aplikací ve Futured, pořádání konferencí, spolupráce na soutěžích Prezentiáda, pIšQworky, <b>Tour de App</b> a Středoškolák roku, nebo třeba dobrovolnictví, vždycky jsem skončila u projektového managementu, rozvíjení soft-skills a vzdělávání. U studentských projektů a akcí jsem si vyzkoušela snad všechno od marketingu po logistiku a moc ráda to předám dál. Momentálně studuji Pdf MUNI a FF MUNI v Brně.</p>",
-    tags: [
-      { name: "Dobrovolnictví" },
-      { name: "Studentské spolky" },
-      { name: "Efektivní učení" },
-      { name: "Prezentační dovednosti" },
-      { name: "Marketing" },
-      { name: "Mimoškolní aktivity" },
-      { name: "Projektový management" },
-      { name: "Fundraising" },
-    ],
-    contact: {
-      emails: ["placha@example.com"],
-      telephone_numbers: ["+123 777 338 111"],
-    },
-  },
 ];
 
 function getRandomItem<T>(items: T[]): T {

@@ -68,11 +68,10 @@ export default function HomeView({
       <HomeList
         initialLecturers={lecturers}
         filters={filters}
-        noLecturerText={t("noLecturers")}
         t={{
           showMore: t("showMore"),
           lecturerLink: t("lecturerLink"),
-          noLecturer: t("noLecturer"),
+          noLecturer: t("noLecturers"),
         }}
       />
     </div>

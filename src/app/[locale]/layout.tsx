@@ -32,21 +32,17 @@ export const metadata: Metadata = {
 
 type Props = Readonly<{
   children: React.ReactNode;
-  params: {
+  params: Promise<{
     locale: string;
-  };
+  }>;
 }>;
 
 export default async function Layout(props: Props) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   // Providing all messages to the client
   // side is the easiest way to get started

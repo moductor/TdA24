@@ -1,20 +1,20 @@
 import { Jwt } from "jsonwebtoken";
-import { cookies, type UnsafeUnwrappedCookies } from "next/headers";
+import { cookies } from "next/headers";
 import { User } from "../database/models/User";
 import { isTokenValid, parseUserToken } from "./tokenParser";
 
-export function getUserTokenWithSession(): Jwt | undefined {
-  const tokenCookie = (cookies() as unknown as UnsafeUnwrappedCookies).get("JWT")?.value;
+export async function getUserTokenWithSession(): Promise<Jwt | undefined> {
+  const tokenCookie = (await cookies()).get("JWT")?.value;
   return parseUserToken(tokenCookie);
 }
 
-export function isLoggedInWithSession(token?: Jwt): boolean {
-  if (!token) token = getUserTokenWithSession();
+export async function isLoggedInWithSession(token?: Jwt): Promise<boolean> {
+  if (!token) token = await getUserTokenWithSession();
   return isTokenValid(token);
 }
 
-export function getCurrentUserWithSession(): User | undefined {
-  const token = getUserTokenWithSession();
-  if (!isLoggedInWithSession(token)) return;
+export async function getCurrentUserWithSession(): Promise<User | undefined> {
+  const token = await getUserTokenWithSession();
+  if (!token || !isLoggedInWithSession(token)) return;
   return token!.payload as User;
 }

@@ -21,10 +21,13 @@ type Params = {
 };
 
 type Props = {
-  params: Params;
+  params: Promise<Params>;
 };
 
-export async function GET(request: NextRequest, props: Props): Promise<NextResponse> {
+export async function GET(
+  request: NextRequest,
+  props: Props,
+): Promise<NextResponse> {
   const params = await props.params;
   if (!["lecturer", "user"].includes(params.type)) {
     return new NextResponse(null, { status: 404 });
@@ -52,7 +55,7 @@ export async function GET(request: NextRequest, props: Props): Promise<NextRespo
       description: event.note,
       organizer: {
         name: params.type == "lecturer" ? event.name : event.lecturerName || "",
-        email: params.type == "lecturer" ? event.email : undefined,
+        email: event.email,
       },
     })),
   });
@@ -65,7 +68,10 @@ export async function GET(request: NextRequest, props: Props): Promise<NextRespo
   });
 }
 
-export async function POST(request: NextRequest, props: Props): Promise<NextResponse> {
+export async function POST(
+  request: NextRequest,
+  props: Props,
+): Promise<NextResponse> {
   const params = await props.params;
   if (!["lecturer", "user"].includes(params.type)) {
     return new NextResponse(null, { status: 404 });

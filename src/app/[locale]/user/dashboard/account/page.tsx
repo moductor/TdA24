@@ -4,10 +4,17 @@ import PageContent from "./PageContent";
 
 export const dynamic = "force-dynamic";
 
-export default function Page() {
-  const user = getCurrentUserWithSession();
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const locale = (await params).locale;
+  const user = await getCurrentUserWithSession();
 
-  if (user == undefined) return redirect("/user/auth/login/");
+  if (user == undefined) return redirect({ href: "/user/auth/login/", locale });
 
-  return <PageContent user={user} getUser={getCurrentUserWithSession()} />;
+  return (
+    <PageContent user={user} getUser={await getCurrentUserWithSession()} />
+  );
 }
