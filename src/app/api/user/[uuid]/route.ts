@@ -23,10 +23,8 @@ type Props = {
   params: Params;
 };
 
-export async function GET(
-  _: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function GET(_: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   console.log("API: GET /api/user/[uuid], uuid:", params.uuid);
 
   const user = await get(params.uuid);
@@ -45,10 +43,8 @@ export async function GET(
   return NextResponse.json(user);
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function DELETE(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   console.log("API: DELETE /api/user/[uuid], uuid:", params.uuid);
 
   if (!isAuthorized(request, undefined, params.uuid)) {
@@ -75,10 +71,8 @@ export async function DELETE(
 
 type UpdateQuery = UserBase & { username?: string; password?: string };
 
-export async function PUT(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function PUT(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   console.log("API: PUT /api/user/[uuid], uuid:", params.uuid);
 
   if (!isAuthorized(request, params.uuid, undefined)) {

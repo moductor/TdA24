@@ -13,7 +13,8 @@ type Props = {
   params: Params;
 };
 
-export async function GET(_: NextRequest, { params }: Props) {
+export async function GET(_: NextRequest, props: Props) {
+  const params = await props.params;
   const lecturer = await get(params.uuid);
   if (!lecturer) return new NextResponse(null, { status: 404 });
 

@@ -14,10 +14,8 @@ type Props = {
   params: Params;
 };
 
-export async function GET(
-  _: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function GET(_: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   const event = await get(params.uuid);
 
   if (!event) {
@@ -32,10 +30,8 @@ export async function GET(
   return NextResponse.json(event);
 }
 
-export async function DELETE(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function DELETE(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   const event = await get(params.uuid);
 
   if (!event) {
@@ -58,10 +54,8 @@ export async function DELETE(
   return NextResponse.json(null);
 }
 
-export async function PUT(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function PUT(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   const event = await get(params.uuid);
 
   if (!event) {

@@ -24,10 +24,8 @@ type Props = {
   params: Params;
 };
 
-export async function GET(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function GET(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   if (!["lecturer", "user"].includes(params.type)) {
     return new NextResponse(null, { status: 404 });
   }
@@ -67,7 +65,8 @@ export async function GET(
   });
 }
 
-export function POST(request: NextRequest, { params }: Props): NextResponse {
+export async function POST(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   if (!["lecturer", "user"].includes(params.type)) {
     return new NextResponse(null, { status: 404 });
   }

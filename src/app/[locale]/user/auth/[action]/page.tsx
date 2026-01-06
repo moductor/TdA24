@@ -20,7 +20,8 @@ type Props = {
   params: Params;
 };
 
-export default function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const action = params.action;
 
   if (getCurrentUserWithSession()) return redirect("/user/dashboard");

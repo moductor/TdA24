@@ -16,10 +16,8 @@ type Props = {
   params: Params;
 };
 
-export async function POST(
-  request: NextRequest,
-  { params }: Props,
-): Promise<NextResponse> {
+export async function POST(request: NextRequest, props: Props): Promise<NextResponse> {
+  const params = await props.params;
   if (!isAuthorized(request, undefined, params.uuid)) {
     return getUnauthorizedError();
   }

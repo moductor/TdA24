@@ -26,7 +26,8 @@ type Props = {
   params: Params;
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page(props: Props) {
+  const params = await props.params;
   const lecturer = await getLecturerForUUID(params.uuid);
   const user = getCurrentUserWithSession();
 
@@ -126,7 +127,8 @@ export default async function Page({ params }: Props) {
   );
 }
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata(props: Props) {
+  const params = await props.params;
   const lecturer = await getLecturerForUUID(params.uuid);
 
   return {

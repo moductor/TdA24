@@ -37,7 +37,17 @@ type Props = Readonly<{
   };
 }>;
 
-export default async function Layout({ children, params: { locale } }: Props) {
+export default async function Layout(props: Props) {
+  const params = await props.params;
+
+  const {
+    locale
+  } = params;
+
+  const {
+    children
+  } = props;
+
   // Providing all messages to the client
   // side is the easiest way to get started
   const messages = await getMessages();
