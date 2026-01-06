@@ -1,4 +1,4 @@
-FROM node:current-alpine
+FROM oven/bun:alpine
 
 ENV NEXT_TELEMETRY_DISABLED=1
 

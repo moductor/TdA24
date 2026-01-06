@@ -17,4 +17,4 @@ services:
     working_dir: /app
     volumes:
       - ..:/app:z
-    command: npm run dev -- -p 3000
+    command: bun run dev -- -p 3000

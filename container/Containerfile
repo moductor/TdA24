@@ -9,11 +9,11 @@ ENV PORT=80
 WORKDIR /app
 COPY . .
 
-RUN npm install; \
-    npm run build;
+RUN bun install; \
+    bun run build;
 
 # Run the app.
 
-CMD npm run start -- -H "$HOST" -p "$PORT";
+CMD bun run start -- -H "$HOST" -p "$PORT";
 
 EXPOSE 80
